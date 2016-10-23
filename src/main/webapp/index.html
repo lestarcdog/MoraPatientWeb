@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="hu" ng-app="MoraPatientApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/angular-material.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="main.css">
+    <title>{{title}}</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container" ng-view></div>
+
+<script src="js/angular.js"></script>
+<script src="js/angular-animate.js"></script>
+<script src="js/angular-route.js"></script>
+<script src="js/angular-messages.js"></script>
+<script src="js/angular-aria.js"></script>
+<script src="js/angular-material.js"></script>
+
+<!--angular app-->
+<script src="app/app.js"></script>
+<!--factories-->
+<script src="app/components/PatientDataService.js"></script>
+
+<!--controllers-->
+<script src="app/login/LoginController.js"></script>
+<script src="app/patient_data/PatientDataController.js"></script>
+<script src="app/therapies/TherapiesController.js"></script>
+
+</body>
+</html>
