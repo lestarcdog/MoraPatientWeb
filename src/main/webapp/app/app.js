@@ -24,5 +24,6 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
             .otherwise("/login")
     })
     .run(function ($rootScope) {
+        moment.locale("hu");
         $rootScope.loginTherapist = {};
     });
