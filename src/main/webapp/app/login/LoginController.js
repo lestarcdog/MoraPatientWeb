@@ -1,14 +1,14 @@
 angular.module("MoraPatientApp")
     .controller("LoginController", function ($rootScope, $scope, $location) {
+        console.log("asdf");
         $rootScope.title = "Bejelentkezés";
         $rootScope.loginTherapist = null;
-        $scope.data = {};
+        $scope.selectedTherapist = null;
 
-        $scope.data.therapists = [{id: 0, name: "csabi"}, {id: 1, name: "béla"}];
+        $scope.therapists = [{id: 0, name: "csabi"}, {id: 1, name: "béla"}];
 
         $scope.login = function () {
-            console.log("bejelentkezés ", $scope.data.loginTherapist);
-            $rootScope.loginTherapist = $scope.data.loginTherapist;
+            $rootScope.loginTherapist = $scope.selectedTherapist;
             $location.path("/patient-list");
 
         }

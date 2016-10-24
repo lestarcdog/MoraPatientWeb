@@ -1,1 +1,41 @@
-<p>list patient</p>
+<div class="row">
+    <form class="form-horizontal ">
+        <div class="form-group col-md-3">
+            <label for="searchField" class="control-label">Keresés</label>
+            <input type="text" class="form-control" id="searchField" ng-model="searchText"/>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+            <th>Név</th>
+            <th>Születési idő</th>
+            <th>Születési hely</th>
+            <th>Telefonszám</th>
+            <th>Utoljára módosítva</th>
+            <th>Műveletek</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="patient in patients | filter : searchText">
+                <td>{{patient.name}}</td>
+                <td>{{patient.birthDate | date: dateformat.DATE}}</td>
+                <td>{{patient.birthPlace}}</td>
+                <td>{{patient.phone}}</td>
+                <td>{{modifiedSince(patient.lastModified)}}
+                    <md-tooltip md-direction="bottom">
+                        {{patient.lastModified | date: dateformat.DATETIME }}
+                    </md-tooltip>
+                </td>
+                <td>
+                    <ul class="list-inline">
+                        <li><a ng-href="#/therapies/{{patient.id}}">Terápiák</a></li>
+                        <li><a ng-href="#/patient-data/{{patient.id}}">Szerkesztés</a></li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

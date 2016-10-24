@@ -23,7 +23,14 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
             })
             .otherwise("/login")
     })
-    .run(function ($rootScope) {
+    .constant("DateFormatConst", {
+        DATE: "yyyy-MM-dd",
+        DATETIME: "yyyy-MM-dd HH:mm:ss"
+    })
+    .run(function ($rootScope, $location) {
         moment.locale("hu");
-        $rootScope.loginTherapist = {};
+        $rootScope.loginTherapist = null;
+        if ($location.path() !== "/login") {
+            $location.path("/login");
+        }
     });

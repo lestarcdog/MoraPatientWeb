@@ -1,18 +1,22 @@
-<div>
-    <h2 class="text-center">Bejelentkezés</h2>
+<div id="login-banner" class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <img src="/img/mora_login.jpg" class="center-block img-responsive"/>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-4 col-md-offset-4">
         <form ng-submit="login()">
             <div class="form-group">
                 <label for="therapistName">Terapeuta</label>
                 <select name="therapistName" id="therapistName" class="form-control"
-                        ng-model="data.loginTherapist"
-                        ng-options="t.name for t in data.therapists"
+                        ng-model="selectedTherapist"
+                        ng-options="t.name for t in therapists"
                 >
                     <option value="">Bejelentkezés mint...</option>
                 </select>
             </div>
             <div class="text-center">
-                <button type="submit" ng-disabled="data.loginTherapist == null" class="btn btn-primary form-control">Bejelentkezés</button>
+                <button type="submit" ng-disabled="selectedTherapist == null" class="btn btn-primary form-control">Bejelentkezés</button>
             </div>
         </form>
     </div>
