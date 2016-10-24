@@ -1,4 +1,11 @@
 angular.module("MoraPatientApp")
     .factory("PatientDataService", function ($http) {
-        return {};
+        var allTherapist = $http.get("/api/allTherapists").then(function (resp) {
+
+        }, function (resp) {
+
+        });
+        return {
+            allTherapist: allTherapist
+        };
     });

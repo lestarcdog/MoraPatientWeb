@@ -5,17 +5,21 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
                 controller: "LoginController",
                 templateUrl: "app/login/login.html"
             })
-            .when("/patient_data/:id", {
+            .when("/patient-data/:id?", {
                 controller: "PatientDataController",
-                templateUrl: "app/patient_data/patient_data.html"
+                templateUrl: "app/patient-data/patient-data.html"
             })
-            .when("/list_patient", {
-                controller: "ListPatientController",
-                templateUrl: "app/list_patient/list_patient.html"
+            .when("/patient-list", {
+                controller: "PatientListController",
+                templateUrl: "app/patient-list/patient-list.html"
             })
-            .when("therapies/:id", {
+            .when("/therapies/:id", {
                 controller: "TherapiesController",
                 templateUrl: "app/therapies/therapies.html"
+            })
+            .when("/therapist-admin", {
+                controller: "TherapistAdminController",
+                templateUrl: "app/therapist-admin/therapist-admin.html"
             })
             .otherwise("/login")
     })
