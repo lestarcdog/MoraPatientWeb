@@ -1,15 +1,15 @@
 CREATE TABLE patients (
-  "id"           INT AUTO_INCREMENT PRIMARY KEY,
-  "name"         VARCHAR(255) NOT NULL,
-  "ismale"       BOOLEAN      NOT NULL,
-  "birthdate"    DATE         NOT NULL,
-  "birthPlace"   VARCHAR(100),
-  "phone"        VARCHAR(20)  NOT NULL,
-  "email"        VARCHAR(50),
-  "city"         VARCHAR(50),
-  "street"       VARCHAR(150),
-  "lastmodified" TIMESTAMP
+  ID           INT AUTO_INCREMENT PRIMARY KEY,
+  NAME         VARCHAR(255) NOT NULL,
+  IS_MALE       BOOLEAN      NOT NULL,
+  BIRTH_DATE    DATE         NOT NULL,
+  BIRTH_PLACE   VARCHAR(100),
+  PHONE        VARCHAR(20)  NOT NULL,
+  EMAIL        VARCHAR(50),
+  CITY         VARCHAR(50),
+  STREET       VARCHAR(150),
+  LAST_MODIFIED TIMESTAMP
 );
 
 CREATE INDEX IDX_PATIENT_NAME
-  ON patients ("name");
+  ON patients (name);

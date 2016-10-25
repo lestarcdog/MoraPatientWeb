@@ -1,25 +1,46 @@
 package hu.mora.model;
 
+import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class PatientData {
+@Entity
+@Table(name = "patients")
+public class Patient {
 
-    public enum DB_COLUMN {
-        name, isMale, birthDate, phone, email, city, street, lastModified;
-    }
-
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Integer id;
+
+    @Column(name = "NAME")
     private String name;
+
+    @Column(name = "IS_MALE")
     private Boolean isMale;
-    private LocalDate birthDate;
+
+    @Column(name = "BIRTH_DATE")
+    private Date birthDate;
+
+    @Column(name = "BIRTH_PLACE")
     private String birthPlace;
+
+    @Column(name = "PHONE")
     private String phone;
+
+    @Column(name = "EMAIL")
     private String email;
+
+    @Column(name = "CITY")
     private String city;
+
+    @Column(name = "STREET")
     private String street;
-    private LocalDateTime lastModified;
+
+    @Column(name = "LAST_MODIFIED")
+    private Timestamp lastModified;
 
 
     public Integer getId() {
@@ -47,11 +68,11 @@ public class PatientData {
     }
 
     public LocalDate getBirthDate() {
-        return birthDate;
+        return birthDate.toLocalDate();
     }
 
     public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+        this.birthDate = Date.valueOf(birthDate);
     }
 
     public String getBirthPlace() {
@@ -83,11 +104,11 @@ public class PatientData {
     }
 
     public LocalDateTime getLastModified() {
-        return lastModified;
+        return lastModified.toLocalDateTime();
     }
 
     public void setLastModified(LocalDateTime lastModified) {
-        this.lastModified = lastModified;
+        this.lastModified = Timestamp.valueOf(lastModified);
     }
 
     public void setEmail(String email) {
@@ -104,7 +125,7 @@ public class PatientData {
 
     @Override
     public String toString() {
-        return "PatientData{" +
+        return "Patient{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", isMale=" + isMale +

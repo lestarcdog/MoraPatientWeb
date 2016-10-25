@@ -1,10 +1,19 @@
-package hu.mora.model.views;
+package hu.mora.model;
 
-/**
- * Login screen therapist ComboBox
- */
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "THERAPISTS")
 public class LoginTherapist {
+
+    @Id
+    @Column(name = "ID")
     private Integer userId;
+
+    @Column(name = "NAME")
     private String name;
 
     public LoginTherapist() {

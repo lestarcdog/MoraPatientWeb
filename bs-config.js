@@ -11,6 +11,9 @@
  |
  |
  */
+
+var proxy = require('http-proxy-middleware');
+var proxyConfig = {target: 'http://localhost:8081/morapatient', changeOrigin: true}
 module.exports = {
     "ui": {
         "port": 3001,
@@ -20,10 +23,20 @@ module.exports = {
     },
     "files": ["src/main/webapp/**"],
     "watchOptions": {},
-    "server": "src/main/webapp",
+    "server": {
+        baseDir: "src/main/webapp",
+        routes: {
+            "/morapatient": "src/main/webapp"
+        }
+    },
     "proxy": false,
     "port": 3000,
-    "middleware": false,
+    "middleware": [
+        {
+            route: "/api",
+            handle: proxy(proxyConfig)
+        }
+    ],
     "serveStatic": [],
     "ghostMode": {
         "clicks": true,

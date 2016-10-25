@@ -1,11 +1,12 @@
 angular.module("MoraPatientApp")
-    .controller("LoginController", function ($rootScope, $scope, $location) {
-        console.log("asdf");
+    .controller("LoginController", function ($rootScope, $scope, $location, PatientDataService) {
         $rootScope.title = "Bejelentkezés";
         $rootScope.loginTherapist = null;
         $scope.selectedTherapist = null;
 
-        $scope.therapists = [{id: 0, name: "csabi"}, {id: 1, name: "béla"}];
+        PatientDataService.allTherapist.then(function (therapists) {
+            $scope.therapists = therapists;
+        });
 
         $scope.login = function () {
             $rootScope.loginTherapist = $scope.selectedTherapist;

@@ -1,1 +1,1 @@
-INSERT INTO therapists("name") VALUES ('admin');
+INSERT INTO therapists(NAME) VALUES ('admin');
