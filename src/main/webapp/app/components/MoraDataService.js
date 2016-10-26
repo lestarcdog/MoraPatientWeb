@@ -15,7 +15,7 @@ angular.module("MoraPatientApp")
         };
 
         var allPatients = function () {
-            return $http.get("api/therapists").then(function (resp) {
+            return $http.get("api/patients").then(function (resp) {
                 return resp.data;
             });
         };

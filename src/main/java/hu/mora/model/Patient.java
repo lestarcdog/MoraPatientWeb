@@ -1,8 +1,7 @@
 package hu.mora.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -15,7 +14,6 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    @JsonIgnore
     private Integer id;
 
     @Column(name = "NAME")
@@ -43,7 +41,6 @@ public class Patient {
     private String street;
 
     @Column(name = "LAST_MODIFIED")
-    @JsonIgnore
     private Timestamp lastModified;
 
 
@@ -75,7 +72,7 @@ public class Patient {
         return birthDate.toLocalDate();
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(@NotNull LocalDate birthDate) {
         this.birthDate = Date.valueOf(birthDate);
     }
 
@@ -108,11 +105,17 @@ public class Patient {
     }
 
     public LocalDateTime getLastModified() {
-        return lastModified.toLocalDateTime();
+        if (lastModified != null) {
+            return lastModified.toLocalDateTime();
+        } else {
+            return null;
+        }
     }
 
     public void setLastModified(LocalDateTime lastModified) {
-        this.lastModified = Timestamp.valueOf(lastModified);
+        if (lastModified != null) {
+            this.lastModified = Timestamp.valueOf(lastModified);
+        }
     }
 
     public void setEmail(String email) {
@@ -125,6 +128,12 @@ public class Patient {
 
     public void setStreet(String street) {
         this.street = street;
+    }
+
+    @PrePersist
+    @PreUpdate
+    public void preHook() {
+        setLastModified(LocalDateTime.now());
     }
 
     @Override

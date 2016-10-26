@@ -1,16 +1,28 @@
 angular.module("MoraPatientApp")
     .controller("PatientDataController", function ($scope, $rootScope, $location, $routeParams, $filter, MoraDataService, HunCityService) {
-        $scope.patient = {};
+        //default patient
+        $scope.patient = {
+            male: true
+        };
+
+        //form extra properties
+        $scope.patientCity = null;
+        $scope.patientBirthDate = null;
+
+        //show error after validation failed
+        $scope.showError = false;
+
+
         if ($routeParams.id != null) {
             MoraDataService.patientById($routeParams.id).then(function (patient) {
+                $scope.patient.male = patient.male;
+                $scope.searchText = patient.city;
+                console.log(patient.city);
+                $scope.patientBirthDate = moment(patient.birthDate).toDate();
                 $scope.patient = patient;
             })
         }
 
-        $scope.showError = false;
-
-        $scope.patientCity = null;
-        $scope.patientBirthDate = null;
 
         var hunCities = [];
         HunCityService.getHunCities().then(function (cities) {
@@ -45,7 +57,7 @@ angular.module("MoraPatientApp")
                 }
 
                 //convert time to millis
-                $scope.patient.birthDate = $scope.patientBirthDate.getTime();
+                $scope.patient.birthDate = $scope.patientBirthDate;
 
                 console.log("Saving patient", $scope.patient);
 
