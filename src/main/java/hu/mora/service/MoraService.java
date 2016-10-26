@@ -2,6 +2,7 @@ package hu.mora.service;
 
 import hu.mora.dao.MoraDao;
 import hu.mora.exception.MoraException;
+import hu.mora.model.HunCity;
 import hu.mora.model.Patient;
 import hu.mora.model.Therapist;
 import org.slf4j.Logger;
@@ -66,5 +67,13 @@ public class MoraService {
     public void removePatient(Integer id) {
         LOG.info("Remove patient by id {}", id);
         moraDao.removePatient(id);
+    }
+
+    public Patient getPatientById(Integer patientId) {
+        return moraDao.findPatient(patientId).orElseThrow(() -> new MoraException("A beteg nem létezik."));
+    }
+
+    public List<HunCity> hunCities() {
+        return moraDao.hunCities();
     }
 }

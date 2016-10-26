@@ -1,6 +1,7 @@
 package hu.mora.dao;
 
 import hu.mora.exception.MoraException;
+import hu.mora.model.HunCity;
 import hu.mora.model.Patient;
 import hu.mora.model.Therapist;
 
@@ -60,5 +61,10 @@ public class MoraDao {
             throw new MoraException("Nem létező terapeuta. Nem törölhető.");
         }
 
+    }
+
+    public List<HunCity> hunCities() {
+        TypedQuery<HunCity> query = em.createQuery("SELECT c FROM HunCity c ORDER BY c.name", HunCity.class);
+        return query.getResultList();
     }
 }

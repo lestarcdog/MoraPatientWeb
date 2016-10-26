@@ -1,5 +1,6 @@
 package hu.mora.jaxrs;
 
+import hu.mora.model.HunCity;
 import hu.mora.model.Patient;
 import hu.mora.model.Therapist;
 import hu.mora.service.MoraService;
@@ -10,6 +11,8 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class MoraController {
 
     @Inject
@@ -17,31 +20,32 @@ public class MoraController {
 
     @GET
     @Path("/therapists")
-    @Produces(MediaType.APPLICATION_JSON)
     public List<Therapist> allTherapist() {
         return moraService.allTherapists();
     }
 
     @GET
     @Path("/patients")
-    @Produces(MediaType.APPLICATION_JSON)
     public List<Patient> allPatients() {
         return moraService.allPatients();
     }
 
-
     @POST
     @Path("/therapist")
-    @Consumes(MediaType.APPLICATION_JSON)
     public void saveLoginTherapist(Therapist therapist) {
         moraService.saveTherapist(therapist);
     }
 
     @POST
     @Path("/patient")
-    @Consumes(MediaType.APPLICATION_JSON)
     public void savePatient(Patient patient) {
         moraService.savePatient(patient);
+    }
+
+    @GET
+    @Path("/patient/{id}")
+    public Patient patientById(@PathParam("id") Integer patientId) {
+        return moraService.getPatientById(patientId);
     }
 
     @DELETE
@@ -54,5 +58,12 @@ public class MoraController {
     @Path("/patient/{id}")
     public void deletePatient(@PathParam("id") Integer id) {
         moraService.removePatient(id);
+    }
+
+
+    @GET
+    @Path("/hunCities")
+    public List<HunCity> hunCities() {
+        return moraService.hunCities();
     }
 }

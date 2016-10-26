@@ -1,4 +1,4 @@
 angular.module("MoraPatientApp")
-    .controller("TherapiesController", function () {
+    .controller("TherapiesController", function ($scope, $rootScope, $location, $routeParams, MoraDataService) {
 
     });
