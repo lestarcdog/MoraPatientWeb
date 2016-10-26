@@ -1,1 +1,1 @@
-INSERT INTO therapists(NAME) VALUES ('admin');
+INSERT INTO therapists(NAME,VISIBLE) VALUES ('admin',true);

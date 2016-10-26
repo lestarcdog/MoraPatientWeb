@@ -1,8 +1,8 @@
 package hu.mora.dao;
 
 import hu.mora.exception.MoraException;
-import hu.mora.model.LoginTherapist;
 import hu.mora.model.Patient;
+import hu.mora.model.Therapist;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -13,14 +13,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Stateless
-public class PatientDao {
+public class MoraDao {
 
     @PersistenceContext(unitName = "MoraPU")
     private EntityManager em;
 
 
-    public List<LoginTherapist> getAllTherapists() {
-        return em.createQuery("SELECT t FROM LoginTherapist t", LoginTherapist.class).getResultList();
+    public List<Therapist> getAllTherapists() {
+        return em.createQuery("SELECT t FROM Therapist t WHERE t.visible = TRUE", Therapist.class).getResultList();
     }
 
     public Optional<Patient> findPatient(@NotNull Integer id) {
@@ -36,14 +36,14 @@ public class PatientDao {
         em.merge(patient);
     }
 
-    public void saveTherapist(LoginTherapist therapist) {
+    public void saveTherapist(Therapist therapist) {
         em.persist(therapist);
     }
 
-    public Optional<LoginTherapist> findTherapistByName(@NotNull String name) {
-        TypedQuery<LoginTherapist> q = em.createQuery("SELECT t FROM LoginTherapist t WHERE t.name = :name", LoginTherapist.class);
+    public Optional<Therapist> findTherapistByName(@NotNull String name) {
+        TypedQuery<Therapist> q = em.createQuery("SELECT t FROM Therapist t WHERE t.name = :name", Therapist.class);
         q.setParameter("name", name);
-        List<LoginTherapist> result = q.getResultList();
+        List<Therapist> result = q.getResultList();
         return result.isEmpty() ? Optional.empty() : Optional.of(result.get(0));
 
     }
@@ -53,9 +53,9 @@ public class PatientDao {
     }
 
     public void removeTherapist(@NotNull Integer id) {
-        LoginTherapist therapist = em.find(LoginTherapist.class, id);
+        Therapist therapist = em.find(Therapist.class, id);
         if (therapist != null) {
-            em.remove(therapist);
+            therapist.setVisible(false);
         } else {
             throw new MoraException("Nem létező terapeuta. Nem törölhető.");
         }

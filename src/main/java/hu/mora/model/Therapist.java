@@ -1,26 +1,26 @@
 package hu.mora.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "THERAPISTS")
-public class LoginTherapist {
+public class Therapist {
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Integer id;
 
     @Column(name = "NAME")
     private String name;
 
-    public LoginTherapist() {
+    @Column(name = "VISIBLE")
+    private Boolean visible = true;
+
+    public Therapist() {
     }
 
-    public LoginTherapist(Integer id, String name) {
+    public Therapist(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -41,10 +41,18 @@ public class LoginTherapist {
         this.name = name;
     }
 
+    public Boolean getVisible() {
+        return visible;
+    }
+
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
+    }
+
     @Override
     public String toString() {
-        return "LoginTherapist{" +
-                "userId=" + id +
+        return "Therapist{" +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
     }
