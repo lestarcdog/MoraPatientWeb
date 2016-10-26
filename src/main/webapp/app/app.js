@@ -30,7 +30,7 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
     .run(function ($rootScope, $location) {
         moment.locale("hu");
         $rootScope.loginTherapist = null;
-        if ($location.path() !== "/login") {
-            $location.path("/login");
-        }
+        // if ($location.path() !== "/login") {
+        //     $location.path("/login");
+        // }
     });

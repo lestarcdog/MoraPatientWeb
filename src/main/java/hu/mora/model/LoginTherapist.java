@@ -1,9 +1,8 @@
 package hu.mora.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "THERAPISTS")
@@ -11,7 +10,9 @@ public class LoginTherapist {
 
     @Id
     @Column(name = "ID")
-    private Integer userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
+    private Integer id;
 
     @Column(name = "NAME")
     private String name;
@@ -19,17 +20,17 @@ public class LoginTherapist {
     public LoginTherapist() {
     }
 
-    public LoginTherapist(Integer userId, String name) {
-        this.userId = userId;
+    public LoginTherapist(Integer id, String name) {
+        this.id = id;
         this.name = name;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer userId) {
+        this.id = userId;
     }
 
     public String getName() {
@@ -43,7 +44,7 @@ public class LoginTherapist {
     @Override
     public String toString() {
         return "LoginTherapist{" +
-                "userId=" + userId +
+                "userId=" + id +
                 ", name='" + name + '\'' +
                 '}';
     }

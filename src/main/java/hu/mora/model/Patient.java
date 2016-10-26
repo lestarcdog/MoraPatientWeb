@@ -1,5 +1,7 @@
 package hu.mora.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -11,8 +13,9 @@ import java.time.LocalDateTime;
 public class Patient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
+    @JsonIgnore
     private Integer id;
 
     @Column(name = "NAME")
@@ -40,6 +43,7 @@ public class Patient {
     private String street;
 
     @Column(name = "LAST_MODIFIED")
+    @JsonIgnore
     private Timestamp lastModified;
 
 
