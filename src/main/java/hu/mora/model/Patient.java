@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "patients")
@@ -42,6 +43,10 @@ public class Patient {
 
     @Column(name = "LAST_MODIFIED")
     private Timestamp lastModified;
+
+    @OneToMany
+    @JoinColumn(name = "PATIENT_ID")
+    private List<Therapy> therapies;
 
 
     public Integer getId() {
@@ -116,6 +121,14 @@ public class Patient {
         if (lastModified != null) {
             this.lastModified = Timestamp.valueOf(lastModified);
         }
+    }
+
+    public List<Therapy> getTherapies() {
+        return therapies;
+    }
+
+    public void setTherapies(List<Therapy> therapies) {
+        this.therapies = therapies;
     }
 
     public void setEmail(String email) {
