@@ -44,13 +44,12 @@ angular.module("MoraPatientApp")
             return $http.delete("api/patient/" + patientId).then(emptyHandler, errorHandler);
         };
 
-        var addNewTherapy = function (therapy, patientId, therapist) {
+        var saveTherapies = function (therapies, patientId, therapist) {
             var data = {
-                therapy: therapy,
-                patientId: patientId,
+                therapies: therapies,
                 therapistId: therapist.id
             };
-            return $http.post("api/newTherapy", data).then(emptyHandler, errorHandler);
+            return $http.post("api/patient/" + patientId + "/therapies", data).then(emptyHandler, errorHandler);
         };
 
 
@@ -62,6 +61,6 @@ angular.module("MoraPatientApp")
             savePatient: savePatient,
             deleteTherapist: deleteTherapist,
             deletePatient: deletePatient,
-            addNewTherapy: addNewTherapy
+            saveTherapies: saveTherapies
         };
     });

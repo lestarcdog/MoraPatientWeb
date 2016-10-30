@@ -1,5 +1,6 @@
 angular.module("MoraPatientApp")
-    .controller("PatientDataController", function ($scope, $rootScope, $location, $routeParams, $filter, MoraDataService, HunCityService) {
+    .controller("PatientDataController", function ($scope, $rootScope, $location, $routeParams, $filter, MoraDataService, HunCityService,
+                                                   DateFormatConst, AlertService, $mdDialog) {
         //default patient
         $scope.patient = {
             male: true
@@ -17,7 +18,6 @@ angular.module("MoraPatientApp")
             MoraDataService.patientById($routeParams.id).then(function (patient) {
                 $scope.patient.male = patient.male;
                 $scope.searchText = patient.city;
-                console.log(patient.city);
                 $scope.patientBirthDate = moment(patient.birthDate).toDate();
                 $scope.patient = patient;
             })
@@ -49,6 +49,20 @@ angular.module("MoraPatientApp")
 
         };
 
+        $scope.delete = function () {
+            var confirm = $mdDialog.confirm()
+                .title("Törlés " + $scope.patient.name)
+                .textContent("Biztosan szeretné törölni a " + $scope.patient.name + " nevű " + $scope.patient.birthDate + " születésű pácienst?")
+                .ok("Törlés")
+                .cancel("Mégsem");
+            $mdDialog.show(confirm).then(function () {
+                MoraDataService.deletePatient($scope.patient.id).then(function () {
+                    AlertService.showSuccess($scope.patient.name + " sikeresen törölve.");
+                    $location.path("/patient-list");
+                });
+            });
+        };
+
         $scope.save = function () {
             if ($scope.patientForm.$valid) {
                 //flatten city
@@ -57,11 +71,14 @@ angular.module("MoraPatientApp")
                 }
 
                 //convert time to millis
-                $scope.patient.birthDate = $scope.patientBirthDate;
+                $scope.patient.birthDate = moment($scope.patientBirthDate).format(DateFormatConst.MOMENT_DATE);
 
-                console.log("Saving patient", $scope.patient);
+                console.log("saving patient", $scope.patient);
 
-                MoraDataService.savePatient($scope.patient);
+                MoraDataService.savePatient($scope.patient).then(function () {
+                    AlertService.showSuccess($scope.patient.name + " sikeresen elmentve.");
+                    $location.path("/patient-list");
+                });
             } else {
                 $scope.showError = true
             }

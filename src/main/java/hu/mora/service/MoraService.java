@@ -5,7 +5,9 @@ import hu.mora.exception.MoraException;
 import hu.mora.model.HunCity;
 import hu.mora.model.Patient;
 import hu.mora.model.Therapist;
-import hu.mora.model.view.ListPatient;
+import hu.mora.model.Therapy;
+import hu.mora.model.view.ListPatientDto;
+import hu.mora.model.view.TherapiesSaveDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,9 +28,9 @@ public class MoraService {
     @Inject
     MoraDao moraDao;
 
-    public List<ListPatient> allPatients() {
+    public List<ListPatientDto> allPatients() {
         return moraDao.getAllPatients().stream()
-                .map(ListPatient::new).collect(Collectors.toList());
+                .map(ListPatientDto::new).collect(Collectors.toList());
     }
 
     public List<Therapist> allTherapists() {
@@ -55,6 +57,13 @@ public class MoraService {
             moraDao.saveTherapist(therapist);
         }
 
+    }
+
+    public void saveTherapies(Integer patientId, TherapiesSaveDto save) {
+        Patient patient = moraDao.findPatient(patientId).orElseThrow(() -> new MoraException("Nem létező beteg."));
+
+        List<Therapy> therapies = save.getTherapies().stream().map(t -> t.toTherapyEntity(moraDao)).collect(Collectors.toList());
+        patient.setTherapies(therapies);
     }
 
     public void savePatient(@NotNull Patient patient) {

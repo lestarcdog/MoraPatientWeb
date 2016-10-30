@@ -4,6 +4,7 @@ import hu.mora.exception.MoraException;
 import hu.mora.model.HunCity;
 import hu.mora.model.Patient;
 import hu.mora.model.Therapist;
+import hu.mora.model.Therapy;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -28,6 +29,10 @@ public class MoraDao {
         return Optional.ofNullable(em.find(Patient.class, id));
     }
 
+    public Optional<Therapy> findTherapy(@NotNull Integer therapyId) {
+        return Optional.ofNullable(em.find(Therapy.class, therapyId));
+    }
+
     public void removePatient(@NotNull Integer id) {
         Optional<Patient> patient = findPatient(id);
         em.remove(patient.orElseThrow(() -> new MoraException("Nem létező beteg. Nem törölhető.")));
@@ -46,11 +51,14 @@ public class MoraDao {
         q.setParameter("name", name);
         List<Therapist> result = q.getResultList();
         return result.isEmpty() ? Optional.empty() : Optional.of(result.get(0));
+    }
 
+    public Optional<Therapist> findTherapist(@NotNull Integer therapistId) {
+        return Optional.ofNullable(em.find(Therapist.class, therapistId));
     }
 
     public List<Patient> getAllPatients() {
-        return em.createQuery("SELECT p FROM Patient p", Patient.class).getResultList();
+        return em.createQuery("SELECT p FROM Patient p ORDER BY p.name", Patient.class).getResultList();
     }
 
     public void removeTherapist(@NotNull Integer id) {

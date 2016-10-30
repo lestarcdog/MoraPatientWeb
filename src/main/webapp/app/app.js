@@ -49,10 +49,11 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
     })
     .constant("DateFormatConst", {
         DATE: "yyyy-MM-dd",
+        MOMENT_DATE: "YYYY-MM-DD",
         DATETIME: "yyyy-MM-dd HH:mm:ss"
     })
     .run(function ($rootScope, $location) {
-        $rootScope.loginTherapist = {"id": 1, "name": "test terapeuta"};
+        $rootScope.loginTherapist = {"id": 1, "name": "admin"};
         // if ($location.path() !== "/login") {
         //     $location.path("/login");
         // }

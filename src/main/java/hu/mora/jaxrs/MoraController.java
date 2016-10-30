@@ -3,7 +3,8 @@ package hu.mora.jaxrs;
 import hu.mora.model.HunCity;
 import hu.mora.model.Patient;
 import hu.mora.model.Therapist;
-import hu.mora.model.view.ListPatient;
+import hu.mora.model.view.ListPatientDto;
+import hu.mora.model.view.TherapiesSaveDto;
 import hu.mora.service.MoraService;
 
 import javax.inject.Inject;
@@ -27,7 +28,7 @@ public class MoraController {
 
     @GET
     @Path("/patients")
-    public List<ListPatient> allPatients() {
+    public List<ListPatientDto> allPatients() {
         return moraService.allPatients();
     }
 
@@ -61,6 +62,11 @@ public class MoraController {
         moraService.removePatient(id);
     }
 
+    @POST
+    @Path("/patient/{id}/therapies")
+    public void saveTherapies(@PathParam("id") Integer patientId, TherapiesSaveDto therapies) {
+        moraService.saveTherapies(patientId, therapies);
+    }
 
     @GET
     @Path("/hunCities")

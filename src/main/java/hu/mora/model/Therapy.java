@@ -1,8 +1,8 @@
 package hu.mora.model;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "THERAPIES")
@@ -14,7 +14,7 @@ public class Therapy {
     private Integer id;
 
     @Column(name = "THERAPY_DATE")
-    private Timestamp therapyDate;
+    private Date therapyDate;
 
     @Column(name = "THERAPY")
     private String therapy;
@@ -41,12 +41,12 @@ public class Therapy {
         this.id = id;
     }
 
-    public LocalDateTime getTherapyDate() {
-        return therapyDate.toLocalDateTime();
+    public LocalDate getTherapyDate() {
+        return therapyDate.toLocalDate();
     }
 
-    public void setTherapyDate(LocalDateTime therapyDate) {
-        this.therapyDate = Timestamp.valueOf(therapyDate);
+    public void setTherapyDate(LocalDate therapyDate) {
+        this.therapyDate = Date.valueOf(therapyDate);
     }
 
     public String getTherapy() {

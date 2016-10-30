@@ -5,7 +5,7 @@ import hu.mora.model.Patient;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class ListPatient {
+public class ListPatientDto {
     private Integer id;
     private String name;
     private LocalDate birthDate;
@@ -13,7 +13,7 @@ public class ListPatient {
     private String phone;
     private LocalDateTime lastModified;
 
-    public ListPatient(Patient patient) {
+    public ListPatientDto(Patient patient) {
         this.id = patient.getId();
         this.name = patient.getName();
         this.birthDate = patient.getBirthDate();
@@ -75,7 +75,7 @@ public class ListPatient {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ListPatient that = (ListPatient) o;
+        ListPatientDto that = (ListPatientDto) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;

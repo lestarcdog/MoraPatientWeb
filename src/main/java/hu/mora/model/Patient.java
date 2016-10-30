@@ -1,5 +1,7 @@
 package hu.mora.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
@@ -24,6 +26,7 @@ public class Patient {
     private Boolean isMale;
 
     @Column(name = "BIRTH_DATE")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
     @Column(name = "BIRTH_PLACE")
@@ -44,8 +47,9 @@ public class Patient {
     @Column(name = "LAST_MODIFIED")
     private Timestamp lastModified;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "PATIENT_ID")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OrderBy("therapyDate desc")
+    @JoinColumn(name = "PATIENT_ID", referencedColumnName = "ID")
     private List<Therapy> therapies;
 
 

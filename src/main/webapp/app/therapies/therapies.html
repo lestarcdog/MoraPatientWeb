@@ -1,17 +1,19 @@
-<form name="therapyForm" class="form form-horizontal">
+<form name="therapyForm" novalidate class="form" ng-submit="save()">
     <div class="row">
         <div class="col-md-12"><h4>Páciens: {{patient.name}}</h4>
             <button type="submit" class="btn btn-primary">Mentés</button>
             <button
-                    type="reset" class="btn btn-warning" ng-show="therapyForm.$dirty">Visszaállít
+                    type="button" class="btn btn-warning" ng-show="therapyForm.$dirty" ng-click="reset()">Visszaállít
             </button>
-            <div class="alert alert-warning" ng-show="showFormError">Hibás mezők. Kérem javítsa őket!</div>
+            <div class="row">
+                <div class="alert alert-warning" ng-show="showFormError">Hibás mezők. Kérem javítsa őket!</div>
+            </div>
         </div>
     </div>
-    <div class="row">
+    <div id="new-therapy-btn" class="row">
         <div class="col-md-12 text-center">
             <div>
-                <button class="btn btn-default" ng-click="addNewTherapy()">Új terápia hozzáadása</button>
+                <button type="button" class="btn btn-default" ng-click="addNewTherapy()">Új terápia hozzáadása</button>
             </div>
         </div>
     </div>

@@ -19,6 +19,10 @@ md-autocomplete md-autocomplete-wrap {
     padding: 10px;
 }
 
+#new-therapy-btn {
+    margin: 10px 0;
+}
+
 .therapy-list {
     display: flex;
     flex-direction: row;
