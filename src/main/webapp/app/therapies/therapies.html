@@ -1,1 +1,25 @@
-<p>therapies</p>
+<form name="therapyForm" class="form form-horizontal">
+    <div class="row">
+        <div class="col-md-12"><h4>Páciens: {{patient.name}}</h4>
+            <button type="submit" class="btn btn-primary">Mentés</button>
+            <button
+                    type="reset" class="btn btn-warning" ng-show="therapyForm.$dirty">Visszaállít
+            </button>
+            <div class="alert alert-warning" ng-show="showFormError">Hibás mezők. Kérem javítsa őket!</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div>
+                <button class="btn btn-default" ng-click="addNewTherapy()">Új terápia hozzáadása</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <therapy ng-repeat="t in therapies" therapy="t" delete="delete($index)"></therapy>
+        </div>
+    </div>
+    </div>
+</form>
+

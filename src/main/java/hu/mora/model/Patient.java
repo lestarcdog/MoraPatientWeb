@@ -44,7 +44,7 @@ public class Patient {
     @Column(name = "LAST_MODIFIED")
     private Timestamp lastModified;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "PATIENT_ID")
     private List<Therapy> therapies;
 

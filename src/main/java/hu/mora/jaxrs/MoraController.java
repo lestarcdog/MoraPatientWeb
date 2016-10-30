@@ -3,7 +3,6 @@ package hu.mora.jaxrs;
 import hu.mora.model.HunCity;
 import hu.mora.model.Patient;
 import hu.mora.model.Therapist;
-import hu.mora.model.Therapy;
 import hu.mora.model.view.ListPatient;
 import hu.mora.service.MoraService;
 
@@ -69,9 +68,4 @@ public class MoraController {
         return moraService.hunCities();
     }
 
-    @GET
-    @Path("/patient/{id}/therapies")
-    public List<Therapy> patientTherapies(@PathParam("id") Integer patientId) {
-        return moraService.therapiesForPatient(patientId);
-    }
 }

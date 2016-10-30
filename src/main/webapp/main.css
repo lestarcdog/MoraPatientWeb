@@ -10,3 +10,26 @@
 md-autocomplete md-autocomplete-wrap {
     border-radius: 4px;
 }
+
+.success-toast div.md-toast-content {
+    background: green;
+}
+
+#therapy-dialog {
+    padding: 10px;
+}
+
+.therapy-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.therapy-list div {
+    margin: 0 30px;
+}
+
+.therapy-list label {
+    display: block;
+}

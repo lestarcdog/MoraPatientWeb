@@ -23,13 +23,36 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
             })
             .otherwise("/login")
     })
+    .config(function ($mdDateLocaleProvider) {
+        moment.locale("hu");
+
+        $mdDateLocaleProvider.months = moment.months();
+        $mdDateLocaleProvider.shortMonths = moment.monthsShort();
+        $mdDateLocaleProvider.days = moment.weekdays();
+        $mdDateLocaleProvider.shortDays = moment.weekdaysShort();
+
+        $mdDateLocaleProvider.firstDayOfWeek = 1;
+
+        // Example uses moment.js to parse and format dates.
+        $mdDateLocaleProvider.parseDate = function (dateString) {
+            var m = moment(dateString, 'L', true);
+            return m.isValid() ? m.toDate() : new Date(NaN);
+        };
+
+        $mdDateLocaleProvider.formatDate = function (date) {
+            var m = moment(date);
+            return m.isValid() ? m.format('L') : '';
+        };
+
+        $mdDateLocaleProvider.msgCalendar = 'Naptár';
+        $mdDateLocaleProvider.msgOpenCalendar = 'Naptár megnyitás';
+    })
     .constant("DateFormatConst", {
         DATE: "yyyy-MM-dd",
         DATETIME: "yyyy-MM-dd HH:mm:ss"
     })
     .run(function ($rootScope, $location) {
-        moment.locale("hu");
-        $rootScope.loginTherapist = null;
+        $rootScope.loginTherapist = {"id": 1, "name": "test terapeuta"};
         // if ($location.path() !== "/login") {
         //     $location.path("/login");
         // }

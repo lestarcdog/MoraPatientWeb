@@ -5,7 +5,6 @@ import hu.mora.exception.MoraException;
 import hu.mora.model.HunCity;
 import hu.mora.model.Patient;
 import hu.mora.model.Therapist;
-import hu.mora.model.Therapy;
 import hu.mora.model.view.ListPatient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,17 +55,6 @@ public class MoraService {
             moraDao.saveTherapist(therapist);
         }
 
-    }
-
-    public List<Therapy> therapiesForPatient(@NotNull Integer patientId) {
-        Optional<Patient> patient = moraDao.findPatient(patientId);
-        if (patient.isPresent()) {
-            List<Therapy> therapies = patient.get().getTherapies();
-            therapies.size();
-            return therapies;
-        } else {
-            throw new MoraException("A beteg nem létezik.");
-        }
     }
 
     public void savePatient(@NotNull Patient patient) {

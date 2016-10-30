@@ -25,6 +25,7 @@
         <p class="navbar-text">Bejelentkezve mint: {{loginTherapist.name}}</p>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#/therapist-admin">Terapeuták</a></li>
+            <li><a href="#/login">Kijelentkezés</a></li>
         </ul>
     </div>
 </nav>
@@ -42,12 +43,17 @@
 <!--factories-->
 <script src="app/components/MoraDataService.js"></script>
 <script src="app/components/HunCityService.js"></script>
+<script src="app/components/AlertService.js"></script>
+
+<!--directive-->
+<script src="app/therapies/therapy-directive.js"></script>
 
 <!--controllers-->
 <script src="app/login/LoginController.js"></script>
 <script src="app/patient-data/PatientDataController.js"></script>
 <script src="app/patient-list/PatientListController.js"></script>
 <script src="app/therapies/TherapiesController.js"></script>
+<script src="app/therapies/TherapyDialog.js"></script>
 <script src="app/therapist-admin/TherapistAdminController.js"></script>
 
 </body>

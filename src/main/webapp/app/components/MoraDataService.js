@@ -1,12 +1,14 @@
 angular.module("MoraPatientApp")
-    .factory("MoraDataService", function ($http, $q) {
+    .factory("MoraDataService", function ($http, $q, AlertService) {
 
         var emptyHandler = function (resp) {
         };
         var errorHandler = function (resp) {
-            console.log(resp.data.message);
+            AlertService.showAlert(resp.data.message);
             return $q.reject()
         };
+
+        // api calls
 
         var allTherapist = function () {
             return $http.get("api/therapists").then(function (resp) {
@@ -42,6 +44,15 @@ angular.module("MoraPatientApp")
             return $http.delete("api/patient/" + patientId).then(emptyHandler, errorHandler);
         };
 
+        var addNewTherapy = function (therapy, patientId, therapist) {
+            var data = {
+                therapy: therapy,
+                patientId: patientId,
+                therapistId: therapist.id
+            };
+            return $http.post("api/newTherapy", data).then(emptyHandler, errorHandler);
+        };
+
 
         return {
             allTherapist: allTherapist,
@@ -50,6 +61,7 @@ angular.module("MoraPatientApp")
             saveTherapist: saveTherapist,
             savePatient: savePatient,
             deleteTherapist: deleteTherapist,
-            deletePatient: deletePatient
+            deletePatient: deletePatient,
+            addNewTherapy: addNewTherapy
         };
     });

@@ -3,7 +3,6 @@ angular.module("MoraPatientApp")
         $scope.patients = [];
 
         MoraDataService.allPatients().then(function (patients) {
-            console.log(patients);
             $scope.patients = patients;
         });
 

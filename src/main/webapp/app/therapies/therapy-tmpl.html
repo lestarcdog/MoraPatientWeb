@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        <div class="row">
+            <div class="col-md-10 text-center">
+                <div class="form-group col-sm-6">
+                    <label>Bejegyzés időpont: </label>
+                    <md-datepicker name="therapy" md-hide-icons="calendar" ng-model="therapy.therapyDate" md-placeholder="ÉÉÉÉ.HH.NN"
+                                   required></md-datepicker>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>Terapeuta: </label>
+                    <span class="form-control-static">{{therapy.therapist.name}}</span>
+                </div>
+            </div>
+            <div class="col-md-2 text-right" ng-if="therapy.newTherapy">
+                <button class="btn btn-warning" ng-click="delete()">Törlés</button>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="therapy-list">
+            <div>
+                <label>Interjú</label>
+                <textarea ng-dblclick="openEditor('Interjú','interview')" ng-model="therapy.interview"/>
+            </div>
+            <div>
+                <label>Terápia</label>
+                <textarea ng-dblclick="openEditor('Terápia','therapy')" ng-model="therapy.therapy"/>
+            </div>
+            <div>
+                <label>Kezelés</label>
+                <textarea ng-dblclick="openEditor('Kezelés','treatment')" ng-model="therapy.treatment"/>
+            </div>
+            <div>
+                <label>Eredmény</label>
+                <textarea ng-dblclick="openEditor('Eredmény','result')" ng-model="therapy.result"/>
+            </div>
+        </div>
+    </div>
+</div>
