@@ -13,8 +13,8 @@ public class HunCity {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "ZIP")
-    private String zip;
+    @Column(name = "ZIPS")
+    private String zips;
 
     @Column(name = "SMALLCAPS")
     private String smallcaps;
@@ -35,12 +35,12 @@ public class HunCity {
         this.smallcaps = smallcaps;
     }
 
-    public String getZip() {
-        return zip;
+    public String getZips() {
+        return zips;
     }
 
-    public void setZip(String zip) {
-        this.zip = zip;
+    public void setZips(String zips) {
+        this.zips = zips;
     }
 
     @Override

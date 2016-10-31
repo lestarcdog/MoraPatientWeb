@@ -22,14 +22,32 @@ angular.module("MoraPatientApp")
                 $scope.patient = patient;
                 $rootScope.$broadcast(MoraEvents.PATIENT_CHANGE, patient);
             });
+        } else {
+            $rootScope.$broadcast(MoraEvents.PATIENT_CHANGE, null);
         }
 
-        $scope.setZipCode = function (zipCode) {
+        $scope.setZipCode = function (zips) {
             if (!$scope.patient.zip) {
-                $scope.patient.zip = zipCode;
+                var firstPipe = zips.indexOf("|");
+                if (firstPipe == -1) {
+                    $scope.patient.zip = zips;
+                } else {
+                    $scope.patient.zip = zips.substring(0, firstPipe);
+                }
             }
         };
 
+        $scope.fillCity = function () {
+            if (!$scope.patientCity) {
+                var foundCity = _.find(hunCities, function (r) {
+                    return r.zips.indexOf($scope.patient.zip) > -1;
+                });
+                console.log(foundCity);
+                if (foundCity) {
+                    $scope.patientCity = foundCity;
+                }
+            }
+        };
 
         var hunCities = [];
         HunCityService.getHunCities().then(function (cities) {

@@ -52,7 +52,8 @@
 
             <div class="form-group" ng-class="hasError('zip')">
                 <label for="zip" class="control-label">Irányítószám</label>
-                <input id="zip" name="zip" type="text" ng-model="patient.zip" ng-pattern="/[\d]+/"
+                <input id="zip" name="zip" type="text" ng-model="patient.zip" ng-minlength="4" ng-change="fillCity()"
+                       ng-pattern="/[\d]+/"
                        class="form-control"/>
             </div>
 
@@ -60,7 +61,7 @@
                 <label class="control-label">Város</label>
                 <md-autocomplete id="patientCity" md-selected-item="patientCity"
                                  md-search-text="searchText"
-                                 md-selected-item-change="setZipCode(patientCity.zip)"
+                                 md-selected-item-change="setZipCode(patientCity.zips)"
                                  md-items="item in getMatches(searchText)"
                                  md-item-text="item.name" md-min-length="2">
                     <span md-highlight-text="searchText">{{item.name}}</span>
