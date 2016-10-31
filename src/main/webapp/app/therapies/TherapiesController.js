@@ -4,13 +4,15 @@ angular.module("MoraPatientApp")
         var patientId = $routeParams.id;
         $scope.showFormError = false;
 
-        var refresh = function () {
+        var refresh = function (addNewItem) {
             MoraDataService.patientById(patientId).then(function (patient) {
                 $scope.patient = patient;
                 $scope.therapies = patient.therapies;
-                $scope.addNewTherapy();
                 $scope.showFormError = false;
                 $rootScope.$broadcast(MoraEvents.PATIENT_CHANGE, patient);
+                if (addNewItem) {
+                    $scope.addNewTherapy();
+                }
             })
         };
 
@@ -53,7 +55,7 @@ angular.module("MoraPatientApp")
             })
         };
 
-        $scope.save = function () {
+        $scope.save = function (closeWindow) {
             if ($scope.therapyForm.$valid) {
 
                 //format date to yyyy-mm-dd
@@ -66,12 +68,16 @@ angular.module("MoraPatientApp")
 
                 MoraDataService.saveTherapies(therapiesCopy, $scope.patient.id, $rootScope.loginTherapist.id).then(function () {
                     AlertService.showSuccess("Sikeres terápia mentés " + $scope.patient.name + " pácienshez.");
-                    $location.path("/patient-list");
+                    if (closeWindow) {
+                        $location.path("/patient-list");
+                    } else {
+                        refresh(false);
+                    }
                 });
             } else {
                 $scope.showFormError = true;
             }
         };
 
-        refresh();
+        refresh(true);
     });

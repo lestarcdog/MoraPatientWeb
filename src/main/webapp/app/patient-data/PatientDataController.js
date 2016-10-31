@@ -42,7 +42,6 @@ angular.module("MoraPatientApp")
                 var foundCity = _.find(hunCities, function (r) {
                     return r.zips.indexOf($scope.patient.zip) > -1;
                 });
-                console.log(foundCity);
                 if (foundCity) {
                     $scope.patientCity = foundCity;
                 }
