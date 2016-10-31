@@ -21,8 +21,14 @@ angular.module("MoraPatientApp")
                 $scope.patientBirthDate = moment(patient.birthDate).toDate();
                 $scope.patient = patient;
                 $rootScope.$broadcast(MoraEvents.PATIENT_CHANGE, patient);
-            })
+            });
         }
+
+        $scope.setZipCode = function (zipCode) {
+            if (!$scope.patient.zip) {
+                $scope.patient.zip = zipCode;
+            }
+        };
 
 
         var hunCities = [];
