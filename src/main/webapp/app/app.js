@@ -35,8 +35,8 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
 
         // Example uses moment.js to parse and format dates.
         $mdDateLocaleProvider.parseDate = function (dateString) {
-            var m = moment(dateString, 'L', true);
-            return m.isValid() ? m.toDate() : new Date(NaN);
+            var m = moment(dateString, ['L', "YYYY-MM-DD", "YYYY.MM.DD", "YYYY MM DD"], true);
+            return m.isValid() ? m.toDate() : null;
         };
 
         $mdDateLocaleProvider.formatDate = function (date) {

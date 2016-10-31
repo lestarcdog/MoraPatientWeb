@@ -15,6 +15,10 @@ md-autocomplete md-autocomplete-wrap {
     background: green;
 }
 
+.alert {
+    margin: 10px 0;
+}
+
 #therapy-dialog {
     padding: 10px;
 }

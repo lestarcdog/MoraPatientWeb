@@ -8,18 +8,21 @@
                 <input name="name" type="text" class="form-control" ng-model="patient.name" required>
             </div>
             <div class="form-group">
-                <div class="radio-inline">
-                    <label><input type="radio" ng-model="patient.male" ng-value="true" ng-checked="true">Férfi</label>
-                </div>
-
-                <div class="radio-inline">
-                    <label><input type="radio" ng-model="patient.male" ng-value="false">Nő</label>
+                <label>Neme</label>
+                <div>
+                    <div class="radio-inline">
+                        <label><input type="radio" ng-model="patient.male" ng-value="true" ng-checked="true">Férfi</label>
+                    </div>
+                    <div class="radio-inline">
+                        <label><input type="radio" ng-model="patient.male" ng-value="false">Nő</label>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group" ng-class="hasError('birthDate')">
                 <label class="control-label">Születési idő</label>
-                <md-datepicker name="birthDate" ng-model="patientBirthDate" md-placeholder="ÉÉÉÉ.HH.NN"
+                <md-datepicker name="birthDate" ng-model="patientBirthDate" md-current-view="year"
+                               md-placeholder="ÉÉÉÉ.HH.NN"
                                required></md-datepicker>
             </div>
 
@@ -61,7 +64,7 @@
                 <input name="street" type="text" class="form-control" ng-model="patient.street">
             </div>
 
-            <div class="alert-warning alert" ng-show="showError">
+            <div class="alert-danger alert" ng-show="showError">
                 Kötelező mezők nincsenek kitöltve.
             </div>
 

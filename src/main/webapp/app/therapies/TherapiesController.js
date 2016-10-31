@@ -9,6 +9,7 @@ angular.module("MoraPatientApp")
                 $scope.patient = patient;
                 $scope.therapies = patient.therapies;
                 $scope.addNewTherapy();
+                $scope.showFormError = false;
             })
         };
 
@@ -25,6 +26,17 @@ angular.module("MoraPatientApp")
             $scope.therapies.unshift(therapy);
         };
 
+        // text area field error field checker
+        // called from the therapy-directive
+        $scope.checkError = function (field) {
+            var f = $scope.therapyForm[field];
+            if (f) {
+                return f.$invalid;
+            }
+        };
+
+        //delete a specified therapy
+        // called from the therapy-directive
         $scope.delete = function (idx) {
             $scope.therapies.splice(idx, 1);
         };
@@ -53,7 +65,7 @@ angular.module("MoraPatientApp")
 
                 MoraDataService.saveTherapies(therapiesCopy, $scope.patient.id, $rootScope.loginTherapist.id).then(function () {
                     AlertService.showSuccess("Sikeres terápia mentés " + $scope.patient.name + " pácienshez.");
-                    refresh();
+                    $location.path("/patient-list");
                 });
             } else {
                 $scope.showFormError = true;

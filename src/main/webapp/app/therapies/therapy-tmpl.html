@@ -21,21 +21,25 @@
     </div>
     <div class="panel-body">
         <div class="therapy-list">
-            <div class="form-group">
-                <label>Interjú</label>
-                <textarea ng-dblclick="openEditor('Interjú','interview')" ng-model="therapy.interview" required/>
+            <div class="form-group" ng-class="{'has-error' : checkError({field:'interview'+idx})}">
+                <label class="control-label">Interjú</label>
+                <textarea name="interview{{idx}}" class="form-control" ng-dblclick="openEditor('Interjú','interview')"
+                          ng-model="therapy.interview" required/>
             </div>
             <div class="form-group">
-                <label>Terápia</label>
-                <textarea ng-dblclick="openEditor('Terápia','therapy')" ng-model="therapy.therapy"/>
+                <label class="control-label">Terápia</label>
+                <textarea name="teraphy{{idx}}" class="form-control" ng-dblclick="openEditor('Terápia','therapy')"
+                          ng-model="therapy.therapy"/>
             </div>
             <div class="form-group">
-                <label>Kezelés</label>
-                <textarea ng-dblclick="openEditor('Kezelés','treatment')" ng-model="therapy.treatment"/>
+                <label class="control-label">Kezelés</label>
+                <textarea name="treatment{{idx}}" class="form-control" ng-dblclick="openEditor('Kezelés','treatment')"
+                          ng-model="therapy.treatment"/>
             </div>
             <div class="form-group">
-                <label>Eredmény</label>
-                <textarea ng-dblclick="openEditor('Eredmény','result')" ng-model="therapy.result"/>
+                <label class="control-label">Eredmény</label>
+                <textarea name="result{{idx}}" class="form-control" ng-dblclick="openEditor('Eredmény','result')"
+                          ng-model="therapy.result"/>
             </div>
         </div>
     </div>

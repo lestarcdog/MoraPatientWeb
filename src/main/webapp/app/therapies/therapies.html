@@ -5,8 +5,8 @@
             <button
                     type="button" class="btn btn-warning" ng-show="therapyForm.$dirty" ng-click="reset()">Visszaállít
             </button>
-            <div class="row">
-                <div class="alert alert-warning" ng-show="showFormError">Hibás mezők. Kérem javítsa őket!</div>
+            <div>
+                <div class="alert alert-danger" ng-show="showFormError">Hibás mezők. Kérem javítsa őket!</div>
             </div>
         </div>
     </div>
@@ -19,7 +19,8 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <therapy ng-repeat="t in therapies" therapy="t" delete="delete($index)"></therapy>
+            <therapy ng-repeat="t in therapies" therapy="t" delete="delete($index)" check-error="checkError(field)"
+                     idx="{{$index}}"></therapy>
         </div>
     </div>
     </div>
