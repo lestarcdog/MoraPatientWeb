@@ -1,4 +1,4 @@
-angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages", "ngMaterial"])
+angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages", "ngMaterial", "infinite-scroll"])
     .config(function ($routeProvider) {
         $routeProvider
             .when("/login", {
@@ -52,9 +52,12 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
         MOMENT_DATE: "YYYY-MM-DD",
         DATETIME: "yyyy-MM-dd HH:mm:ss"
     })
+    .constant("MoraEvents", {
+        PATIENT_CHANGE: "moraPatientChangedEvt"
+    })
     .run(function ($rootScope, $location) {
-        $rootScope.loginTherapist = {"id": 1, "name": "admin"};
-        // if ($location.path() !== "/login") {
-        //     $location.path("/login");
-        // }
+        // $rootScope.loginTherapist = {"id": 1, "name": "admin"};
+        if ($location.path() !== "/login") {
+            $location.path("/login");
+        }
     });

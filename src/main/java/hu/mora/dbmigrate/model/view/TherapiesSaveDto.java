@@ -1,11 +1,11 @@
-package hu.mora.model.view;
+package hu.mora.dbmigrate.model.view;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import hu.mora.dao.MoraDao;
-import hu.mora.exception.MoraException;
-import hu.mora.model.Therapist;
-import hu.mora.model.Therapy;
+import hu.mora.dbmigrate.dao.MoraDao;
+import hu.mora.dbmigrate.exception.MoraException;
+import hu.mora.dbmigrate.model.Therapist;
+import hu.mora.dbmigrate.model.Therapy;
 
 import java.time.LocalDate;
 import java.util.List;

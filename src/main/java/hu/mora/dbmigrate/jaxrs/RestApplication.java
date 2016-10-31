@@ -1,4 +1,4 @@
-package hu.mora.jaxrs;
+package hu.mora.dbmigrate.jaxrs;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

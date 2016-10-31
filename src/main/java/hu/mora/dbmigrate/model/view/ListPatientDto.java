@@ -1,6 +1,6 @@
-package hu.mora.model.view;
+package hu.mora.dbmigrate.model.view;
 
-import hu.mora.model.Patient;
+import hu.mora.dbmigrate.model.Patient;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

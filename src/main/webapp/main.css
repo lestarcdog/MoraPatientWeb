@@ -1,14 +1,22 @@
+body {
+    padding: 80px 0;
+}
+
+.container {
+    margin-bottom: 80px;
+}
+
+.navbar-center {
+    position: absolute;
+    left: 50%;
+    margin-top: 5px;
+    transform: translateX(-50%);
+    float: none;
+    display: inline-block;
+}
+
 #login-banner {
     margin: 4em 0;
-}
-
-#patientCity input, md-autocomplete md-autocomplete-wrap {
-    line-height: 1.42857143;
-    height: 34px;
-}
-
-md-autocomplete md-autocomplete-wrap {
-    border-radius: 4px;
 }
 
 .success-toast div.md-toast-content {
@@ -35,9 +43,23 @@ md-autocomplete md-autocomplete-wrap {
 }
 
 .therapy-list div {
-    margin: 0 30px;
+    margin: 0 5px;
 }
 
 .therapy-list label {
     display: block;
+}
+
+/*Patient Data*/
+#patientCity input, md-autocomplete md-autocomplete-wrap {
+    line-height: 1.42857143;
+    height: 34px;
+}
+
+md-autocomplete md-autocomplete-wrap {
+    border-radius: 4px;
+}
+
+#zip {
+    width: 10em;
 }

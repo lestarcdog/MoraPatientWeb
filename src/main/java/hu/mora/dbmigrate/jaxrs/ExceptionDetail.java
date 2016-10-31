@@ -1,4 +1,4 @@
-package hu.mora.jaxrs;
+package hu.mora.dbmigrate.jaxrs;
 
 public class ExceptionDetail {
     private String message;

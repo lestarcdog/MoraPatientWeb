@@ -1,13 +1,13 @@
-package hu.mora.service;
+package hu.mora.dbmigrate.service;
 
-import hu.mora.dao.MoraDao;
-import hu.mora.exception.MoraException;
-import hu.mora.model.HunCity;
-import hu.mora.model.Patient;
-import hu.mora.model.Therapist;
-import hu.mora.model.Therapy;
-import hu.mora.model.view.ListPatientDto;
-import hu.mora.model.view.TherapiesSaveDto;
+import hu.mora.dbmigrate.dao.MoraDao;
+import hu.mora.dbmigrate.exception.MoraException;
+import hu.mora.dbmigrate.model.HunCity;
+import hu.mora.dbmigrate.model.Patient;
+import hu.mora.dbmigrate.model.Therapist;
+import hu.mora.dbmigrate.model.Therapy;
+import hu.mora.dbmigrate.model.view.ListPatientDto;
+import hu.mora.dbmigrate.model.view.TherapiesSaveDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,9 +66,9 @@ public class MoraService {
         patient.setTherapies(therapies);
     }
 
-    public void savePatient(@NotNull Patient patient) {
+    public Integer savePatient(@NotNull Patient patient) {
         LOG.info("Saving patient {}", patient);
-        moraDao.savePatient(patient);
+        return moraDao.savePatient(patient);
     }
 
     public void removeTherapist(Integer id) {

@@ -1,6 +1,6 @@
 angular.module("MoraPatientApp")
     .controller("TherapiesController", function ($scope, $rootScope, $location, $routeParams, $mdDialog, MoraDataService, DateFormatConst,
-                                                 AlertService) {
+                                                 AlertService, MoraEvents) {
         var patientId = $routeParams.id;
         $scope.showFormError = false;
 
@@ -10,6 +10,7 @@ angular.module("MoraPatientApp")
                 $scope.therapies = patient.therapies;
                 $scope.addNewTherapy();
                 $scope.showFormError = false;
+                $rootScope.$broadcast(MoraEvents.PATIENT_CHANGE, patient);
             })
         };
 

@@ -1,4 +1,4 @@
-package hu.mora.model;
+package hu.mora.dbmigrate.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -40,6 +40,9 @@ public class Patient {
 
     @Column(name = "CITY")
     private String city;
+
+    @Column(name = "ZIP")
+    private String zip;
 
     @Column(name = "STREET")
     private String street;
@@ -139,6 +142,14 @@ public class Patient {
         this.email = email;
     }
 
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
     public String getStreet() {
         return street;
     }
@@ -160,11 +171,14 @@ public class Patient {
                 ", name='" + name + '\'' +
                 ", isMale=" + isMale +
                 ", birthDate=" + birthDate +
+                ", birthPlace='" + birthPlace + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", city='" + city + '\'' +
+                ", zip='" + zip + '\'' +
                 ", street='" + street + '\'' +
                 ", lastModified=" + lastModified +
+                ", therapies=" + therapies +
                 '}';
     }
 

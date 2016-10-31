@@ -1,4 +1,4 @@
-package hu.mora.jaxrs;
+package hu.mora.dbmigrate.jaxrs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

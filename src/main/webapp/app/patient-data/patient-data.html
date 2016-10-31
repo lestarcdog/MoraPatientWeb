@@ -4,8 +4,8 @@
             <h4>Személyes adatok</h4>
 
             <div class="form-group" ng-class="hasError('name')">
-                <label class="control-label">Név</label>
-                <input name="name" type="text" class="form-control" ng-model="patient.name" required>
+                <label for="name" class="control-label">Név</label>
+                <input id="name" name="name" type="text" class="form-control" ng-model="patient.name" required>
             </div>
             <div class="form-group">
                 <label>Neme</label>
@@ -28,7 +28,7 @@
 
             <div class="form-group" ng-class="hasError('birthPlace')">
                 <label class="control-label">Születési hely</label>
-                <input type="text" name="birthPlace" class="form-control" ng-model="patient.birthPlace" required>
+                <input type="text" name="birthPlace" class="form-control" ng-model="patient.birthPlace">
             </div>
 
             <hr/>
@@ -50,9 +50,17 @@
 
             <h4>Lakcím</h4>
 
+            <div class="form-group" ng-class="hasError('zip')">
+                <label for="zip" class="control-label">Irányítószám</label>
+                <input id="zip" name="zip" type="text" ng-model="patient.zip" ng-pattern="/[\d]+/"
+                       class="form-control"/>
+            </div>
+
             <div class="form-group">
                 <label class="control-label">Város</label>
-                <md-autocomplete id="patientCity" md-selected-item="patientCity" md-search-text="searchText"
+                <md-autocomplete id="patientCity" md-selected-item="patientCity"
+                                 md-search-text="searchText"
+                                 md-selected-item-change="patient.zip = patientCity.zip"
                                  md-items="item in getMatches(searchText)"
                                  md-item-text="item.name" md-min-length="2">
                     <span md-highlight-text="searchText">{{item.name}}</span>
@@ -60,8 +68,8 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">Utca</label>
-                <input name="street" type="text" class="form-control" ng-model="patient.street">
+                <label for="street" class="control-label">Utca</label>
+                <input id="street" name="street" type="text" class="form-control" ng-model="patient.street">
             </div>
 
             <div class="alert-danger alert" ng-show="showError">

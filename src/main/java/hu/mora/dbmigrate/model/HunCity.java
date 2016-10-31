@@ -1,4 +1,4 @@
-package hu.mora.model;
+package hu.mora.dbmigrate.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +12,9 @@ public class HunCity {
     @Id
     @Column(name = "NAME")
     private String name;
+
+    @Column(name = "ZIP")
+    private String zip;
 
     @Column(name = "SMALLCAPS")
     private String smallcaps;
@@ -30,6 +33,14 @@ public class HunCity {
 
     public void setSmallcaps(String smallcaps) {
         this.smallcaps = smallcaps;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 
     @Override

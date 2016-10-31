@@ -1,6 +1,6 @@
 angular.module("MoraPatientApp")
     .controller("PatientDataController", function ($scope, $rootScope, $location, $routeParams, $filter, MoraDataService, HunCityService,
-                                                   DateFormatConst, AlertService, $mdDialog) {
+                                                   DateFormatConst, AlertService, $mdDialog, PatientCache, MoraEvents) {
         //default patient
         $scope.patient = {
             male: true
@@ -20,6 +20,7 @@ angular.module("MoraPatientApp")
                 $scope.searchText = patient.city;
                 $scope.patientBirthDate = moment(patient.birthDate).toDate();
                 $scope.patient = patient;
+                $rootScope.$broadcast(MoraEvents.PATIENT_CHANGE, patient);
             })
         }
 
@@ -58,7 +59,7 @@ angular.module("MoraPatientApp")
             $mdDialog.show(confirm).then(function () {
                 MoraDataService.deletePatient($scope.patient.id).then(function () {
                     AlertService.showSuccess($scope.patient.name + " sikeresen törölve.");
-                    $location.path("/patient-list");
+                    $location.path("/patient-list").search("passThrough", true);
                 });
             });
         };
@@ -75,9 +76,11 @@ angular.module("MoraPatientApp")
 
                 console.log("saving patient", $scope.patient);
 
-                MoraDataService.savePatient($scope.patient).then(function () {
+                MoraDataService.savePatient($scope.patient).then(function (newPatientId) {
                     AlertService.showSuccess($scope.patient.name + " sikeresen elmentve.");
-                    $location.path("/patient-list");
+                    //load the new patient list in the background to the cache
+                    PatientCache.patients(true);
+                    $location.path("/therapies/" + newPatientId);
                 });
             } else {
                 $scope.showError = true

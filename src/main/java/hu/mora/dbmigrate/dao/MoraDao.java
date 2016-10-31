@@ -1,10 +1,10 @@
-package hu.mora.dao;
+package hu.mora.dbmigrate.dao;
 
-import hu.mora.exception.MoraException;
-import hu.mora.model.HunCity;
-import hu.mora.model.Patient;
-import hu.mora.model.Therapist;
-import hu.mora.model.Therapy;
+import hu.mora.dbmigrate.exception.MoraException;
+import hu.mora.dbmigrate.model.HunCity;
+import hu.mora.dbmigrate.model.Patient;
+import hu.mora.dbmigrate.model.Therapist;
+import hu.mora.dbmigrate.model.Therapy;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -38,8 +38,9 @@ public class MoraDao {
         em.remove(patient.orElseThrow(() -> new MoraException("Nem létező beteg. Nem törölhető.")));
     }
 
-    public void savePatient(Patient patient) {
-        em.merge(patient);
+    public Integer savePatient(Patient patient) {
+        Patient merged = em.merge(patient);
+        return merged.getId();
     }
 
     public void saveTherapist(Therapist therapist) {

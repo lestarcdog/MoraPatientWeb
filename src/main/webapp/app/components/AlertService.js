@@ -13,7 +13,7 @@ angular.module("MoraPatientApp").factory("AlertService", function ($mdDialog, $m
         var success = $mdToast.simple()
             .position("bottom right")
             .textContent(text)
-            .hideDelay(0)
+            .hideDelay(4000)
             .toastClass("success-toast");
         $mdToast.show(success);
     };

@@ -1,4 +1,4 @@
-package hu.mora.model;
+package hu.mora.dbmigrate.model;
 
 import javax.persistence.*;
 

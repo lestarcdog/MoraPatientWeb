@@ -4,7 +4,8 @@
             <div class="col-md-10 text-center">
                 <div class="form-group col-sm-6">
                     <label>Bejegyzés időpontja: </label>
-                    <md-datepicker ng-if="therapy.newTherapy" name="therapy" md-hide-icons="calendar" ng-model="therapy.therapyDate"
+                    <md-datepicker ng-if="therapy.newTherapy" name="therapy" md-hide-icons="calendar"
+                                   ng-model="therapy.therapyDate"
                                    md-placeholder="ÉÉÉÉ.HH.NN"
                                    required></md-datepicker>
                     <span ng-if="!therapy.newTherapy">{{ therapy.therapyDate}}</span>
@@ -24,22 +25,25 @@
             <div class="form-group" ng-class="{'has-error' : checkError({field:'interview'+idx})}">
                 <label class="control-label">Interjú</label>
                 <textarea name="interview{{idx}}" class="form-control" ng-dblclick="openEditor('Interjú','interview')"
-                          ng-model="therapy.interview" required/>
+                          ng-model="therapy.interview" cols="45" rows="5" required></textarea>
             </div>
             <div class="form-group">
                 <label class="control-label">Terápia</label>
-                <textarea name="teraphy{{idx}}" class="form-control" ng-dblclick="openEditor('Terápia','therapy')"
-                          ng-model="therapy.therapy"/>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Kezelés</label>
-                <textarea name="treatment{{idx}}" class="form-control" ng-dblclick="openEditor('Kezelés','treatment')"
-                          ng-model="therapy.treatment"/>
+                <textarea name="teraphy{{idx}}" class="form-control" rows="5"
+                          ng-dblclick="openEditor('Terápia','therapy')"
+                          ng-model="therapy.therapy"></textarea>
             </div>
             <div class="form-group">
                 <label class="control-label">Eredmény</label>
-                <textarea name="result{{idx}}" class="form-control" ng-dblclick="openEditor('Eredmény','result')"
-                          ng-model="therapy.result"/>
+                <textarea name="treatment{{idx}}" class="form-control" rows="5"
+                          ng-dblclick="openEditor('Kezelés','treatment')"
+                          ng-model="therapy.treatment"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Javaslat - kontroll</label>
+                <textarea name="result{{idx}}" class="form-control" rows="5"
+                          ng-dblclick="openEditor('Eredmény','result')"
+                          ng-model="therapy.result"></textarea>
             </div>
         </div>
     </div>

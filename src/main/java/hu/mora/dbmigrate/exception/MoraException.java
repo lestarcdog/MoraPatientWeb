@@ -1,4 +1,4 @@
-package hu.mora.exception;
+package hu.mora.dbmigrate.exception;
 
 import javax.ejb.ApplicationException;
 

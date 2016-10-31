@@ -19,7 +19,7 @@ angular.module("MoraPatientApp")
         var allPatients = function () {
             return $http.get("api/patients").then(function (resp) {
                 return resp.data;
-            });
+            }, errorHandler);
         };
 
         var patientById = function (patientId) {
@@ -33,7 +33,9 @@ angular.module("MoraPatientApp")
         };
 
         var savePatient = function (patient) {
-            return $http.post("api/patient", patient).then(emptyHandler, errorHandler);
+            return $http.post("api/patient", patient).then(function (resp) {
+                return resp.data;
+            }, errorHandler);
         };
 
         var deleteTherapist = function (therapistId) {

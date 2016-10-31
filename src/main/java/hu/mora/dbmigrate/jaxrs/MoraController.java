@@ -1,11 +1,11 @@
-package hu.mora.jaxrs;
+package hu.mora.dbmigrate.jaxrs;
 
-import hu.mora.model.HunCity;
-import hu.mora.model.Patient;
-import hu.mora.model.Therapist;
-import hu.mora.model.view.ListPatientDto;
-import hu.mora.model.view.TherapiesSaveDto;
-import hu.mora.service.MoraService;
+import hu.mora.dbmigrate.model.HunCity;
+import hu.mora.dbmigrate.model.Patient;
+import hu.mora.dbmigrate.model.Therapist;
+import hu.mora.dbmigrate.model.view.ListPatientDto;
+import hu.mora.dbmigrate.model.view.TherapiesSaveDto;
+import hu.mora.dbmigrate.service.MoraService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -40,8 +40,8 @@ public class MoraController {
 
     @POST
     @Path("/patient")
-    public void savePatient(Patient patient) {
-        moraService.savePatient(patient);
+    public Integer savePatient(Patient patient) {
+        return moraService.savePatient(patient);
     }
 
     @GET

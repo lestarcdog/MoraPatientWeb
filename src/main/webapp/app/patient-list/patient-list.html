@@ -2,7 +2,7 @@
     <form class="form-horizontal ">
         <div class="form-group col-md-3">
             <label for="searchField" class="control-label">Keresés</label>
-            <input type="text" class="form-control" id="searchField" ng-model="searchText"/>
+            <input type="text" class="form-control" id="searchField" ng-model="searchText" ng-minlength="2"/>
         </div>
     </form>
 </div>
@@ -18,7 +18,8 @@
             <th>Műveletek</th>
             </thead>
             <tbody>
-            <tr ng-repeat="patient in patients | filter : searchText">
+            <tr ng-repeat="patient in patients | filter : searchText | limitTo: scrollLimit"
+                ng-dblclick="openTherapies(patient.id)">
                 <td>{{patient.name}}</td>
                 <td>{{patient.birthDate | date: dateformat.DATE}}</td>
                 <td>{{patient.birthPlace}}</td>
@@ -37,5 +38,6 @@
             </tr>
             </tbody>
         </table>
+        <div infinite-scroll="morePatients()" infinite-scroll-distance="3"></div>
     </div>
 </div>

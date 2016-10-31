@@ -1,6 +1,6 @@
-package hu.mora.jaxrs;
+package hu.mora.dbmigrate.jaxrs;
 
-import hu.mora.exception.MoraException;
+import hu.mora.dbmigrate.exception.MoraException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

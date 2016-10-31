@@ -1,5 +1,5 @@
 angular.module("MoraPatientApp")
-    .controller("TherapistAdminController", function ($scope, MoraDataService, $rootScope, $location) {
+    .controller("TherapistAdminController", function ($scope, MoraDataService, $rootScope, $location, MoraEvents) {
 
         var loadTherapist = function () {
             MoraDataService.allTherapist().then(function (therapists) {
@@ -7,6 +7,8 @@ angular.module("MoraPatientApp")
                 $scope.therapists = therapists;
             });
         };
+
+        $rootScope.$broadcast(MoraEvents.PATIENT_CHANGE, null);
 
         loadTherapist();
 
