@@ -2,7 +2,8 @@
     <form class="form-horizontal ">
         <div class="form-group col-md-3">
             <label for="searchField" class="control-label">Keresés</label>
-            <input type="text" class="form-control" id="searchField" ng-model="searchText" ng-minlength="2"/>
+            <input type="text" class="form-control" id="searchField" ng-model="searchText"
+                   ng-model-options="{debounce : 500}" ng-minlength="3"/>
         </div>
     </form>
 </div>
