@@ -9,7 +9,7 @@ public class ListPatientDto {
     private Integer id;
     private String name;
     private LocalDate birthDate;
-    private String birthPlace;
+    private String city;
     private String phone;
     private LocalDateTime lastModified;
 
@@ -17,7 +17,7 @@ public class ListPatientDto {
         this.id = patient.getId();
         this.name = patient.getName();
         this.birthDate = patient.getBirthDate();
-        this.birthPlace = patient.getBirthPlace();
+        this.city = patient.getCity();
         this.phone = patient.getPhone();
         this.lastModified = patient.getLastModified();
     }
@@ -46,12 +46,12 @@ public class ListPatientDto {
         this.birthDate = birthDate;
     }
 
-    public String getBirthPlace() {
-        return birthPlace;
+    public String getCity() {
+        return city;
     }
 
-    public void setBirthPlace(String birthPlace) {
-        this.birthPlace = birthPlace;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getPhone() {
@@ -80,7 +80,7 @@ public class ListPatientDto {
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (birthDate != null ? !birthDate.equals(that.birthDate) : that.birthDate != null) return false;
-        if (birthPlace != null ? !birthPlace.equals(that.birthPlace) : that.birthPlace != null) return false;
+        if (city != null ? !city.equals(that.city) : that.city != null) return false;
         if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
         return lastModified != null ? lastModified.equals(that.lastModified) : that.lastModified == null;
 
@@ -91,7 +91,7 @@ public class ListPatientDto {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
-        result = 31 * result + (birthPlace != null ? birthPlace.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (lastModified != null ? lastModified.hashCode() : 0);
         return result;

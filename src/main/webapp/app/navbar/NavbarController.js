@@ -7,7 +7,6 @@ angular.module("MoraPatientApp").controller("NavbarController", function ($scope
 
     $scope.$on(MoraEvents.PATIENT_CHANGE, function (evt, patient) {
         if (patient) {
-            console.log(patient);
             $scope.patientName = patient.name;
         } else {
             $scope.patientName = null;

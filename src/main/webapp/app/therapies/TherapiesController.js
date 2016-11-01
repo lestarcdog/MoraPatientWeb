@@ -3,6 +3,7 @@ angular.module("MoraPatientApp")
                                                  AlertService, MoraEvents) {
         var patientId = $routeParams.id;
         $scope.showFormError = false;
+        $scope.therapyLimit = 15;
 
         var refresh = function (addNewItem) {
             MoraDataService.patientById(patientId).then(function (patient) {
@@ -14,6 +15,12 @@ angular.module("MoraPatientApp")
                     $scope.addNewTherapy();
                 }
             })
+        };
+
+        $scope.moreTherapies = function () {
+            if ($scope.therapies && $scope.therapies.length > $scope.therapyLimit) {
+                $scope.therapyLimit += 10;
+            }
         };
 
         $scope.addNewTherapy = function () {

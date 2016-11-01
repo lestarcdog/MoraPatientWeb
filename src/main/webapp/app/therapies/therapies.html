@@ -20,9 +20,11 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <therapy ng-repeat="t in therapies" therapy="t" delete="delete($index)" check-error="checkError(field)"
+            <therapy ng-repeat="t in therapies | limitTo: therapyLimit" therapy="t" delete="delete($index)"
+                     check-error="checkError(field)"
                      idx="{{$index}}"></therapy>
         </div>
     </div>
 </form>
+<div infinite-scroll="moreTherapies()" infinite-scroll-distance="3"></div>
 

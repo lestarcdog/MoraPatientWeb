@@ -12,7 +12,7 @@
             <thead>
             <th>Név</th>
             <th>Születési idő</th>
-            <th>Születési hely</th>
+            <th>Város</th>
             <th>Telefonszám</th>
             <th>Utoljára módosítva</th>
             <th>Műveletek</th>
@@ -22,7 +22,7 @@
                 ng-dblclick="openTherapies(patient.id)">
                 <td>{{patient.name}}</td>
                 <td>{{patient.birthDate | date: dateformat.DATE}}</td>
-                <td>{{patient.birthPlace}}</td>
+                <td>{{patient.city}}</td>
                 <td>{{patient.phone}}</td>
                 <td>{{modifiedSince(patient.lastModified)}}
                     <md-tooltip md-direction="bottom">
