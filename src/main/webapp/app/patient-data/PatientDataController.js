@@ -94,7 +94,7 @@ angular.module("MoraPatientApp")
                     $scope.patient.city = $scope.patientCity.name;
                 }
 
-                //convert time to millis
+                //convert time jackson yyyy-mm-dd format string
                 $scope.patient.birthDate = moment($scope.patientBirthDate).format(DateFormatConst.MOMENT_DATE);
 
                 console.log("saving patient", $scope.patient);

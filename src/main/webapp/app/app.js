@@ -33,15 +33,15 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
 
         $mdDateLocaleProvider.firstDayOfWeek = 1;
 
-        // Example uses moment.js to parse and format dates.
         $mdDateLocaleProvider.parseDate = function (dateString) {
-            var m = moment(dateString, ['L', "YYYY-MM-DD", "YYYY.MM.DD", "YYYY MM DD"], true);
-            return m.isValid() ? m.toDate() : null;
+            var m = moment(dateString, ["YYYYMMDD", 'L', "YYYY-MM-DD", "YYYY.MM.DD", "YYYY MM DD"], true);
+            console.log(m.isValid(), m.toDate());
+            return m.isValid() ? m.toDate() : new Date(NaN);
         };
 
         $mdDateLocaleProvider.formatDate = function (date) {
             var m = moment(date);
-            return m.isValid() ? m.format('L') : '';
+            return m.isValid() ? m.format('YYYY.MM.DD') : '';
         };
 
         $mdDateLocaleProvider.msgCalendar = 'Naptár';
