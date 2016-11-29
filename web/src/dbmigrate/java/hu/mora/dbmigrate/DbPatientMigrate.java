@@ -2,7 +2,6 @@ package hu.mora.dbmigrate;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Splitter;
-import org.h2.Driver;
 
 import java.io.BufferedReader;
 import java.io.IOException;

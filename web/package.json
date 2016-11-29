@@ -7,12 +7,12 @@
     "start": "lite-server"
   },
   "dependencies": {
-    "angular": "^1.5.8",
-    "angular-animate": "^1.5.8",
-    "angular-aria": "^1.5.8",
+    "angular": "^1.5.9",
+    "angular-animate": "^1.5.9",
+    "angular-aria": "^1.5.9",
     "angular-material": "^1.1.1",
-    "angular-messages": "^1.5.8",
-    "angular-route": "^1.5.8",
+    "angular-messages": "^1.5.9",
+    "angular-route": "^1.5.9",
     "bootstrap": "^3.3.7",
     "jquery": "^3.1.1",
     "lodash": "^4.16.2",
@@ -21,6 +21,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "browser-sync": "^2.18.2",
     "http-proxy-middleware": "^0.17.2",
     "lite-server": "^2.2.2"
   }
