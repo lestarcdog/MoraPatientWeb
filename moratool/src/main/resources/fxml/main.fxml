@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane fx:controller="hu.mora.tool.section.MainController" stylesheets="@/fxml/main.css"
+            xmlns:fx="http://javafx.com/fxml" prefHeight="600" prefWidth="900" fx:id="rootPane">
+
+    <top>
+        <HBox alignment="CENTER" spacing="10">
+            <padding>
+                <Insets top="5" bottom="5"/>
+            </padding>
+            <Label text="MoraPatient könyvtár"/>
+            <TextField fx:id="moraPatientHomeDirectory" prefWidth="300"/>
+            <Button fx:id="homeDirectoryChooser" onAction="#openHomeDirectoryChooser">
+                <graphic>
+                    <ImageView fitHeight="20" preserveRatio="true">
+                        <image>
+                            <Image url="@/graphics/folder_icon.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Label fx:id="pathStatusIcon"/>
+        </HBox>
+    </top>
+
+    <center>
+        <GridPane></GridPane>
+    </center>
+
+    <bottom>
+        <HBox fx:id="footer"></HBox>
+    </bottom>
+
+</BorderPane>
