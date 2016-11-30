@@ -1,26 +1,28 @@
 package hu.mora.tool.section;
 
-import hu.mora.tool.MainStageHolder;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
-import javafx.stage.FileChooser;
 
-public class MainController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MainController implements Initializable {
 
     @FXML
     private Pane rootPane;
 
     @FXML
-    private TextField moraPatientHomeDirectory;
+    private ControlAreaController controlAreaController;
 
     @FXML
-    private Label pathStatusIcon;
+    private HeaderController headerController;
 
-    public void openHomeDirectoryChooser(ActionEvent actionEvent) {
-        FileChooser chooser = new FileChooser();
-        chooser.showOpenDialog(MainStageHolder.getMainStage());
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        controlAreaController.disabledProperty().bind(headerController.validPathProperty());
     }
+
+
 }
