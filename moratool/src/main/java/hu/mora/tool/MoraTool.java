@@ -1,27 +1,28 @@
 package hu.mora.tool;
 
+import hu.mora.tool.scene.SceneManager;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
-import java.net.URL;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class MoraTool extends Application {
 
+    private static final Logger LOG = LoggerFactory.getLogger(MoraTool.class);
+    private static final ApplicationContext CTX = new ClassPathXmlApplicationContext("classpath:/context.xml");
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        URL mainFxml = MoraTool.class.getResource("/fxml/main.fxml");
-        Parent mainParent = FXMLLoader.load(mainFxml);
+        SceneManager sceneManager = CTX.getBean(SceneManager.class);
 
-        primaryStage.getIcons().add(new Image("graphics/mora_icon.jpg"));
-        primaryStage.setScene(new Scene(mainParent));
+        Thread.setDefaultUncaughtExceptionHandler((t, exception) -> {
+            LOG.error(exception.getMessage(), exception);
+            sceneManager.showError("A művelet nem sikerült. Hiba történt: " + exception.getMessage());
+        });
+        sceneManager.setupStage(primaryStage);
 
-        MainStageHolder.setMainStage(primaryStage);
-
-        primaryStage.show();
     }
 
 

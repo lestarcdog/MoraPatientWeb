@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <BorderPane fx:controller="hu.mora.tool.section.MainController" stylesheets="@/fxml/main.css"
-            xmlns:fx="http://javafx.com/fxml" prefHeight="600" prefWidth="900" fx:id="rootPane">
+            xmlns:fx="http://javafx.com/fxml" prefHeight="600" prefWidth="900">
 
     <top>
-        <fx:include source="header.fxml" fx:id="header"/>
+        <fx:include source="/fxml/header/header.fxml"/>
     </top>
 
     <center>
-        <fx:include source="contentArea.fxml" fx:id="controlArea"/>
+        <fx:include source="/fxml/content/controlArea.fxml"/>
     </center>
 
     <bottom>
-        <HBox fx:id="footerArea"></HBox>
+
     </bottom>
 
 </BorderPane>

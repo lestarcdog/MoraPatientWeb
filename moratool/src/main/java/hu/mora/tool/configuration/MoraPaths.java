@@ -1,14 +1,19 @@
-package hu.mora.tool.path;
+package hu.mora.tool.configuration;
+
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class MoraHomeVerifier {
+@Service
+public class MoraPaths {
 
     private static final String WILDFLY_DIR = "wildfly";
     private static final String TOOL_DIR = "tool";
     private static final String DB_DIR = "db";
+
+    private Path homeDir;
 
     /**
      * Has
@@ -19,9 +24,10 @@ public class MoraHomeVerifier {
      * </ul>
      * directories under the root dir.
      *
-     * @param rootDir root dir
+     * @param rootDirPath root dir
      */
-    public static boolean isHomeDirectory(File rootDir) {
+    public boolean isHomeDirectory(String rootDirPath) {
+        File rootDir = new File(rootDirPath);
         if (rootDir != null && rootDir.isDirectory()) {
             Path rootPath = rootDir.toPath();
             boolean allExists = Files.exists(rootPath.resolve(WILDFLY_DIR));
@@ -30,5 +36,18 @@ public class MoraHomeVerifier {
         } else {
             return false;
         }
+    }
+
+    public void setHomeDir(File dir) {
+        homeDir = dir.toPath();
+    }
+
+    public String getHomeDir() {
+        return homeDir != null ? homeDir.toString() : null;
+    }
+
+
+    public String jbossCliPath() {
+        return homeDir.resolve(WILDFLY_DIR).resolve("bin").resolve("jboss-cli.bat").toString();
     }
 }
