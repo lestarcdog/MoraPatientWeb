@@ -24,7 +24,7 @@ public class ControlAreaController implements Initializable {
     private BooleanProperty disabled = new SimpleBooleanProperty(false);
 
     @Autowired
-    private SceneManager sceneManager;
+    SceneManager sceneManager;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

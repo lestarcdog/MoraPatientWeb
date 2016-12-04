@@ -1,2 +1,2 @@
-include "moratool", "web"
+include "moratool", "web", "cityparser", "dbmigrate"
 

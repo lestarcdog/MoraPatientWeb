@@ -34,10 +34,10 @@ public class HeaderController implements Initializable {
     private SceneManager manager;
 
     @Autowired
-    private MoraPaths moraPaths;
+    MoraPaths moraPaths;
 
     @Autowired
-    private ConfigurationRepository configurationRepository;
+    ConfigurationRepository configurationRepository;
 
 
     private BooleanProperty validPath = new SimpleBooleanProperty(false);

@@ -13,7 +13,7 @@
  */
 
 var proxy = require('http-proxy-middleware');
-var proxyConfig = {target: 'http://localhost:8081/morapatient', changeOrigin: true}
+var proxyConfig = {target: 'http://localhost:8080/morapatient', changeOrigin: true}
 module.exports = {
     "ui": {
         "port": 3001,

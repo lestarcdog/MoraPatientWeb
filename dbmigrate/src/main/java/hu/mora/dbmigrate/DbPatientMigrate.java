@@ -19,7 +19,6 @@ public class DbPatientMigrate {
 
     public static final LocalDate EPOCH_BIRTHDATE = LocalDate.of(1970, 1, 1);
 
-    private Driver driver;
     private Connection connection;
     private PreparedStatement patientStmt;
     private PreparedStatement therapyStmt;
@@ -31,7 +30,6 @@ public class DbPatientMigrate {
     }
 
     public DbPatientMigrate() throws SQLException {
-        driver = new Driver();
         try {
             connectDb();
             readFile();
