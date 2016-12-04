@@ -1,14 +1,11 @@
 package hu.mora.tool.commands.wildfly;
 
+import hu.mora.tool.commands.SpringBase;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/context.xml")
-public class WildflyCommandsTest {
+
+public class WildflyCommandsTest extends SpringBase {
 
 
     @Autowired

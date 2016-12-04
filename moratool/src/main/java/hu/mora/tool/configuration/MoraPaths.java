@@ -10,6 +10,8 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class MoraPaths {
@@ -21,6 +23,7 @@ public class MoraPaths {
     private static final String DB_DIR = "db";
 
     public final WildflyPaths wildfly = new WildflyPaths();
+    public final DatabasePaths database = new DatabasePaths();
 
     private Path homeDir;
 
@@ -61,8 +64,8 @@ public class MoraPaths {
         homeDir = dir.toPath();
     }
 
-    public String getHomeDir() {
-        return homeDir != null ? homeDir.toString() : null;
+    public Path getHomeDir() {
+        return homeDir != null ? homeDir : null;
     }
 
 
@@ -71,12 +74,31 @@ public class MoraPaths {
         private WildflyPaths() {
         }
 
-        public String jbossCliPath() {
-            return homeDir.resolve(WILDFLY_DIR).resolve("bin").resolve("jboss-cli.bat").toString();
+        public Path jbossCliPath() {
+            return homeDir.resolve(WILDFLY_DIR).resolve("bin").resolve("jboss-cli.bat");
         }
 
-        public String startBatPath() {
-            return homeDir.resolve(WILDFLY_DIR).resolve("bin").resolve("standalone.bat").toString();
+        public Path startBatPath() {
+            return homeDir.resolve(WILDFLY_DIR).resolve("bin").resolve("standalone.bat");
+        }
+    }
+
+    public class DatabasePaths {
+
+        public final String DATABASE_NAME = "morapatient.h2.db";
+
+        private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+
+        private DatabasePaths() {
+        }
+
+        public Path databasePath() {
+            return homeDir.resolve(DB_DIR).resolve(DATABASE_NAME);
+        }
+
+        public Path createBackupDbPath(String prefix) {
+            String currentTime = LocalDateTime.now().format(formatter);
+            return Paths.get(prefix).resolve("morapatient").resolve("backup").resolve("db").resolve(DATABASE_NAME + "." + currentTime);
         }
     }
 }
