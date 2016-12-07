@@ -1,0 +1,99 @@
+package hu.mora.web.model.view;
+
+import hu.mora.web.model.Patient;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+public class ListPatientDto {
+    private Integer id;
+    private String name;
+    private LocalDate birthDate;
+    private String city;
+    private String phone;
+    private LocalDateTime lastModified;
+
+    public ListPatientDto(Patient patient) {
+        this.id = patient.getId();
+        this.name = patient.getName();
+        this.birthDate = patient.getBirthDate();
+        this.city = patient.getCity();
+        this.phone = patient.getPhone();
+        this.lastModified = patient.getLastModified();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public LocalDateTime getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(LocalDateTime lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ListPatientDto that = (ListPatientDto) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (birthDate != null ? !birthDate.equals(that.birthDate) : that.birthDate != null) return false;
+        if (city != null ? !city.equals(that.city) : that.city != null) return false;
+        if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
+        return lastModified != null ? lastModified.equals(that.lastModified) : that.lastModified == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (lastModified != null ? lastModified.hashCode() : 0);
+        return result;
+    }
+}
