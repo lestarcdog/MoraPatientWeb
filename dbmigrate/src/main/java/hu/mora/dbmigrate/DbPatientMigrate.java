@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class DbPatientMigrate {
 
-    private static final String CONNECTION_URL = "jdbc:h2:/C:/morapatient/db/morapatient";
+    private static final String CONNECTION_URL = "jdbc:h2:/C:/MoraPatient/db/morapatient";
 
     public static final LocalDate EPOCH_BIRTHDATE = LocalDate.of(1970, 1, 1);
 
