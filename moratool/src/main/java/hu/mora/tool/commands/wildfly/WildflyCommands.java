@@ -39,12 +39,12 @@ public class WildflyCommands extends AbstractCommands {
 
     public void stopWildfly() throws MoraException {
         try {
-            Process exec = ProcessExecutor.exec(moraPaths.wildfly.jbossCliPath().toString() + " -c --command=shutdown");
+            Process exec = ProcessExecutor.exec(moraPaths.wildfly.jbossCliPath().toString(), "-c", "--command=shutdown");
             if (exec.waitFor(30, TimeUnit.SECONDS)) {
                 throw new MoraException("A szerver nem állítható le. Valószínű nem fut.");
             }
         } catch (Exception e) {
-            throw new MoraException("A szerver nem állítható le. Valószínű nem fut.");
+            throw new MoraException("A szerver nem állítható le. Valószínű nem fut.", e);
         }
     }
 

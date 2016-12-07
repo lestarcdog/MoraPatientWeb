@@ -12,7 +12,7 @@ public class ProcessExecutor {
 
     @SafeVarargs
     public static Process exec(String... cmd) throws IOException {
-        LOG.info("Executing command {} ", cmd);
+        LOG.info("Executing command {} ", (Object[]) cmd);
         ProcessBuilder pb = new ProcessBuilder(cmd);
         pb.redirectErrorStream(true);
         pb.environment().put("NOPAUSE", "cafebabe");

@@ -33,11 +33,13 @@ public class DatabaseCommands extends AbstractCommands {
         try {
             dbStream = new FileInputStream(db);
 
-            //get last part of path as filename
+            //create directory structure
             Path backupDbPath = moraPaths.database.createBackupDbPath(path);
             createDirectoryStructureForFile(backupDbPath);
 
-            zipOutput = new ZipOutputStream(new FileOutputStream(backupDbPath + ".zip"));
+            String backupZipPath = backupDbPath + ".zip";
+            LOG.info("Backing up db {} to {}", db.getAbsoluteFile(), backupZipPath);
+            zipOutput = new ZipOutputStream(new FileOutputStream(backupZipPath));
 
             //add entry
             zipOutput.putNextEntry(new ZipEntry(backupDbPath.getFileName().toString()));

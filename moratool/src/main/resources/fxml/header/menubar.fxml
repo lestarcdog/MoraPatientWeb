@@ -5,8 +5,8 @@
          xmlns:fx="http://javafx.com/fxml">
     <menus>
         <Menu text="Műveletek">
-            <MenuItem text="Adatbázis mentés"/>
-            <MenuItem text="Szerver beállítások"/>
+            <MenuItem text="Mora patient" onAction="#goToMoraPatient"/>
+            <MenuItem text="Adatbázis" onAction="#goToDatabasePage"/>
             <MenuItem text="Kilépés" onAction="#onExit"/>
         </Menu>
         <Menu text="Frissítések">

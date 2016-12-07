@@ -36,7 +36,7 @@ public class SceneManager {
     private ControlAreaController controlAreaController;
 
 
-    public synchronized void setupStage(Stage main) {
+    public void setupStage(Stage main) {
         if (mainStage == null) {
             mainStage = requireNonNull(main, "main");
 
@@ -47,7 +47,7 @@ public class SceneManager {
 
             List<String> errorMessages = preFlightCheck();
             if (errorMessages.isEmpty()) {
-                showScene(AppScene.ERROR_HOME_DIR);
+                showScene(AppScene.WELCOME);
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR,
                         Joiner.on("\n").join(errorMessages),
@@ -89,7 +89,11 @@ public class SceneManager {
     }
 
     public void showError(String errorMessage) {
-        LOG.error(errorMessage);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.getButtonTypes().add(ButtonType.CLOSE);
+        alert.setContentText(errorMessage);
+        alert.setHeaderText("Hiba");
+        alert.showAndWait();
     }
 
     public void showSuccess(String successMessage) {

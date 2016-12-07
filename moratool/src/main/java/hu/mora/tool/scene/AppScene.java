@@ -1,7 +1,10 @@
 package hu.mora.tool.scene;
 
 public enum AppScene {
-    ERROR_HOME_DIR("content/invalidHomeDir", "Érvénytelen főkönyvtár");
+    ERROR_HOME_DIR("content/invalidHomeDir", "Érvénytelen főkönyvtár"),
+    DATABASE("content/database", "Adatbázis műveletek"),
+    MORA_PATIENT("content/homedirectory", "Alapértelmezett főkönyvtár"),
+    WELCOME("content/welcome", "Welcome");
 
     private static final String PATH_PREFIX = "/fxml/";
     private static final String PATH_POSTFIX = ".fxml";

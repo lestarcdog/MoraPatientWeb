@@ -18,6 +18,8 @@ public class MoraPaths {
 
     private static final Logger LOG = LoggerFactory.getLogger(MoraPaths.class);
 
+
+    private static final String ROOTDIR_NAME = "MoraPatient";
     private static final String WILDFLY_DIR = "wildfly";
     private static final String TOOL_DIR = "tool";
     private static final String DB_DIR = "db";
@@ -85,7 +87,7 @@ public class MoraPaths {
 
     public class DatabasePaths {
 
-        public final String DATABASE_NAME = "morapatient.h2.db";
+        private final String DATABASE_NAME = "morapatient.h2.db";
 
         private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
 
@@ -98,7 +100,7 @@ public class MoraPaths {
 
         public Path createBackupDbPath(String prefix) {
             String currentTime = LocalDateTime.now().format(formatter);
-            return Paths.get(prefix).resolve("morapatient").resolve("backup").resolve("db").resolve(DATABASE_NAME + "." + currentTime);
+            return Paths.get(prefix).resolve(ROOTDIR_NAME).resolve("backup").resolve("db").resolve(DATABASE_NAME + "." + currentTime);
         }
     }
 }
