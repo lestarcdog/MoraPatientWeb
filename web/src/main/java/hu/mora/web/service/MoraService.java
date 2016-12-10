@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.lang.String.format;
@@ -62,7 +63,7 @@ public class MoraService {
     public void saveTherapies(Integer patientId, TherapiesSaveDto save) {
         Patient patient = moraDao.findPatient(patientId).orElseThrow(() -> new MoraException("Nem létező beteg."));
 
-        List<Therapy> therapies = save.getTherapies().stream().map(t -> t.toTherapyEntity(moraDao)).collect(Collectors.toList());
+        Set<Therapy> therapies = save.getTherapies().stream().map(t -> t.toTherapyEntity(moraDao)).collect(Collectors.toSet());
         patient.setTherapies(therapies);
     }
 
@@ -81,11 +82,11 @@ public class MoraService {
         moraDao.removePatient(id);
     }
 
-    public Patient getPatientById(Integer patientId) {
-        return moraDao.findPatient(patientId).orElseThrow(() -> new MoraException("A beteg nem létezik."));
-    }
-
     public List<HunCity> hunCities() {
         return moraDao.hunCities();
+    }
+
+    public Patient getPatientById(Integer patientId) {
+        return moraDao.findPatient(patientId).orElseThrow(() -> new MoraException("A beteg nem létezik."));
     }
 }

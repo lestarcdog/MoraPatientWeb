@@ -1,33 +1,22 @@
-package hu.mora.migrate;
+package hu.mora.migrate.dbload;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import static hu.mora.migrate.DbPatientMigrate.EPOCH_BIRTHDATE;
 
 public class MigratePatient {
 
     public static final DateTimeFormatter PATIENT_CSV_DATE = DateTimeFormatter.ofPattern("d-M-uu");
 
     private Integer newId;
-
     private Integer oldId;
-
     private String name;
-
     private Boolean isMale;
-
     private LocalDate birthDate;
-
     private String birthPlace;
-
     private String phone;
-
     private String email;
-
     private String city;
-
     private String street;
 
     public Integer getNewId() {
@@ -163,13 +152,13 @@ public class MigratePatient {
         String date = row.get(10);
         //dd-MM-yy
         if (date == null || date.isEmpty()) {
-            return EPOCH_BIRTHDATE;
+            return DbPatientMigrate.EPOCH_BIRTHDATE;
         } else {
             try {
                 LocalDate twok = LocalDate.parse(date, PATIENT_CSV_DATE);
                 return twok.minusYears(100);
             } catch (Exception e) {
-                return EPOCH_BIRTHDATE;
+                return DbPatientMigrate.EPOCH_BIRTHDATE;
             }
         }
     }

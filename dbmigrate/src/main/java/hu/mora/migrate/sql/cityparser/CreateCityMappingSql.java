@@ -1,3 +1,5 @@
+package hu.mora.migrate.sql.cityparser;
+
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ArrayListMultimap;
@@ -9,11 +11,11 @@ import java.util.Scanner;
 
 import static java.lang.String.format;
 
-public class ParseAndLoadCities {
+public class CreateCityMappingSql {
 
     public static void main(String[] args) throws FileNotFoundException {
         Multimap<String, String> cities = ArrayListMultimap.create();
-        try (Scanner scanner = new Scanner(ParseAndLoadCities.class.getResourceAsStream("/telepulesek.txt"))) {
+        try (Scanner scanner = new Scanner(CreateCityMappingSql.class.getResourceAsStream("/telepulesek.txt"))) {
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();

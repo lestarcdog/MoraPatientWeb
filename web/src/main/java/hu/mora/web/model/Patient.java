@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "patients")
@@ -53,7 +53,14 @@ public class Patient {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @OrderBy("therapyDate desc")
     @JoinColumn(name = "PATIENT_ID", referencedColumnName = "ID")
-    private List<Therapy> therapies;
+    private Set<Therapy> therapies;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @OrderBy("id asc")
+    @JoinTable(name = "ELHELEMENTS_PATIENTS",
+            joinColumns = {@JoinColumn(name = "PATIENT_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ELHELEMENTS_ID")})
+    private Set<ElhElement> elhElements;
 
 
     public Integer getId() {
@@ -130,14 +137,6 @@ public class Patient {
         }
     }
 
-    public List<Therapy> getTherapies() {
-        return therapies;
-    }
-
-    public void setTherapies(List<Therapy> therapies) {
-        this.therapies = therapies;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -156,6 +155,22 @@ public class Patient {
 
     public void setStreet(String street) {
         this.street = street;
+    }
+
+    public Set<Therapy> getTherapies() {
+        return therapies;
+    }
+
+    public void setTherapies(Set<Therapy> therapies) {
+        this.therapies = therapies;
+    }
+
+    public Set<ElhElement> getElhElements() {
+        return elhElements;
+    }
+
+    public void setElhElements(Set<ElhElement> elhElements) {
+        this.elhElements = elhElements;
     }
 
     @PrePersist
@@ -179,6 +194,7 @@ public class Patient {
                 ", street='" + street + '\'' +
                 ", lastModified=" + lastModified +
                 ", therapies=" + therapies +
+                ", elhElements=" + elhElements +
                 '}';
     }
 

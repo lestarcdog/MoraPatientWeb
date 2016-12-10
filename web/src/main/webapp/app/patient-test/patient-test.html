@@ -1,0 +1,25 @@
+<div class="row">
+    <h4 class="col-md-4">Páciens korábbi tesztjei</h4>
+    <div class="col-md-4">
+        <md-switch id="patient-test-switch" ng-model="lang"
+                   ng-true-value="'en'"
+                   ng-false-value="'hu'"
+                   name="language-selection" aria-label="language-switch">
+            <span ng-if="lang == 'en'">Angol</span>
+            <span ng-if="lang == 'hu'">Magyar</span>
+        </md-switch>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <input type="text" class="form-control" ng-model="searchKeyword" placeholder="keresés">
+    </div>
+</div>
+<div class="row" id="elh-elements-div">
+    <ul class="col-md-12">
+        <li ng-repeat="elh in elhElements | filter: searchKeyword">
+            <span ng-if="lang == 'en'">{{elh.nameEn}}</span>
+            <span ng-if="lang == 'hu'">{{elh.nameHu}}</span>
+        </li>
+    </ul>
+</div>

@@ -3,13 +3,13 @@ angular.module("MoraPatientApp").controller("NavbarController", function ($scope
         return $location.path().startsWith(path);
     };
 
-    $scope.patientName = null;
+    $scope.patient = null;
 
     $scope.$on(MoraEvents.PATIENT_CHANGE, function (evt, patient) {
         if (patient) {
-            $scope.patientName = patient.name;
+            $scope.patient = patient;
         } else {
-            $scope.patientName = null;
+            $scope.patient = null;
         }
     });
 

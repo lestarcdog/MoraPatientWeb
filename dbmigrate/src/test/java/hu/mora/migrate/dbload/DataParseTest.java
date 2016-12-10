@@ -1,4 +1,4 @@
-package hu.mora.migrate;
+package hu.mora.migrate.dbload;
 
 import org.junit.Test;
 

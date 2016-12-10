@@ -1,2 +1,2 @@
-include "moratool", "web", "cityparser", "dbmigrate", "openshiftdb"
+include "moratool", "web", "dbmigrate", "openshiftdb"
 

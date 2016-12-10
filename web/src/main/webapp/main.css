@@ -63,3 +63,12 @@ md-autocomplete md-autocomplete-wrap {
 #zip {
     width: 10em;
 }
+
+/* Patient test */
+#patient-test-switch {
+    margin: 0;
+}
+
+#elh-elements-div {
+    margin-top: 20px;
+}
