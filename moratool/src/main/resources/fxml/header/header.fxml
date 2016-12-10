@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox fx:controller="hu.mora.tool.section.header.HeaderController" alignment="CENTER" spacing="10"
+      xmlns:fx="http://javafx.com/fxml">
+    <HBox>
+        <fx:include source="menubar.fxml" HBox.hgrow="ALWAYS"/>
+    </HBox>
+</VBox>

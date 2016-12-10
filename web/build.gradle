@@ -1,0 +1,11 @@
+apply plugin: 'war'
+
+dependencies {
+    // wildfly has all this
+    providedCompile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
+    providedCompile group: 'org.jboss.spec', name: 'jboss-javaee-7.0', version: '1.0.3.Final-redhat-6'
+}
+
+war {
+    archiveName = "morapatient.$extension"
+}

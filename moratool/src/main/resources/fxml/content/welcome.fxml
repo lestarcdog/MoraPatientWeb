@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane fx:id="contentArea"
+            xmlns:fx="http://javafx.com/fxml">
+
+    <center>
+        <VBox spacing="20" alignment="CENTER">
+            <ImageView preserveRatio="true" fitHeight="200">
+                <image>
+                    <Image url="@/graphics/mora_login.jpg"/>
+                </image>
+            </ImageView>
+            <Label text="MoraPatient adminisztrátor eszköz" styleClass="h2"/>
+        </VBox>
+    </center>
+
+</BorderPane>

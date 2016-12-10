@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<MenuBar fx:id="menuBar" fx:controller="hu.mora.tool.section.header.MenuController"
+         xmlns:fx="http://javafx.com/fxml">
+    <menus>
+        <Menu text="Műveletek">
+            <MenuItem text="Mora patient" onAction="#goToMoraPatient"/>
+            <MenuItem text="Adatbázis" onAction="#goToDatabasePage"/>
+            <MenuItem text="Kilépés" onAction="#onExit"/>
+        </Menu>
+        <Menu text="Frissítések">
+            <MenuItem text="Nézet"/>
+        </Menu>
+    </menus>
+</MenuBar>

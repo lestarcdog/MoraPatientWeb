@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane fx:controller="hu.mora.tool.section.MainController" stylesheets="@/fxml/main.css"
+            xmlns:fx="http://javafx.com/fxml" prefHeight="600" prefWidth="900">
+
+    <top>
+        <fx:include source="/fxml/header/header.fxml"/>
+    </top>
+
+    <center>
+        <fx:include source="/fxml/content/controlArea.fxml"/>
+    </center>
+
+    <bottom>
+
+    </bottom>
+
+</BorderPane>

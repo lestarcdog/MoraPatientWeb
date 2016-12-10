@@ -1,0 +1,21 @@
+apply plugin: 'war'
+
+dependencies {
+    compile group: 'org.flywaydb', name: 'flyway-core', version: '4.0.3'
+    compile group: 'com.h2database', name: 'h2', version: '1.3.176'
+
+    // wildfly has all this
+    providedCompile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
+    providedCompile group: 'org.jboss.spec', name: 'jboss-javaee-7.0', version: '1.0.3.Final-redhat-6'
+}
+
+war {
+    archiveName = "openshiftDbCreator.$extension"
+    from(file("../flyway/sql"), {
+        into("WEB-INF/classes/sql")
+    })
+    from(file("../web/src/main/resources/META-INF/persistence.xml"),{
+        into("META-INF")
+    })
+    //classpath += file("../flyway/sql")
+}
