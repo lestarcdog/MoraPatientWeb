@@ -1,6 +1,11 @@
 <form name="therapyForm" novalidate class="form" ng-submit="save(false)">
     <div class="row">
-        <div class="col-md-12"><h4>Páciens: {{patient.name}}</h4>
+        <div class="col-md-12">
+            <h4>Páciens: {{patient.name}}</h4>
+            <ul class="list-inline">
+                <li><strong>Születési idő:</strong> {{patient.birthDate}}</li>
+                <li><strong>Telefonszám:</strong> {{patient.phone}}</li>
+            </ul>
             <button type="submit" class="btn btn-primary">Mentés</button>
             <button type="button" ng-click="save(true)" class="btn btn-primary">Mentés és Bezár</button>
             <button

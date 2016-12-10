@@ -56,7 +56,8 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
         PATIENT_CHANGE: "moraPatientChangedEvt"
     })
     .run(function ($rootScope, $location) {
-        //$rootScope.loginTherapist = {"id": 1, "name": "admin"};
+        // uncomment to testing
+        $rootScope.loginTherapist = {"id": 1, "name": "admin"};
         if ($location.path() !== "/login") {
             $location.path("/login");
         }
