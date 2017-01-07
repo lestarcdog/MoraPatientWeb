@@ -33,7 +33,7 @@ public class DbPatientMigrate {
      */
     private static final Reader TESTS_CSV = new InputStreamReader(DbPatientMigrate.class.getResourceAsStream("/MELHDATA.csv"), Charsets.ISO_8859_1);
 
-    private final boolean appendMode;
+    private final boolean appendElhTestMode;
     private final String connectionUrl;
     private static final Splitter SPLITTER = Splitter.on(";");
 
@@ -58,11 +58,11 @@ public class DbPatientMigrate {
 
     }
 
-    public DbPatientMigrate(String connectionUrl, boolean appendMode) throws SQLException {
-        this.appendMode = appendMode;
+    public DbPatientMigrate(String connectionUrl, boolean appendElhTestMode) throws SQLException {
+        this.appendElhTestMode = appendElhTestMode;
         this.connectionUrl = connectionUrl;
         System.out.println("Connection url is " + connectionUrl);
-        System.out.println("Append mode is " + appendMode);
+        System.out.println("Append mode is " + appendElhTestMode);
         try {
             connectDb();
             cacheElhEng();
@@ -124,7 +124,7 @@ public class DbPatientMigrate {
                 try {
                     // our preconception is that the patient all fully loaded
                     // so no append is needed
-                    if (!appendMode) {
+                    if (!appendElhTestMode) {
                         //create newPatientId
                         savePatient(migratePatient);
                     } else {
@@ -155,7 +155,7 @@ public class DbPatientMigrate {
                         skipped++;
                         System.out.println("Not found :" + therapy.getOldId());
                     } else {
-                        if (appendMode) {
+                        if (appendElhTestMode) {
                             //no append to patient
                         } else {
                             saveTherapy(therapy, patient.getNewId());
@@ -177,7 +177,7 @@ public class DbPatientMigrate {
                 MigrateElhElementsMapping elh = MigrateElhElementsMapping.createFromRow(row);
                 try {
                     Integer newElhTestId = findElhNewId(elh.getOldTestId());
-                    if (appendMode) {
+                    if (appendElhTestMode) {
                         MigratePatient patient = patients.get(elh.getOldPatientId());
                         if (patient != null) {
                             Optional<Integer> newPatientId = findPatientByNameAndBday(patient);

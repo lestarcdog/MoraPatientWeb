@@ -6,4 +6,5 @@ out/
 *.csv
 *.dbf
 *.dbt
+*.mdx
 moratool/out.txt
