@@ -9,6 +9,8 @@
 
     <context:property-placeholder location="/main.properties"/>
 
+    <bean class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"/>
+
 
     <!--<bean id="datasource" class="org.h2.jdbcx.JdbcDataSource">
         <property name="URL" value="${jdbc.url}"/>

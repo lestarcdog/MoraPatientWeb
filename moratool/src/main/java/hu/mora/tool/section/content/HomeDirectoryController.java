@@ -1,5 +1,6 @@
 package hu.mora.tool.section.content;
 
+import hu.mora.tool.configuration.Config;
 import hu.mora.tool.configuration.ConfigurationRepository;
 import hu.mora.tool.configuration.MoraPaths;
 import hu.mora.tool.graphics.GraphicsPath;
@@ -23,14 +24,25 @@ import java.util.ResourceBundle;
 @Controller
 public class HomeDirectoryController implements Initializable {
 
+    // Mora patient
     @FXML
     private TextField moraPatientHomeDirectory;
 
     @FXML
-    private ImageView pathStatusIcon;
+    private ImageView moraPatientPathStatusIcon;
 
     @FXML
-    private Pane invalidHomeDirectory;
+    private Pane invalidMoraPatientHomeDir;
+
+    //Nova Db
+    @FXML
+    private TextField novaDbHomeDirectory;
+
+    @FXML
+    private ImageView novaDbPathStatusIcon;
+
+    @FXML
+    private Pane invalidNovaDbHomeDir;
 
     @Autowired
     private SceneManager manager;
@@ -41,31 +53,56 @@ public class HomeDirectoryController implements Initializable {
     @Autowired
     ConfigurationRepository configurationRepository;
 
+    private Config config;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String initHome = configurationRepository.homeDirectory();
-        validateHomeDirTextField(initHome);
+        config = configurationRepository.config();
+        validateMoraPatientHomeDirTextField(config.getMoraPatientHomeDirPath().toString());
+        validateNovaDbHomeDirTextField(config.getNovaDbHomeDirPath().toString());
     }
 
     @FXML
-    public void openHomeDirectoryChooser(ActionEvent actionEvent) throws IOException {
+    public void openMoraPatientHomeDirectoryChooser(ActionEvent actionEvent) throws IOException {
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("MoraPatient könyvtár");
         File selectedFile = chooser.showDialog(manager.getMainStage());
         if (selectedFile != null) {
-            validateHomeDirTextField(selectedFile.getCanonicalPath());
+            validateMoraPatientHomeDirTextField(selectedFile.getCanonicalPath());
         }
     }
 
 
-    private void validateHomeDirTextField(String filePath) {
+    private void validateMoraPatientHomeDirTextField(String filePath) {
         moraPatientHomeDirectory.setText(filePath);
-        boolean isHomeDirectory = moraPaths.isHomeDirectory(filePath);
-        invalidHomeDirectory.setVisible(!isHomeDirectory);
+        boolean isHomeDirectory = moraPaths.isMoraPatientHomeDir(filePath);
+        invalidMoraPatientHomeDir.setVisible(!isHomeDirectory);
         if (isHomeDirectory) {
-            pathStatusIcon.setImage(new Image(GraphicsPath.okIcon()));
+            moraPatientPathStatusIcon.setImage(new Image(GraphicsPath.okIcon()));
+            config.setMoraPatientHomeDir(filePath);
         } else {
-            pathStatusIcon.setImage(new Image(GraphicsPath.errorIcon()));
+            moraPatientPathStatusIcon.setImage(new Image(GraphicsPath.errorIcon()));
+        }
+    }
+
+    public void openNovaDbHomeDirectoryChooser(ActionEvent actionEvent) throws IOException {
+        DirectoryChooser chooser = new DirectoryChooser();
+        chooser.setTitle("NovaDB könyvtár");
+        File selectedFile = chooser.showDialog(manager.getMainStage());
+        if (selectedFile != null) {
+            validateNovaDbHomeDirTextField(selectedFile.getCanonicalPath());
+        }
+    }
+
+    private void validateNovaDbHomeDirTextField(String canonicalPath) {
+        novaDbHomeDirectory.setText(canonicalPath);
+        boolean isHomeDirectory = moraPaths.isNovaDbHomeDir(canonicalPath);
+        invalidNovaDbHomeDir.setVisible(!isHomeDirectory);
+        if (isHomeDirectory) {
+            novaDbPathStatusIcon.setImage(new Image(GraphicsPath.okIcon()));
+            config.setNovaDbHomeDir(canonicalPath);
+        } else {
+            novaDbPathStatusIcon.setImage(new Image(GraphicsPath.errorIcon()));
         }
     }
 }

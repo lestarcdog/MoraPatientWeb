@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="hu.mora.tool.section.content.ServerController" spacing="10">
+    <padding>
+        <Insets top="10" left="10" right="10"/>
+    </padding>
+    <Label>A MoraPatient szerver kézileg való elindítása és leállítása.</Label>
+    <TextFlow>
+        <Label>A MoraPatient szerver jelenleg</Label>
+        <Label fx:id="status"/>
+    </TextFlow>
+    <Button fx:id="startButton" styleClass="btn-info" onAction="#startWildfly">Szerver indítása</Button>
+    <Button fx:id="stopButton" styleClass="btn-info" onAction="#stopWildfly">Szerver leállítása</Button>
+</VBox>

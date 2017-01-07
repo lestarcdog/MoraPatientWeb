@@ -30,7 +30,11 @@ public class MenuController {
 
     }
 
-    public void goToMoraPatient(ActionEvent actionEvent) {
-        sceneManager.showScene(AppScene.MORA_PATIENT);
+    public void goToHomeDirPathsPage(ActionEvent actionEvent) {
+        sceneManager.showScene(AppScene.HOME_DIR_PAGE);
+    }
+
+    public void goToMoraPatientServer(ActionEvent actionEvent) {
+        sceneManager.showScene(AppScene.MORA_PATIENT_SERVER);
     }
 }

@@ -2,6 +2,7 @@ package hu.mora.tool.scene;
 
 import com.google.common.base.Joiner;
 import hu.mora.tool.scene.springloader.SpringFxmlLoader;
+import hu.mora.tool.section.FooterController;
 import hu.mora.tool.section.content.ControlAreaController;
 import javafx.application.Platform;
 import javafx.scene.Parent;
@@ -34,6 +35,9 @@ public class SceneManager {
 
     @Autowired
     private ControlAreaController controlAreaController;
+
+    @Autowired
+    private FooterController footerController;
 
 
     public void setupStage(Stage main) {
@@ -88,15 +92,25 @@ public class SceneManager {
 
     }
 
+    public void showStatusMessage(String message) {
+        footerController.setStatus(message);
+    }
+
+
+    public void showError(String errorMessage, Exception e) {
+        LOG.error(e.getMessage(), e);
+        showError(errorMessage);
+
+    }
+
     public void showError(String errorMessage) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.getButtonTypes().add(ButtonType.CLOSE);
-        alert.setContentText(errorMessage);
-        alert.setHeaderText("Hiba");
+        footerController.setStatus("");
+        Alert alert = new Alert(Alert.AlertType.WARNING, errorMessage, ButtonType.OK);
+        alert.setHeaderText("Hiba történt");
         alert.showAndWait();
     }
 
     public void showSuccess(String successMessage) {
-        LOG.info(successMessage);
+        footerController.setSuccessMessage(successMessage);
     }
 }

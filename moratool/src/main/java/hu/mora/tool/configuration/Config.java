@@ -1,85 +1,70 @@
 package hu.mora.tool.configuration;
 
-import com.google.common.base.MoreObjects;
-
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-/**
- * MoraTool configuration object representation
- */
-class Config {
+public interface Config {
 
-    private String homeDirectory;
+    /**
+     * Mora patient this app home directory
+     *
+     * @return as java path
+     */
+    Path getMoraPatientHomeDirPath();
 
-    private LocalDateTime toolLastUpdateTime;
+    void setMoraPatientHomeDir(String moraPatientHomeDir);
 
-    private Integer toolVersion;
+    /**
+     * Nova db home directory
+     *
+     * @return as path
+     */
+    Path getNovaDbHomeDirPath();
 
-    private LocalDateTime webLastUpdateTime;
+    void setNovaDbHomeDir(String novaDbHomeDir);
 
-    private Integer webVersion;
+    /**
+     * Last time this tool was upgraded
+     *
+     * @return last update time
+     */
+    LocalDateTime getToolLastUpdateTime();
 
-    private Map<String, String> extraProperties;
+    void setToolLastUpdateTime(LocalDateTime toolLastUpdateTime);
 
+    /**
+     * Tools version
+     *
+     * @return tool version
+     */
+    Integer getToolVersion();
 
-    public Map<String, String> getExtraProperties() {
-        return extraProperties;
-    }
+    void setToolVersion(Integer toolVersion);
 
-    public void setExtraProperties(Map<String, String> extraProperties) {
-        this.extraProperties = extraProperties;
-    }
+    /**
+     * The web application last update time.
+     *
+     * @return last update time
+     */
+    LocalDateTime getWebLastUpdateTime();
 
-    public String getHomeDirectory() {
-        return homeDirectory;
-    }
+    void setWebLastUpdateTime(LocalDateTime webLastUpdateTime);
 
-    public void setHomeDirectory(String homeDirectory) {
-        this.homeDirectory = homeDirectory;
-    }
+    /**
+     * Web components tool
+     *
+     * @return web version
+     */
+    Integer getWebVersion();
 
-    public LocalDateTime getToolLastUpdateTime() {
-        return toolLastUpdateTime;
-    }
+    void setWebVersion(Integer webVersion);
 
-    public void setToolLastUpdateTime(LocalDateTime toolLastUpdateTime) {
-        this.toolLastUpdateTime = toolLastUpdateTime;
-    }
+    Map<String, String> getExtraProperties();
 
-    public Integer getToolVersion() {
-        return toolVersion;
-    }
+    void setExtraProperties(Map<String, String> extraProperties);
 
-    public void setToolVersion(Integer toolVersion) {
-        this.toolVersion = toolVersion;
-    }
+    String getWildflyManagementAddress();
 
-    public LocalDateTime getWebLastUpdateTime() {
-        return webLastUpdateTime;
-    }
-
-    public void setWebLastUpdateTime(LocalDateTime webLastUpdateTime) {
-        this.webLastUpdateTime = webLastUpdateTime;
-    }
-
-    public Integer getWebVersion() {
-        return webVersion;
-    }
-
-    public void setWebVersion(Integer webVersion) {
-        this.webVersion = webVersion;
-    }
-
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("homeDirectory", homeDirectory)
-                .add("toolLastUpdateTime", toolLastUpdateTime)
-                .add("toolVersion", toolVersion)
-                .add("webLastUpdateTime", webLastUpdateTime)
-                .add("webVersion", webVersion)
-                .add("extraProperties", extraProperties)
-                .toString();
-    }
+    void setWildflyManagementAddress(String wildflyManagementAddress);
 }

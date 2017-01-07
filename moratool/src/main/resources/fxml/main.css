@@ -2,31 +2,29 @@
     -fx-text-fill: red;
 }
 
+.successText {
+    -fx-text-fill: #356635;
+}
+
 .error {
     -fx-border-color: indianred;
     -fx-border-width: 2px;
 }
 
-#errorMessageBox, #successMessageBox {
-    -fx-opacity: 0.7;
-}
-
-#errorMessageBox {
-    -fx-background-color: #d2322d;
-    -fx-border-color: #ac2925;
-}
-
-#errorMessageBox Button {
-    -fx-padding: 0 10;
-}
-
-#successMessageBox {
+.successMessageBox {
     -fx-background-color: #5cb85c;
     -fx-border-color: #4cae4c;
 }
 
-#errorMessageBox Label, #successMessageBox Label {
+.successMessageBox Label {
     -fx-text-fill: #ffffff;
+}
+
+/* Footer message box */
+#messageBox {
+    -fx-border-width: 1px 0 0 0;
+    -fx-border-color: black;
+    -fx-border-style: solid;
 }
 
 /* Bootstrap style */

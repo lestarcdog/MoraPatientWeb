@@ -11,18 +11,18 @@
     </padding>
 
     <TextFlow GridPane.columnIndex="1" GridPane.rowIndex="1">
-        <Label text="A jelenlegi menüben az adatbázis mentését és visszaállíását végezheti külső meghajtóról."/>
-        <Label text="Az adatbázis mentésekor a szervert a mentés előtt le kell állítani ez automatikus megtörténik. Majd a szerver automatikusan újra el is indul."/>
-        <Label text="Az adatbázis visszaállításakor a szervert a szervert a visszaállítás előtt le kell állítani. Majd a szerver automatikusan újra el is indul"/>
+        <Label text="A jelenlegi menüben az adatbázis mentést és visszaállíását végezheti el külső meghajtóra."/>
+        <Label text="Mind a MoraPatient és a NovaDB adatbázis mentésre kerül."/>
     </TextFlow>
 
     <VBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="2">
         <Label text="Adatbázis mentése" styleClass="h3"/>
-        <Button text="Mentés megkezdése" styleClass="btn-primary" onAction="#saveCurrentDatabase"/>
+        <Button fx:id="databaseSaveButton" text="Mentés megkezdése" styleClass="btn-primary"
+                onAction="#saveCurrentDatabase"/>
     </VBox>
 
     <VBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <Label text="Adatbázis visszaállítása" styleClass="h3"/>
-        <Button text="Visszaállítás megkezdése" styleClass="btn-primary"/>
+        <Button fx:id="databaseReloadButton" text="Visszaállítás megkezdése" styleClass="btn-primary"/>
     </VBox>
 </GridPane>

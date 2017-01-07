@@ -13,7 +13,7 @@
     </center>
 
     <bottom>
-
+        <fx:include source="/fxml/footer/footer.fxml"/>
     </bottom>
 
 </BorderPane>

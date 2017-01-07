@@ -8,15 +8,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class DbPatientMigrate {
 
-    private static final String CONNECTION_URL = "jdbc:h2:/C:/MoraPatient/db/morapatient";
+    private final static String CONNECTION_URL = "jdbc:h2:/C:/MoraPatient/db/morapatient";
 
     static final LocalDate EPOCH_BIRTHDATE = LocalDate.of(1970, 1, 1);
 
@@ -35,7 +33,8 @@ public class DbPatientMigrate {
      */
     private static final Reader TESTS_CSV = new InputStreamReader(DbPatientMigrate.class.getResourceAsStream("/MELHDATA.csv"), Charsets.ISO_8859_1);
 
-    private static final boolean APPEND_MODE = true;
+    private final boolean appendMode;
+    private final String connectionUrl;
     private static final Splitter SPLITTER = Splitter.on(";");
 
     private Connection connection;
@@ -47,12 +46,23 @@ public class DbPatientMigrate {
     private Map<Integer, String> elhEng = new HashMap<>();
 
     public static void main(String[] args) throws IOException, SQLException {
-        new DbPatientMigrate();
+        boolean appendMode = true;
+        String connectionUrl = CONNECTION_URL;
+        if (args.length == 2) {
+            connectionUrl = args[0];
+            appendMode = Boolean.parseBoolean(args[1]);
+        }
+
+        new DbPatientMigrate(connectionUrl, appendMode);
 
 
     }
 
-    public DbPatientMigrate() throws SQLException {
+    public DbPatientMigrate(String connectionUrl, boolean appendMode) throws SQLException {
+        this.appendMode = appendMode;
+        this.connectionUrl = connectionUrl;
+        System.out.println("Connection url is " + connectionUrl);
+        System.out.println("Append mode is " + appendMode);
         try {
             connectDb();
             cacheElhEng();
@@ -78,7 +88,7 @@ public class DbPatientMigrate {
 
     private void connectDb() throws SQLException, ClassNotFoundException {
         Class.forName("org.h2.Driver");
-        connection = DriverManager.getConnection(CONNECTION_URL, "sa", "sa");
+        connection = DriverManager.getConnection(connectionUrl, "sa", "sa");
         patientStmt = connection.prepareStatement("INSERT INTO PATIENTS (NAME,IS_MALE,BIRTH_DATE,PHONE,EMAIL,CITY,STREET) VALUES (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
         therapyStmt = connection.prepareStatement("INSERT INTO THERAPIES (THERAPY_DATE,THERAPY,TREATMENT,INTERVIEW,RESULT,PATIENT_ID,THERAPIST_ID) VALUES (?,?,?,?,?,?,1)");
         testsStmt = connection.prepareStatement("INSERT INTO ELHELEMENTS_PATIENTS (PATIENT_ID,ELHELEMENTS_ID) VALUES (?,?)");
@@ -114,7 +124,7 @@ public class DbPatientMigrate {
                 try {
                     // our preconception is that the patient all fully loaded
                     // so no append is needed
-                    if (!APPEND_MODE) {
+                    if (!appendMode) {
                         //create newPatientId
                         savePatient(migratePatient);
                     } else {
@@ -145,7 +155,7 @@ public class DbPatientMigrate {
                         skipped++;
                         System.out.println("Not found :" + therapy.getOldId());
                     } else {
-                        if (APPEND_MODE) {
+                        if (appendMode) {
                             //no append to patient
                         } else {
                             saveTherapy(therapy, patient.getNewId());
@@ -167,11 +177,13 @@ public class DbPatientMigrate {
                 MigrateElhElementsMapping elh = MigrateElhElementsMapping.createFromRow(row);
                 try {
                     Integer newElhTestId = findElhNewId(elh.getOldTestId());
-                    if (APPEND_MODE) {
+                    if (appendMode) {
                         MigratePatient patient = patients.get(elh.getOldPatientId());
                         if (patient != null) {
-                            Integer newPatientId = findPatientByNameAndBday(patient);
-                            saveTest(newPatientId, newElhTestId);
+                            Optional<Integer> newPatientId = findPatientByNameAndBday(patient);
+                            if (newPatientId.isPresent()) {
+                                saveTest(newPatientId.get(), newElhTestId);
+                            }
                         } else {
                             System.out.println("No patient found for test " + elh.getOldPatientId());
                         }
@@ -189,14 +201,15 @@ public class DbPatientMigrate {
         }
     }
 
-    private Integer findPatientByNameAndBday(MigratePatient patient) throws SQLException {
+    private Optional<Integer> findPatientByNameAndBday(MigratePatient patient) throws SQLException {
         findPatientByNameAndBdayStmt.setString(1, patient.getName());
         findPatientByNameAndBdayStmt.setDate(2, Date.valueOf(patient.getBirthDate()));
         ResultSet rs = findPatientByNameAndBdayStmt.executeQuery();
         if (rs.next()) {
-            return rs.getInt(1);
+            return Optional.of(rs.getInt(1));
         } else {
-            throw new IllegalArgumentException("Patient not found " + patient.getName() + " " + patient.getBirthDate());
+            System.out.println("Patient not found " + patient.getName() + " " + patient.getBirthDate());
+            return Optional.empty();
         }
     }
 

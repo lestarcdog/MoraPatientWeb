@@ -1,5 +1,7 @@
 {
-  "homeDirectory": "C:/MoraPatient",
+  "moraPatientHomeDir": "C:/MoraPatient",
+  "novaDbHomeDir": "C:/NovaDB",
+  "wildflyManagementAddress": "127.0.0.1:9990",
   "toolVersion": 1,
   "webVersion": 1
 }
