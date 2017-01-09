@@ -19,7 +19,7 @@ public class ConfigurationRepository {
 
     private static final Logger LOG = LoggerFactory.getLogger(ConfigurationRepository.class);
     private static final ObjectMapper MAPPER = new ObjectMapper();
-    public static final String CONFIG_FILE_PATH = "/config.json";
+    private static final String CONFIG_FILE_PATH = "/config.json";
     private AutoSaveConfig autoSaveConfig;
 
 
@@ -28,13 +28,14 @@ public class ConfigurationRepository {
     }
 
     @PostConstruct
-    public void init() {
-        InputStream configStream = ConfigurationRepository.class.getResourceAsStream(CONFIG_FILE_PATH);
+    public void init() throws IOException {
         try {
+            InputStream configStream = ConfigurationRepository.class.getResourceAsStream(CONFIG_FILE_PATH);
             LOG.info("Reading autoSaveConfig file {}", CONFIG_FILE_PATH);
             autoSaveConfig = MAPPER.readValue(configStream, AutoSaveConfig.class);
             autoSaveConfig.setSaveConfig(this::save);
             LOG.info("AutoSaveConfig loaded {}", autoSaveConfig);
+            configStream.close();
         } catch (IOException e) {
             LOG.error(e.getMessage(), e);
             Throwables.propagate(e);

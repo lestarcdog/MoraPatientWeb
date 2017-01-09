@@ -23,6 +23,7 @@
 
     <VBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <Label text="Adatbázis visszaállítása" styleClass="h3"/>
-        <Button fx:id="databaseReloadButton" text="Visszaállítás megkezdése" styleClass="btn-primary"/>
+        <Button fx:id="databaseRestoreButton" text="Visszaállítás megkezdése" styleClass="btn-primary"
+                onAction="#restorePreviousDatabase"/>
     </VBox>
 </GridPane>

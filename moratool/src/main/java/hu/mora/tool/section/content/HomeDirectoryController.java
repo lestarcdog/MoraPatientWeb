@@ -48,18 +48,18 @@ public class HomeDirectoryController implements Initializable {
     private SceneManager manager;
 
     @Autowired
-    MoraPaths moraPaths;
+    private MoraPaths moraPaths;
 
     @Autowired
-    ConfigurationRepository configurationRepository;
+    private ConfigurationRepository configurationRepository;
 
     private Config config;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         config = configurationRepository.config();
-        validateMoraPatientHomeDirTextField(config.getMoraPatientHomeDirPath().toString());
-        validateNovaDbHomeDirTextField(config.getNovaDbHomeDirPath().toString());
+        validateMoraPatientHomeDirTextField(config.getMoraPatientHomeDirPath().toString(), false);
+        validateNovaDbHomeDirTextField(config.getNovaDbHomeDirPath().toString(), false);
     }
 
     @FXML
@@ -68,18 +68,20 @@ public class HomeDirectoryController implements Initializable {
         chooser.setTitle("MoraPatient könyvtár");
         File selectedFile = chooser.showDialog(manager.getMainStage());
         if (selectedFile != null) {
-            validateMoraPatientHomeDirTextField(selectedFile.getCanonicalPath());
+            validateMoraPatientHomeDirTextField(selectedFile.getCanonicalPath(), true);
         }
     }
 
 
-    private void validateMoraPatientHomeDirTextField(String filePath) {
+    private void validateMoraPatientHomeDirTextField(String filePath, boolean save) {
         moraPatientHomeDirectory.setText(filePath);
         boolean isHomeDirectory = moraPaths.isMoraPatientHomeDir(filePath);
         invalidMoraPatientHomeDir.setVisible(!isHomeDirectory);
         if (isHomeDirectory) {
             moraPatientPathStatusIcon.setImage(new Image(GraphicsPath.okIcon()));
-            config.setMoraPatientHomeDir(filePath);
+            if (save) {
+                config.setMoraPatientHomeDir(filePath);
+            }
         } else {
             moraPatientPathStatusIcon.setImage(new Image(GraphicsPath.errorIcon()));
         }
@@ -90,17 +92,19 @@ public class HomeDirectoryController implements Initializable {
         chooser.setTitle("NovaDB könyvtár");
         File selectedFile = chooser.showDialog(manager.getMainStage());
         if (selectedFile != null) {
-            validateNovaDbHomeDirTextField(selectedFile.getCanonicalPath());
+            validateNovaDbHomeDirTextField(selectedFile.getCanonicalPath(), true);
         }
     }
 
-    private void validateNovaDbHomeDirTextField(String canonicalPath) {
+    private void validateNovaDbHomeDirTextField(String canonicalPath, boolean save) {
         novaDbHomeDirectory.setText(canonicalPath);
         boolean isHomeDirectory = moraPaths.isNovaDbHomeDir(canonicalPath);
         invalidNovaDbHomeDir.setVisible(!isHomeDirectory);
         if (isHomeDirectory) {
             novaDbPathStatusIcon.setImage(new Image(GraphicsPath.okIcon()));
-            config.setNovaDbHomeDir(canonicalPath);
+            if (save) {
+                config.setNovaDbHomeDir(canonicalPath);
+            }
         } else {
             novaDbPathStatusIcon.setImage(new Image(GraphicsPath.errorIcon()));
         }

@@ -96,4 +96,8 @@ public class DatabaseCommands extends AbstractCommands {
         moraZipOut.closeEntry();
     }
 
+    public void restoreDatabase(String moraDbPath, String novaDbPath) {
+
+    }
+
 }

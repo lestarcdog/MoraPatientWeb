@@ -43,7 +43,7 @@ public class AutoSaveConfig implements Config {
      *
      * @param saveConfig save action
      */
-    public void setSaveConfig(Runnable saveConfig) {
+    void setSaveConfig(Runnable saveConfig) {
         this.saveConfig = saveConfig;
     }
 

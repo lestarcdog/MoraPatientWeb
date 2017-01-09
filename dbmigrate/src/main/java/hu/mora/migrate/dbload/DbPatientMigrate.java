@@ -46,16 +46,7 @@ public class DbPatientMigrate {
     private Map<Integer, String> elhEng = new HashMap<>();
 
     public static void main(String[] args) throws IOException, SQLException {
-        boolean appendMode = true;
-        String connectionUrl = CONNECTION_URL;
-        if (args.length == 2) {
-            connectionUrl = args[0];
-            appendMode = Boolean.parseBoolean(args[1]);
-        }
-
-        new DbPatientMigrate(connectionUrl, appendMode);
-
-
+        new DbPatientMigrate(CONNECTION_URL, false);
     }
 
     public DbPatientMigrate(String connectionUrl, boolean appendElhTestMode) throws SQLException {
@@ -189,8 +180,13 @@ public class DbPatientMigrate {
                         }
 
                     } else {
-                        Integer newPatientId = patients.get(elh.getOldPatientId()).getNewId();
-                        saveTest(newPatientId, newElhTestId);
+                        MigratePatient migratePatient = patients.get(elh.getOldPatientId());
+                        if (migratePatient != null) {
+                            Integer newPatientId = migratePatient.getNewId();
+                            saveTest(newPatientId, newElhTestId);
+                        } else {
+                            System.out.println("No patient found for test " + elh.getOldPatientId());
+                        }
                     }
                 } catch (SQLException e) {
                     if (e.getErrorCode() != 23505) {

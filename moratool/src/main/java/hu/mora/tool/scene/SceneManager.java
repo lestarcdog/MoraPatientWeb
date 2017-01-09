@@ -104,13 +104,16 @@ public class SceneManager {
     }
 
     public void showError(String errorMessage) {
-        footerController.setStatus("");
-        Alert alert = new Alert(Alert.AlertType.WARNING, errorMessage, ButtonType.OK);
-        alert.setHeaderText("Hiba történt");
-        alert.showAndWait();
+        Platform.runLater(() -> {
+            footerController.setStatus("");
+            Alert alert = new Alert(Alert.AlertType.WARNING, errorMessage, ButtonType.OK);
+            alert.setHeaderText("Hiba történt");
+            alert.showAndWait();
+        });
     }
 
     public void showSuccess(String successMessage) {
-        footerController.setSuccessMessage(successMessage);
+        Platform.runLater(() -> footerController.setSuccessMessage(successMessage));
+
     }
 }
