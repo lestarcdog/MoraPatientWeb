@@ -93,7 +93,7 @@ public class SceneManager {
     }
 
     public void showStatusMessage(String message) {
-        footerController.setStatus(message);
+        Platform.runLater(() -> footerController.setStatus(message));
     }
 
 

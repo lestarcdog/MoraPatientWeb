@@ -22,14 +22,14 @@ public class WildflyCommands extends AbstractCommands {
 
     public void startWildfly() throws MoraException {
         try {
-            Process exec = ProcessExecutor.exec(moraPaths.wildfly.startBatPath().toString());
+            ProcessExecutor.exec(moraPaths.wildfly.startBatPath().toString());
             //check running in every 5 seconds max retry 10 times 50s max
             //TODO pass it to config
             int maxTry = 10;
             int waited = 0;
             while (!isWildflyRunning()) {
                 if (waited++ > maxTry) {
-                    throw new MoraException("A szerver lehet hogy nem indult el.Ellenőrizze hogy be tud-e lépni");
+                    throw new MoraException("A szerver lehet hogy nem indult el. Ellenőrizze hogy be tud-e lépni");
                 }
                 //wait 5s
                 Thread.sleep(5000);

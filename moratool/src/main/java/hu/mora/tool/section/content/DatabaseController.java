@@ -56,6 +56,9 @@ public class DatabaseController {
     @Autowired
     private ThreadPoolTaskExecutor executor;
 
+
+    private boolean restoreMoraPatientDb;
+
     public void saveCurrentDatabase(ActionEvent actionEvent) {
         Optional<String> drive = askUserToSelectExternalDrive();
         //cancelled or invalid
@@ -97,13 +100,12 @@ public class DatabaseController {
 
         // select backup path
         Path backupPath;
-        boolean restoreMoraPatient = true;
         if (database.get().equals(DATABASES.get(0))) {
-            backupPath = moraPaths.database.backupMoraDbPath(drive.get());
-            restoreMoraPatient = true;
+            backupPath = moraPaths.database.backupMoraPatientDbPath(drive.get());
+            restoreMoraPatientDb = true;
         } else {
             backupPath = moraPaths.database.backupNovaDbPath(drive.get());
-            restoreMoraPatient = false;
+            restoreMoraPatientDb = false;
         }
 
         //check backup path exists
@@ -120,25 +122,37 @@ public class DatabaseController {
                 sceneManager.showError("Nem található egyetlen egy mentés sem az útvonalon: " + backupPath.toString());
                 return;
             }
+
+            //sort by name reverse order
+            restorePaths = restorePaths.stream().sorted(Comparator.comparing(Path::getFileName).reversed()).collect(toList());
         } catch (IOException e) {
             sceneManager.showError("Nem megnyitható a fájl: " + backupPath.toString());
             return;
         }
-        Optional<Integer> selectedRestorePathIdx = listAllBackedUpVersions(restorePaths, restoreMoraPatient);
+        Optional<Integer> selectedRestorePathIdx = listAllBackedUpVersions(restorePaths, restoreMoraPatientDb);
+        // user cancelled exit
         if (!selectedRestorePathIdx.isPresent()) {
             return;
         }
 
         Path restorePath = restorePaths.get(selectedRestorePathIdx.get());
-        if (restoreMoraPatient) {
-
-        } else {
-
-        }
-
-
+        // do the extracting
         databaseRestoreButton.setDisable(true);
-        databaseRestoreButton.setDisable(false);
+        executor.execute(() -> {
+            try {
+                if (restoreMoraPatientDb) {
+                    databaseCommands.restoreDatabase(restorePath, moraPaths.database.moraPatientsDbPath().getParent());
+                } else {
+                    databaseCommands.restoreDatabase(restorePath, moraPaths.database.novaDbPath());
+                }
+                sceneManager.showStatusMessage("Adatbázis visszatöltés sikeres");
+                sceneManager.showSuccess("Adatbázis visszatöltés sikeres");
+            } catch (IOException e) {
+                sceneManager.showError(e.getMessage(), e);
+            } finally {
+                Platform.runLater(() -> databaseRestoreButton.setDisable(false));
+            }
+        });
     }
 
     private Optional<String> askUserToSelectExternalDrive() {

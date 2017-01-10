@@ -104,24 +104,52 @@ public class MoraPaths {
         private DatabasePaths() {
         }
 
-        public Path moraPatientsDatabase() {
+        /**
+         * Installed mora patient database file
+         *
+         * @return file
+         */
+        public Path moraPatientsDbPath() {
             return config.getMoraPatientHomeDirPath().resolve(DB_DIR).resolve(MORAPATIENT_DB_NAME);
         }
 
-        public Path novaDbDatabase() {
+        /**
+         * Installed nova db path
+         *
+         * @return folder
+         */
+        public Path novaDbPath() {
             return config.getNovaDbHomeDirPath();
         }
 
+        /**
+         * Common backup folder
+         *
+         * @param driveLetter prefix
+         * @return folder
+         */
         public Path backupBasePath(String driveLetter) {
             return Paths.get(driveLetter).resolve(BACKUP_ROOT_DIR);
         }
 
-        public Path backupMoraDbPath(String driveLetter) {
+        /**
+         * Returns backup folder for moraPatient
+         *
+         * @param driveLetter drive letter to prefix
+         * @return folder
+         */
+        public Path backupMoraPatientDbPath(String driveLetter) {
             return backupBasePath(driveLetter)
                     .resolve(MORA_PATETIENT_ROOT_DIR)
                     .resolve("db");
         }
 
+        /**
+         * Returns backup novadb folder
+         *
+         * @param driveLetter drive letter to prefix
+         * @return folder
+         */
         public Path backupNovaDbPath(String driveLetter) {
             return backupBasePath(driveLetter)
                     .resolve(NOVA_DB_ROOT_DIR);
@@ -147,7 +175,7 @@ public class MoraPaths {
         public BackupDatabasePaths createDatabaseBackupPaths(String prefix) {
             String currentTime = LocalDateTime.now().format(formatter);
             // only the database needs to be saved
-            Path moraPatientBackup = backupMoraDbPath(prefix)
+            Path moraPatientBackup = backupMoraPatientDbPath(prefix)
                     .resolve(MORAPATIENT_DB_NAME + "." + currentTime);
             // the whole directory needs to be saved
             Path novaDbBackup = backupNovaDbPath(prefix)

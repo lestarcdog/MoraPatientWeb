@@ -14,10 +14,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 @Service
@@ -28,11 +29,11 @@ public class DatabaseCommands extends AbstractCommands {
     private static final String ZIP_EXT = ".zip";
 
     public void saveDatabaseToPath(String path) throws MoraException {
-        File moraDb = moraPaths.database.moraPatientsDatabase().toFile();
+        File moraDb = moraPaths.database.moraPatientsDbPath().toFile();
         if (!moraDb.exists()) {
             throw new MoraException("Az MoraPatient elérési útvonal helytelen vagy az adatbázis még nincs létrehozva");
         }
-        File novaDb = moraPaths.database.novaDbDatabase().toFile();
+        File novaDb = moraPaths.database.novaDbPath().toFile();
         if (!novaDb.exists()) {
             throw new MoraException("A NovaDb elérési útvonal helytelen vagy nem létezik");
         }
@@ -96,8 +97,56 @@ public class DatabaseCommands extends AbstractCommands {
         moraZipOut.closeEntry();
     }
 
-    public void restoreDatabase(String moraDbPath, String novaDbPath) {
+    private void unpackZipFile(ZipInputStream zipInput, Path dstPath) throws IOException {
+        ZipEntry entry;
+        while ((entry = zipInput.getNextEntry()) != null) {
+            Path dstFilePath = dstPath.resolve(entry.getName());
+            LOG.info("Unpacking {} to path {}", entry.getName(), dstFilePath.toString());
 
+            try {
+                Files.createDirectories(dstFilePath.getParent());
+            } catch (FileAlreadyExistsException e) {
+                // swallow
+            }
+            FileOutputStream fileOut = new FileOutputStream(dstFilePath.toFile());
+            ByteStreams.copy(zipInput, fileOut);
+
+            fileOut.close();
+            zipInput.closeEntry();
+        }
+
+        zipInput.close();
+    }
+
+    public void restoreDatabase(Path inputZipFile, Path dstPath) throws IOException {
+        if (!Files.exists(inputZipFile)) {
+            throw new IOException("A file nem létezik: " + inputZipFile.toString());
+        }
+
+        ZipInputStream zipInput = new ZipInputStream(new FileInputStream(inputZipFile.toFile()));
+        deleteDir(dstPath);
+
+        unpackZipFile(zipInput, dstPath);
+    }
+
+    private void deleteDir(Path dir) throws IOException {
+        if (Files.exists(dir)) {
+            Files.walkFileTree(dir, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    Files.delete(file);
+                    return FileVisitResult.CONTINUE;
+                }
+
+
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    Files.delete(dir);
+                    return FileVisitResult.CONTINUE;
+                }
+
+            });
+        }
     }
 
 }
