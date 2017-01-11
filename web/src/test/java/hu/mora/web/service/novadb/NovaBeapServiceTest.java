@@ -1,13 +1,14 @@
 package hu.mora.web.service.novadb;
 
 import hu.mora.web.dao.ConfigDao;
-import hu.mora.web.model.novadb.beap.Benutzer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Matchers.any;
@@ -31,8 +32,7 @@ public class NovaBeapServiceTest {
 
     @Test
     public void test() throws Exception {
-        List<Benutzer> benutzer = underTest.beap.getBenutzer();
-
-        benutzer.forEach(b -> System.out.println(b.getErgebnisse().toString()));
+        List<Integer> l = Arrays.asList(1, 2, 3, 4, 8, 11, 12);
+        System.out.println(Collections.binarySearch(l, 15));
     }
 }

@@ -1,5 +1,6 @@
 package hu.mora.web.service;
 
+import hu.mora.web.dao.ConfigDao;
 import hu.mora.web.dao.MoraDao;
 import hu.mora.web.exception.MoraException;
 import hu.mora.web.model.HunCity;
@@ -28,6 +29,9 @@ public class MoraService {
 
     @Inject
     MoraDao moraDao;
+
+    @Inject
+    ConfigDao configDao;
 
     public List<ListPatientDto> allPatients() {
         return moraDao.getAllPatients().stream()
@@ -83,7 +87,7 @@ public class MoraService {
     }
 
     public List<HunCity> hunCities() {
-        return moraDao.hunCities();
+        return configDao.hunCities();
     }
 
     public Patient getPatientById(Integer patientId) {
