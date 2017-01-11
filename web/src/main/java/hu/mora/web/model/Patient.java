@@ -63,6 +63,10 @@ public class Patient {
     private Set<ElhElement> elhElements;
 
 
+    @Column(name = "NOVA_PATIENT_ID")
+    private Integer novaDbPatientId;
+
+
     public Integer getId() {
         return id;
     }
@@ -121,6 +125,14 @@ public class Patient {
 
     public String getEmail() {
         return email;
+    }
+
+    public Integer getNovaDbPatientId() {
+        return novaDbPatientId;
+    }
+
+    public void setNovaDbPatientId(Integer novaDbPatientId) {
+        this.novaDbPatientId = novaDbPatientId;
     }
 
     public LocalDateTime getLastModified() {

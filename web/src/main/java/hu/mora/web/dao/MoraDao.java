@@ -1,7 +1,6 @@
 package hu.mora.web.dao;
 
 import hu.mora.web.exception.MoraException;
-import hu.mora.web.model.HunCity;
 import hu.mora.web.model.Patient;
 import hu.mora.web.model.Therapist;
 import hu.mora.web.model.Therapy;
@@ -38,12 +37,12 @@ public class MoraDao {
         em.remove(patient.orElseThrow(() -> new MoraException("Nem létező beteg. Nem törölhető.")));
     }
 
-    public Integer savePatient(Patient patient) {
+    public Integer savePatient(@NotNull Patient patient) {
         Patient merged = em.merge(patient);
         return merged.getId();
     }
 
-    public void saveTherapist(Therapist therapist) {
+    public void saveTherapist(@NotNull Therapist therapist) {
         em.persist(therapist);
     }
 
@@ -72,8 +71,5 @@ public class MoraDao {
 
     }
 
-    public List<HunCity> hunCities() {
-        TypedQuery<HunCity> query = em.createQuery("SELECT c FROM HunCity c ORDER BY c.name", HunCity.class);
-        return query.getResultList();
-    }
+
 }

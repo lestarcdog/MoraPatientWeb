@@ -1,9 +1,16 @@
 apply plugin: 'war'
 
 dependencies {
+//    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.8.5'
+
     // wildfly has all this
     providedCompile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
     providedCompile group: 'org.jboss.spec', name: 'jboss-javaee-7.0', version: '1.0.3.Final-redhat-6'
+
+
+    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.21'
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+
 }
 
 war {
