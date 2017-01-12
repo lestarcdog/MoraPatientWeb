@@ -52,8 +52,11 @@ public class SatelitElements {
             bufferedWriter.write("-- Write parent-child relationship");
             bufferedWriter.newLine();
             for (Struc struc : strucs.values()) {
-                bufferedWriter.write(String.format(ADD_PARENT_SQL, struc.parentId, struc.id));
-                bufferedWriter.newLine();
+                // do not write the all parent it has a circular dependency
+                if (struc.id != 0) {
+                    bufferedWriter.write(String.format(ADD_PARENT_SQL, struc.parentId, struc.id));
+                    bufferedWriter.newLine();
+                }
             }
         }
 

@@ -16,6 +16,12 @@ public class SatelitElhElement {
     @Column(name = "NAME_ENG")
     private String nameEng;
 
+    @Column(name = "VISIBLE")
+    private Boolean visible;
+
+    @Column(name = "PARENT_ID")
+    private Integer parentId;
+
     public Integer getId() {
         return id;
     }
@@ -30,6 +36,22 @@ public class SatelitElhElement {
 
     public void setNameEng(String nameEng) {
         this.nameEng = nameEng;
+    }
+
+    public Boolean getVisible() {
+        return visible;
+    }
+
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     @Override
