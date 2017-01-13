@@ -13,7 +13,7 @@ angular.module("MoraPatientApp").factory("TherapyDialog", function ($mdDialog) {
 
     var openDialog = function (header, text) {
         return $mdDialog.show({
-            templateUrl: "app/therapies/therapydialog-tmpl.html",
+            templateUrl: "app/treatment/therapies/therapydialog-tmpl.html",
             controller: controller,
             locals: {
                 content: {

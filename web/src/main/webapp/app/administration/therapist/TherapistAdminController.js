@@ -21,6 +21,10 @@ angular.module("MoraPatientApp")
         }
 
         $scope.deleteTherapist = function (therapistId) {
+            if (therapistId == 1) {
+                AlertService.showAlert("Az admin felhasználó nem törölhető");
+                return;
+            }
             MoraDataService.deleteTherapist(therapistId).then(function () {
                 // deleted myself
                 if ($rootScope.loginTherapist.id === therapistId) {

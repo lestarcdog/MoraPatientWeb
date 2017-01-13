@@ -13,15 +13,15 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
                 controller: "PatientListController",
                 templateUrl: "app/patient-list/patient-list.html"
             })
-            .when("/patient-test/:id", {
-                controller: "PatientTestController",
-                templateUrl: "app/patient-test/patient-test.html"
+            .when("/treatment/mora-result/:id", {
+                controller: "MoraResultsController",
+                templateUrl: "app/treatment/mora-result/mora-results.html"
             })
-            .when("/therapies/:id", {
+            .when("/treatment/therapies/:id", {
                 controller: "TherapiesController",
-                templateUrl: "app/therapies/therapies.html"
+                templateUrl: "app/treatment/therapies/therapies.html"
             })
-            .when("/therapist-admin", {
+            .when("/administration/therapist-admin", {
                 controller: "TherapistAdminController",
                 templateUrl: "app/therapist-admin/therapist-admin.html"
             })
@@ -61,9 +61,9 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
     })
     .run(function ($rootScope, $location) {
         // uncomment to testing
-        // $rootScope.loginTherapist = {"id": 1, "name": "admin"};
+        $rootScope.loginTherapist = {"id": 1, "name": "admin"};
         // comment to testing
-        if ($location.path() !== "/login") {
-            $location.path("/login");
-        }
+        // if ($location.path() !== "/login") {
+        //     $location.path("/login");
+        // }
     });

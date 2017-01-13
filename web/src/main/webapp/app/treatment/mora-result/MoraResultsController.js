@@ -1,4 +1,4 @@
-angular.module("MoraPatientApp").controller("PatientTestController", function ($scope, $rootScope, $routeParams, MoraDataService, MoraEvents) {
+angular.module("MoraPatientApp").controller("MoraResultsController", function ($scope, $rootScope, $routeParams, MoraDataService, MoraEvents) {
 
     var patientId = $routeParams.id;
     // other is hu

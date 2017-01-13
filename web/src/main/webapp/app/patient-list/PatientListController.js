@@ -13,7 +13,7 @@ angular.module("MoraPatientApp")
         });
 
         $scope.openTherapies = function (patientId) {
-            $location.path("/therapies/" + patientId);
+            $location.path("/treatment/therapies/" + patientId);
         };
 
         $scope.morePatients = function () {
