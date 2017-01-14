@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-3">
+        <h4>Tesztek időpontja</h4>
+        <ul id="nova-results-list">
+            <li ng-click="selectTest(result.id)" ng-class="{selected : result.id == selectedTestId}"
+                ng-repeat="result in results">
+                {{result.datum}} {{result.uhrZeit}}
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <div ng-if="novaResult">
+            <div class="row form-inline">
+                <div class="form-group">
+                    <label for="tree-search">Keresés</label>
+                    <input id="tree-search" type="text" class="form-control" ng-model="treeSearch">
+                </div>
+                <button class="btn btn-default" ng-click="openTree()">Kinyit</button>
+                <button class="btn btn-default" ng-click="closeTree()">Bezár</button>
+
+            </div>
+            <div class="row">
+                <treecontrol class="tree-boot col-md-12"
+                             tree-model="novaResult.root"
+                             options="treeControlOptions"
+                             expanded-nodes="allNodes"
+                             filter-expression="treeSearch"
+                >
+                    {{node.nameEng}}
+                </treecontrol>
+            </div>
+        </div>
+    </div>
+</div>

@@ -121,6 +121,7 @@ public class NovaDbConnector {
         Path nrfFile = Paths.get(novaHome).resolve(NRF_PATH).resolve(fileName);
         if (Files.exists(nrfFile)) {
             try {
+                LOG.info("Reading NOVA result file {}", nrfFile.toString());
                 return readNrfFile(nrfFile);
             } catch (IOException e) {
                 throw new MoraException("A beteghez tartozó mérési eredmény nem nyitható meg.", e);
@@ -164,7 +165,18 @@ public class NovaDbConnector {
         row.setJn(buffer.get());
         // 6
         row.setModus(buffer.get());
-
+        // 7 - 8
+        row.setPotenz(buffer.getShort());
+        // 9
+        row.setKanal(buffer.get());
+        // 10
+        row.setAusgesetzt(buffer.get());
+        // 11 - 12
+        row.setWert(buffer.getShort());
+        // 13
+        row.setWabe(buffer.get());
+        // 14 - 17
+        row.setVerstearkung(buffer.getInt());
 
         return row;
     }

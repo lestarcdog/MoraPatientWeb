@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -59,6 +60,14 @@ public class Ergebnis {
             return Strings.isNullOrEmpty(uhrZeit) ? null : LocalTime.parse(uhrZeit, UHRZEIT_F);
         } catch (Exception e) {
             LOG.warn("Could not parse uhrzeit {} to ergebnis {}", uhrZeit, this.toString());
+            return null;
+        }
+    }
+
+    public LocalDateTime getDateTime() {
+        if (getDatum() != null && getUhrZeit() != null) {
+            return getDatum().atTime(getUhrZeit());
+        } else {
             return null;
         }
     }

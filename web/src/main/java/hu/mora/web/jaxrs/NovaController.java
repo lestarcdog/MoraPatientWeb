@@ -23,7 +23,7 @@ public class NovaController {
     ConfigDao dao;
 
     @GET
-    @Path("/allNovaPatient")
+    @Path("/patients")
     public List<Person> listAllPerson() {
         return novaService.allPatients();
     }
@@ -38,6 +38,12 @@ public class NovaController {
     @Path("/patient/{id}/result/{resultId}")
     public NovaResult patientResult(@PathParam("id") Integer id, @PathParam("resultId") Integer resultId) {
         return novaService.patientResult(id, resultId);
+    }
+
+    @POST
+    @Path("/patient/{novaId}")
+    public void joinMoraAndNovaPatient(@PathParam("novaId") Integer id, Integer moraPatientId) {
+
     }
 
 

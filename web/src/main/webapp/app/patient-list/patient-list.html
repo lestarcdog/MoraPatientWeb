@@ -11,15 +11,33 @@
     <div class="col-md-12">
         <table class="table table-hover">
             <thead>
-            <th>Név</th>
-            <th>Születési idő</th>
-            <th>Város</th>
-            <th>Telefonszám</th>
-            <th>Utoljára módosítva</th>
-            <th>Műveletek</th>
+            <tr>
+                <th class="uneditable" ng-dblclick="order.field='name';order.isAscending = !order.isAscending">Név
+                    <th-sort-indicator watched="name" selected-field="order.field" direction="order.isAscending"/>
+                </th>
+                <th class="uneditable" ng-dblclick="order.field='birthDate';order.isAscending = !order.isAscending">
+                    Születési idő
+                    <th-sort-indicator watched="birthDate" selected-field="order.field" direction="order.isAscending"/>
+                </th>
+
+                <th class="uneditable" ng-dblclick="order.field='city';order.isAscending = !order.isAscending">Város
+                    <th-sort-indicator watched="city" selected-field="order.field" direction="order.isAscending"/>
+                </th>
+
+                <th class="uneditable" ng-dblclick="order.field='phone';order.isAscending = !order.isAscending">
+                    Telefonszám
+                    <th-sort-indicator watched="phone" selected-field="order.field" direction="order.isAscending"/>
+                </th>
+                <th class="uneditable" ng-dblclick="order.field='lastModified';order.isAscending = !order.isAscending">
+                    Utoljára módosítva
+                    <th-sort-indicator watched="lastModified" selected-field="order.field"
+                                       direction="order.isAscending"/>
+                </th>
+                <th class="uneditable">Műveletek</th>
+            </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="patient in patients | filter : searchText | limitTo: scrollLimit"
+            <tr ng-repeat="patient in patients | filter : searchText | orderBy:order.field:order.isAscending|  limitTo: scrollLimit"
                 ng-dblclick="openTherapies(patient.id)">
                 <td>{{patient.name}}</td>
                 <td>{{patient.birthDate | date: dateformat.DATE}}</td>

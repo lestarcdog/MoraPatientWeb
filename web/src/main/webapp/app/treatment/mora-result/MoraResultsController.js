@@ -1,6 +1,7 @@
 angular.module("MoraPatientApp").controller("MoraResultsController", function ($scope, $rootScope, $routeParams, MoraDataService, MoraEvents) {
 
     var patientId = $routeParams.id;
+
     // other is hu
     $scope.lang = "en";
 

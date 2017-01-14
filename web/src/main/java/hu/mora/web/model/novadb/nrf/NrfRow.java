@@ -7,6 +7,12 @@ public class NrfRow {
     private Integer substanceId;
     private Byte jn;
     private Byte modus;
+    private Short potenz;
+    private Byte kanal;
+    private Byte ausgesetzt;
+    private Short wert;
+    private Byte wabe;
+    private Integer verstearkung;
 
     public Integer getSubstanceId() {
         return substanceId;
@@ -32,6 +38,54 @@ public class NrfRow {
         this.modus = modus;
     }
 
+    public Short getPotenz() {
+        return potenz;
+    }
+
+    public void setPotenz(Short potenz) {
+        this.potenz = potenz;
+    }
+
+    public Byte getKanal() {
+        return kanal;
+    }
+
+    public void setKanal(Byte kanal) {
+        this.kanal = kanal;
+    }
+
+    public Byte getAusgesetzt() {
+        return ausgesetzt;
+    }
+
+    public void setAusgesetzt(Byte ausgesetzt) {
+        this.ausgesetzt = ausgesetzt;
+    }
+
+    public Short getWert() {
+        return wert;
+    }
+
+    public void setWert(Short wert) {
+        this.wert = wert;
+    }
+
+    public Byte getWabe() {
+        return wabe;
+    }
+
+    public void setWabe(Byte wabe) {
+        this.wabe = wabe;
+    }
+
+    public Integer getVerstearkung() {
+        return verstearkung;
+    }
+
+    public void setVerstearkung(Integer verstearkung) {
+        this.verstearkung = verstearkung;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,6 +107,12 @@ public class NrfRow {
                 .add("substanceId", substanceId)
                 .add("jn", jn)
                 .add("modus", modus)
+                .add("potenz", potenz)
+                .add("kanal", kanal)
+                .add("ausgesetzt", ausgesetzt)
+                .add("wert", wert)
+                .add("wabe", wabe)
+                .add("verstearkung", verstearkung)
                 .toString();
     }
 }

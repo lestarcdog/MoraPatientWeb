@@ -82,7 +82,7 @@ angular.module("MoraPatientApp")
             $mdDialog.show(confirm).then(function () {
                 MoraDataService.deletePatient($scope.patient.id).then(function () {
                     AlertService.showSuccess($scope.patient.name + " sikeresen törölve.");
-                    $location.path("/patient-list").search("passThrough", true);
+                    $location.path("/patient-list").search("forceReload", true);
                 });
             });
         };

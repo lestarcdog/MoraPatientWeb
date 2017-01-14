@@ -1,6 +1,7 @@
 package hu.mora.web.model.novadb;
 
 import com.google.common.base.MoreObjects;
+import hu.mora.web.model.novadb.nrf.NrfRow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ public class NovaResultChild {
 
     private Integer substanceId;
     private String nameEng;
+    private NrfRow rawdata;
     private List<NovaResultChild> children = new ArrayList<>();
 
     public Integer getSubstanceId() {
@@ -37,6 +39,14 @@ public class NovaResultChild {
 
     public void setChildren(List<NovaResultChild> children) {
         this.children = children;
+    }
+
+    public NrfRow getRawdata() {
+        return rawdata;
+    }
+
+    public void setRawdata(NrfRow rawdata) {
+        this.rawdata = rawdata;
     }
 
     @Override

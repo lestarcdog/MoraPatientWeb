@@ -1,4 +1,5 @@
-angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages", "ngMaterial", "infinite-scroll"])
+angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages", "ngMaterial",
+    "infinite-scroll", "treeControl"])
     .config(function ($routeProvider) {
         $routeProvider
             .when("/login", {
@@ -16,6 +17,10 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
             .when("/treatment/mora-result/:id", {
                 controller: "MoraResultsController",
                 templateUrl: "app/treatment/mora-result/mora-results.html"
+            })
+            .when("/treatment/nova-result/:id", {
+                controller: "NovaResultsController",
+                templateUrl: "app/treatment/nova-result/nova-results.html"
             })
             .when("/treatment/therapies/:id", {
                 controller: "TherapiesController",
@@ -62,6 +67,7 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
     .run(function ($rootScope, $location) {
         // uncomment to testing
         $rootScope.loginTherapist = {"id": 1, "name": "admin"};
+
         // comment to testing
         // if ($location.path() !== "/login") {
         //     $location.path("/login");

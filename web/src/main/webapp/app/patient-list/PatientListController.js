@@ -4,11 +4,16 @@ angular.module("MoraPatientApp")
         $scope.dateformat = DateFormatConst;
         $scope.scrollLimit = 30;
 
+        $scope.order = {
+            field: null,
+            isAscending: true
+        };
+
         $rootScope.$broadcast(MoraEvents.PATIENT_CHANGE, null);
 
-        var passThrough = $location.search().passThrough;
+        var forceReload = $location.search().forceReload;
 
-        PatientCache.patients(passThrough).then(function (patients) {
+        PatientCache.patients(forceReload).then(function (patients) {
             $scope.patients = patients;
         });
 

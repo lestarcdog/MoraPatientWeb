@@ -27,6 +27,13 @@ body {
     margin: 10px 0;
 }
 
+.uneditable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 #therapy-dialog {
     padding: 10px;
 }
@@ -51,6 +58,7 @@ body {
 }
 
 /*Patient Data*/
+
 #patientCity input, md-autocomplete md-autocomplete-wrap {
     line-height: 1.42857143;
     height: 34px;
@@ -65,10 +73,28 @@ md-autocomplete md-autocomplete-wrap {
 }
 
 /* Patient test */
+
 #patient-test-switch {
     margin: 0;
 }
 
 #elh-elements-div {
     margin-top: 20px;
+}
+
+/* Nova results */
+#nova-results-list {
+    list-style-type: none;
+    padding: 0;
+    border-right: 1px solid #CCC;
+}
+
+#nova-results-list li {
+    text-align: center;
+    padding: 0.75em 0;
+
+}
+
+#nova-results-list li:hover, #nova-results-list li.selected {
+    background-color: #EEE;
 }

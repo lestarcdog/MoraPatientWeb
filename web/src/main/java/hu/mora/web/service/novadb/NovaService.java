@@ -15,11 +15,11 @@ import org.slf4j.LoggerFactory;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.util.function.Function;
+
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 @Stateless
 public class NovaService {
@@ -38,7 +38,9 @@ public class NovaService {
     }
 
     public List<Ergebnis> resultsOfPatient(Integer id) {
-        return novaDb.patientResults(id);
+        return novaDb.patientResults(id).stream()
+                .sorted(Comparator.nullsLast(Comparator.comparing(Ergebnis::getDateTime)).reversed())
+                .collect(toList());
     }
 
     public NovaResult patientResult(Integer userId, Integer resultId) {
@@ -53,15 +55,16 @@ public class NovaService {
         LocalDateTime ergebnisTime = ergebnis.getDatum().atTime(ergebnis.getUhrZeit());
         result.setResultDateTime(ergebnisTime);
         if (!nrfResult.getRows().isEmpty()) {
-            result.setRoot(makeHieararchicalResult(nrfResult.getRows()));
+            // there are possible duplicate rows remove them
+            result.setRoot(makeHieararchicalResult(new HashSet<>(nrfResult.getRows())));
         }
 
         return result;
     }
 
-    private NovaResultChild makeHieararchicalResult(List<NrfRow> rows) {
-        List<Integer> ids = rows.stream().map(NrfRow::getSubstanceId).collect(Collectors.toList());
-        List<SatelitElhElement> elements = configDao.satelitElementWithParent(ids);
+    private NovaResultChild makeHieararchicalResult(Set<NrfRow> rows) {
+        Map<Integer, NrfRow> nrfRows = rows.stream().collect(toMap(NrfRow::getSubstanceId, Function.identity()));
+        List<SatelitElhElement> elements = configDao.satelitElementWithParent(new ArrayList<>(nrfRows.keySet()));
 
         Map<Integer, NovaResultChild> hierarchy = new HashMap<>();
         // do the hierarchical ordering here
@@ -72,14 +75,14 @@ public class NovaService {
                 NovaResultChild parent = hierarchy.getOrDefault(element.getParentId(), new NovaResultChild());
                 // put myself in the hierarchy and under my parent
                 NovaResultChild me = hierarchy.getOrDefault(element.getId(), new NovaResultChild());
-                mapSatelitToNovaChild(element, me);
+                mapSatelitToNovaChild(element, me, nrfRows.get(element.getId()));
                 hierarchy.put(element.getId(), me);
                 parent.addChild(me);
 
                 hierarchy.put(element.getParentId(), parent);
             } else {
                 root = hierarchy.getOrDefault(element.getId(), new NovaResultChild());
-                mapSatelitToNovaChild(element, root);
+                mapSatelitToNovaChild(element, root, nrfRows.get(element.getId()));
                 hierarchy.put(element.getId(), root);
             }
         }
@@ -88,9 +91,10 @@ public class NovaService {
 
     }
 
-    private NovaResultChild mapSatelitToNovaChild(SatelitElhElement element, NovaResultChild child) {
+    private NovaResultChild mapSatelitToNovaChild(SatelitElhElement element, NovaResultChild child, NrfRow nrfRow) {
         child.setSubstanceId(element.getId());
         child.setNameEng(element.getNameEng());
+        child.setRawdata(nrfRow);
         return child;
     }
 }
