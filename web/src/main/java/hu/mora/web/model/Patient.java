@@ -64,7 +64,7 @@ public class Patient {
 
 
     @Column(name = "NOVA_PATIENT_ID")
-    private Integer novaDbPatientId;
+    private Integer novaPatientId;
 
 
     public Integer getId() {
@@ -127,12 +127,12 @@ public class Patient {
         return email;
     }
 
-    public Integer getNovaDbPatientId() {
-        return novaDbPatientId;
+    public Integer getNovaPatientId() {
+        return novaPatientId;
     }
 
-    public void setNovaDbPatientId(Integer novaDbPatientId) {
-        this.novaDbPatientId = novaDbPatientId;
+    public void setNovaPatientId(Integer novaDbPatientId) {
+        this.novaPatientId = novaDbPatientId;
     }
 
     public LocalDateTime getLastModified() {

@@ -1,6 +1,7 @@
 angular.module("MoraPatientApp")
     .controller("PatientListController", function ($scope, $rootScope, DateFormatConst, $location, PatientCache, MoraEvents) {
         $scope.patients = [];
+        $scope.patientsLoading = true;
         $scope.dateformat = DateFormatConst;
         $scope.scrollLimit = 30;
 
@@ -15,6 +16,7 @@ angular.module("MoraPatientApp")
 
         PatientCache.patients(forceReload).then(function (patients) {
             $scope.patients = patients;
+            $scope.patientsLoading = false;
         });
 
         $scope.openTherapies = function (patientId) {

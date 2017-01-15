@@ -26,9 +26,9 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
                 controller: "TherapiesController",
                 templateUrl: "app/treatment/therapies/therapies.html"
             })
-            .when("/administration/therapist-admin", {
+            .when("/administration/therapists/therapist-admin", {
                 controller: "TherapistAdminController",
-                templateUrl: "app/therapist-admin/therapist-admin.html"
+                templateUrl: "app/administration/therapists/therapist-admin.html"
             })
             .otherwise("/login")
     })

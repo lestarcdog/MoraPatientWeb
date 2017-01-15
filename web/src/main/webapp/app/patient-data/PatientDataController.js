@@ -101,9 +101,9 @@ angular.module("MoraPatientApp")
 
                 MoraDataService.savePatient($scope.patient).then(function (newPatientId) {
                     AlertService.showSuccess($scope.patient.name + " sikeresen elmentve.");
-                    //load the new patient list in the background to the cache
+                    //load the new patient list to the cache
                     PatientCache.patients(true);
-                    $location.path("/therapies/" + newPatientId);
+                    $location.path("/treatment/therapies/" + newPatientId);
                 });
             } else {
                 $scope.showError = true

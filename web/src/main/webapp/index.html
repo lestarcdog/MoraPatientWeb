@@ -45,13 +45,13 @@
                    aria-expanded="false">Adminisztráció<span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li ng-class="{'active' : isActive('/administration/therapist-admin')}">
-                        <a ng-href="#/administration/therapist-admin">Terapeuták</a>
+                    <li ng-class="{'active' : isActive('/administration/therapists/therapist-admin')}">
+                        <a ng-href="#/administration/therapists/therapist-admin">Terapeuták</a>
                     </li>
-                    <li ng-class="{'active' : isActive('/administration/nova-mora-patients')}">
+                    <li ng-class="{'active' : isActive('/administration/nova-mora-patients/patients')}">
                         <a ng-href="#/administration/nova-mora-patients">Nova - Mora betegek összekapcsolása</a>
                     </li>
-                    <li ng-class="{'active' : isActive('/administration/nova-materials')}"
+                    <li ng-class="{'active' : isActive('/administration/nova-materials/materials')}"
                     ><a ng-href="#/administration/nova-materials">Nova anyagok</a>
                     </li>
                 </ul>
@@ -98,7 +98,7 @@
 <script src="app/treatment/therapies/TherapiesController.js"></script>
 <script src="app/treatment/therapies/TherapyDialog.js"></script>
 
-<script src="app/administration/therapist/TherapistAdminController.js"></script>
+<script src="app/administration/therapists/TherapistAdminController.js"></script>
 
 </body>
 </html>
