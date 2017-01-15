@@ -20,17 +20,23 @@
 <nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavbarController" ng-if="loginTherapist != null">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
-            <li ng-class="{'active' : isActive('/patient-list')}"><a ng-href="#/patient-list">Páciens lista</a></li>
-            <li ng-class="{'active' : isActive('/patient-data')}"><a ng-href="#/patient-data">Új páciens</a></li>
+            <li ng-class="{'active' : isActive('/patient-list')}">
+                <a ng-href="#/patient-list"><i class="fa fa-address-card-o" aria-hidden="true"></i> Páciens lista</a>
+            </li>
+            <li ng-class="{'active' : isActive('/patient-data')}">
+                <a ng-href="#/patient-data"><i class="fa fa-user" aria-hidden="true"></i> Új páciens</a>
+            </li>
 
             <li role="presentation" class="dropdown" ng-if="patient">
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button"
                    aria-haspopup="true"
-                   aria-expanded="false">Kezelések<span class="caret"></span>
+                   aria-expanded="false"><i class="fa fa-heartbeat" aria-hidden="true"></i> Kezelések<span
+                        class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a type="button" ng-href="#/treatment/therapies/{{patient.id}}">Terápiák</a></li>
-                    <li><a type="button" ng-href="#/treatment/nova-result/{{patient.id}}">Nova Tesztek</a></li>
+                    <li><a type="button" ng-href="#/treatment/nova-result/{{patient.novaPatientId}}">Nova Tesztek</a>
+                    </li>
                     <li><a type="button" ng-href="#/treatment/mora-result/{{patient.id}}">Mora I. Tesztek</a></li>
                 </ul>
             </li>
@@ -45,19 +51,19 @@
                    aria-expanded="false">Adminisztráció<span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li ng-class="{'active' : isActive('/administration/therapists/therapist-admin')}">
-                        <a ng-href="#/administration/therapists/therapist-admin">Terapeuták</a>
+                    <li ng-class="{'active' : isActive('/administration/therapist-admin')}">
+                        <a ng-href="#/administration/therapist-admin">Terapeuták</a>
                     </li>
-                    <li ng-class="{'active' : isActive('/administration/nova-mora-patients/patients')}">
+                    <li ng-class="{'active' : isActive('/administration/nova-mora-patients')}">
                         <a ng-href="#/administration/nova-mora-patients">Nova - Mora betegek összekapcsolása</a>
                     </li>
-                    <li ng-class="{'active' : isActive('/administration/nova-materials/materials')}"
+                    <li ng-class="{'active' : isActive('/administration/nova-materials')}"
                     ><a ng-href="#/administration/nova-materials">Nova anyagok</a>
                     </li>
                 </ul>
             </li>
             <li class="navbar-text">Bejelentkezve mint: {{loginTherapist.name}}</li>
-            <li><a ng-href="#/login">Kijelentkezés</a></li>
+            <li><a ng-href="#/login"> <i class="fa fa-sign-out" aria-hidden="true"></i> Kijelentkezés</a></li>
         </ul>
     </div>
 </nav>
@@ -99,6 +105,8 @@
 <script src="app/treatment/therapies/TherapyDialog.js"></script>
 
 <script src="app/administration/therapists/TherapistAdminController.js"></script>
+<script src="app/administration/nova-materials/NovaMaterialsController.js"></script>
+<script src="app/administration/nova-mora-patients/NovaMoraPatientsController.js"></script>
 
 </body>
 </html>

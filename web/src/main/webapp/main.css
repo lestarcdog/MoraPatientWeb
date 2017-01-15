@@ -101,3 +101,10 @@ md-autocomplete md-autocomplete-wrap {
 #nova-results-list li:hover, #nova-results-list li.selected {
     background-color: #EEE;
 }
+
+/* Nova Mora patient join */
+#patients-join {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+}

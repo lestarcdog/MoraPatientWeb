@@ -28,6 +28,13 @@ public class MoraDao {
         return Optional.ofNullable(em.find(Patient.class, id));
     }
 
+    public Optional<Patient> findPatientByNovaId(@NotNull Integer novaUserId) {
+        TypedQuery<Patient> query = em.createQuery("SELECT p FROM Patient p WHERE p.novaPatientId = :novaId", Patient.class);
+        query.setParameter("novaId", novaUserId);
+        List<Patient> result = query.getResultList();
+        return result.isEmpty() ? Optional.empty() : Optional.of(result.get(0));
+    }
+
     public Optional<Therapy> findTherapy(@NotNull Integer therapyId) {
         return Optional.ofNullable(em.find(Therapy.class, therapyId));
     }

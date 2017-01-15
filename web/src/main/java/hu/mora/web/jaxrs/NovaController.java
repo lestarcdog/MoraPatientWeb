@@ -1,9 +1,10 @@
 package hu.mora.web.jaxrs;
 
 import hu.mora.web.dao.ConfigDao;
+import hu.mora.web.model.novadb.NovaPatient;
 import hu.mora.web.model.novadb.NovaResult;
 import hu.mora.web.model.novadb.beap.Ergebnis;
-import hu.mora.web.model.novadb.beap.Person;
+import hu.mora.web.service.MoraService;
 import hu.mora.web.service.novadb.NovaService;
 
 import javax.inject.Inject;
@@ -20,12 +21,15 @@ public class NovaController {
     NovaService novaService;
 
     @Inject
+    MoraService moraService;
+
+    @Inject
     ConfigDao dao;
 
     @GET
     @Path("/patients")
-    public List<Person> listAllPerson() {
-        return novaService.allPatients();
+    public List<NovaPatient> listAllPerson(@QueryParam("refresh") @DefaultValue("false") boolean refresh) {
+        return novaService.allPatients(refresh);
     }
 
     @GET
@@ -41,9 +45,9 @@ public class NovaController {
     }
 
     @POST
-    @Path("/patient/{novaId}")
-    public void joinMoraAndNovaPatient(@PathParam("novaId") Integer id, Integer moraPatientId) {
-
+    @Path("/patient/{novaId}/join")
+    public void joinMoraAndNovaPatient(@PathParam("novaId") Integer novaId, Integer moraPatientId) {
+        moraService.joinNovaPatientTo(novaId, moraPatientId);
     }
 
 

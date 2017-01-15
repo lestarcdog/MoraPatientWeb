@@ -12,6 +12,7 @@ public class ListPatientDto {
     private String city;
     private String phone;
     private LocalDateTime lastModified;
+    private Integer novaPatientId;
 
     public ListPatientDto(Patient patient) {
         this.id = patient.getId();
@@ -20,6 +21,7 @@ public class ListPatientDto {
         this.city = patient.getCity();
         this.phone = patient.getPhone();
         this.lastModified = patient.getLastModified();
+        this.novaPatientId = patient.getNovaPatientId();
     }
 
     public Integer getId() {
@@ -70,6 +72,14 @@ public class ListPatientDto {
         this.lastModified = lastModified;
     }
 
+    public Integer getNovaPatientId() {
+        return novaPatientId;
+    }
+
+    public void setNovaPatientId(Integer novaPatientId) {
+        this.novaPatientId = novaPatientId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -77,23 +87,11 @@ public class ListPatientDto {
 
         ListPatientDto that = (ListPatientDto) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (birthDate != null ? !birthDate.equals(that.birthDate) : that.birthDate != null) return false;
-        if (city != null ? !city.equals(that.city) : that.city != null) return false;
-        if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
-        return lastModified != null ? lastModified.equals(that.lastModified) : that.lastModified == null;
-
+        return id != null ? id.equals(that.id) : that.id == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (lastModified != null ? lastModified.hashCode() : 0);
-        return result;
+        return id != null ? id.hashCode() : 0;
     }
 }

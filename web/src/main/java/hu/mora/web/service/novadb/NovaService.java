@@ -1,7 +1,10 @@
 package hu.mora.web.service.novadb;
 
 import hu.mora.web.dao.ConfigDao;
+import hu.mora.web.dao.MoraDao;
 import hu.mora.web.exception.MoraException;
+import hu.mora.web.model.Patient;
+import hu.mora.web.model.novadb.NovaPatient;
 import hu.mora.web.model.novadb.NovaResult;
 import hu.mora.web.model.novadb.NovaResultChild;
 import hu.mora.web.model.novadb.SatelitElhElement;
@@ -30,11 +33,21 @@ public class NovaService {
     NovaDbConnector novaDb;
 
     @Inject
+    MoraDao moraDao;
+
+    @Inject
     ConfigDao configDao;
 
 
-    public List<Person> allPatients() {
-        return novaDb.allPatients(false);
+    public List<NovaPatient> allPatients(boolean refresh) {
+        List<Person> novaPeople = novaDb.allPatients(refresh);
+        return novaPeople.stream()
+                .map(NovaPatient::new)
+                .peek(p -> {
+                    Optional<Patient> moraPatient = moraDao.findPatientByNovaId(p.getId());
+                    moraPatient.ifPresent(m -> p.setMoraPatientId(m.getId()));
+                })
+                .collect(toList());
     }
 
     public List<Ergebnis> resultsOfPatient(Integer id) {

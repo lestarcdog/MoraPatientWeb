@@ -78,6 +78,7 @@ public class NovaDbConnector {
     }
 
     private void populateCachedPersons() {
+        LOG.info("Reload patients data from Nova BEAP.XML");
         cachedPersonsSortedByName = beap.getBenutzer().stream()
                 .map(Benutzer::getPerson)
                 .sorted(comparing(Person::fullHungarianName))

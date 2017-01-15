@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-md-5">
+        <h3 class="text-center">Nova betegek</h3>
+        <div class="form-inline form-group text-center">
+            <label for="novaSearch">Keresés</label>
+            <input id="novaSearch" type="text" class="form-control" ng-model="novaSearch"/>
+        </div>
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>Nova azonosító</th>
+                <th>Név</th>
+                <th>Születési idő</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="p in patients.nova | filter: novaSearch | limitTo: 100"
+                ng-click="selectNova(p)"
+                ng-class="{success: p.moraPatientId != null, info : p.id === selected.nova.id}">
+                <td class="text-center">{{p.id}}</td>
+                <td class="text-center">{{p.name}}</td>
+                <td class="text-center">{{p.birthDate}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-1">
+        <button id="patients-join"
+                ng-disabled="selected.nova == null || selected.mora == null"
+                ng-click="joinPatients()"
+                class="btn btn-primary"><i class="fa fa-arrows-h" aria-hidden="true"></i></button>
+    </div>
+    <div class="col-md-5">
+        <h3 class="text-center">Mora betegek</h3>
+        <div class="form-inline form-group text-center">
+            <label for="moraSearch">Keresés</label>
+            <input id="moraSearch" type="text" class="form-control" ng-model="moraSearch"/>
+        </div>
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>Mora azonosító</th>
+                <th>Név</th>
+                <th>Születési idő</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="p in patients.mora | filter: moraSearch | limitTo: 100"
+                ng-click="selectMora(p)"
+                ng-class="{success: p.novaPatientId != null, info : p.id === selected.mora.id}">
+                <td class="text-center">{{p.id}}</td>
+                <td class="text-center">{{p.name}}</td>
+                <td class="text-center">{{p.birthDate}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

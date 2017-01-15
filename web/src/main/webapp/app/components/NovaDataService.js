@@ -30,7 +30,7 @@ angular.module("MoraPatientApp")
 
 
         var joinMoraNovaPatient = function (novaPatientId, moraPatientId) {
-            return $http.post("patient/" + novaPatientId, moraPatientId).then(function (resp) {
+            return $http.post("api/nova/patient/" + novaPatientId + "/join", moraPatientId).then(function (resp) {
             }, errorHandler);
         };
 

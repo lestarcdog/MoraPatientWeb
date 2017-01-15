@@ -93,4 +93,20 @@ public class MoraService {
     public Patient getPatientById(Integer patientId) {
         return moraDao.findPatient(patientId).orElseThrow(() -> new MoraException("A beteg nem létezik."));
     }
+
+    public void joinNovaPatientTo(Integer novaPatientId, Integer moraPatientId) {
+        LOG.info("Joining nova id {} and mora id {}", novaPatientId, moraPatientId);
+        Patient patient = getPatientById(moraPatientId);
+        Optional<Patient> possiblePrevPatient = moraDao.findPatientByNovaId(novaPatientId);
+
+        //clear the previous patient if any
+        possiblePrevPatient.ifPresent(p -> {
+            p.setNovaPatientId(null);
+            savePatient(p);
+        });
+
+        // add the new patient
+        patient.setNovaPatientId(novaPatientId);
+        savePatient(patient);
+    }
 }

@@ -26,9 +26,17 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
                 controller: "TherapiesController",
                 templateUrl: "app/treatment/therapies/therapies.html"
             })
-            .when("/administration/therapists/therapist-admin", {
+            .when("/administration/therapist-admin", {
                 controller: "TherapistAdminController",
                 templateUrl: "app/administration/therapists/therapist-admin.html"
+            })
+            .when("/administration/nova-mora-patients", {
+                controller: "NovaMoraPatientsController",
+                templateUrl: "app/administration/nova-mora-patients/patients.html"
+            })
+            .when("/administration/nova-materials", {
+                controller: "NovaMaterialsController",
+                templateUrl: "app/administration/nova-materials/materials.html"
             })
             .otherwise("/login")
     })

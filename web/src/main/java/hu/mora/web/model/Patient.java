@@ -1,6 +1,7 @@
 package hu.mora.web.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.google.common.base.MoreObjects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -66,10 +67,10 @@ public class Patient {
     @Column(name = "NOVA_PATIENT_ID")
     private Integer novaPatientId;
 
-
     public Integer getId() {
         return id;
     }
+
 
     public void setId(Integer id) {
         this.id = id;
@@ -185,29 +186,30 @@ public class Patient {
         this.elhElements = elhElements;
     }
 
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("name", name)
+                .add("isMale", isMale)
+                .add("birthDate", birthDate)
+                .add("birthPlace", birthPlace)
+                .add("phone", phone)
+                .add("email", email)
+                .add("city", city)
+                .add("zip", zip)
+                .add("street", street)
+                .add("lastModified", lastModified)
+                .add("therapies", therapies)
+                .add("elhElements", elhElements)
+                .add("novaPatientId", novaPatientId)
+                .toString();
+    }
+
     @PrePersist
     @PreUpdate
     public void preHook() {
         setLastModified(LocalDateTime.now());
-    }
-
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", isMale=" + isMale +
-                ", birthDate=" + birthDate +
-                ", birthPlace='" + birthPlace + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", city='" + city + '\'' +
-                ", zip='" + zip + '\'' +
-                ", street='" + street + '\'' +
-                ", lastModified=" + lastModified +
-                ", therapies=" + therapies +
-                ", elhElements=" + elhElements +
-                '}';
     }
 
 }
