@@ -26,10 +26,15 @@ public class ConfigDao {
     @PersistenceContext(unitName = "MoraPU")
     private EntityManager em;
 
-    public String getValue(Configs config) {
+    public Config getValue(Configs config) {
         TypedQuery<Config> query = em.createQuery(SQL_QUERY, Config.class);
         query.setParameter("key", config.name());
-        return query.getSingleResult().getValue();
+        return query.getSingleResult();
+    }
+
+    public void setValue(Configs config, String newValue) {
+        Config entity = new Config(config.name(), newValue);
+        em.merge(entity);
     }
 
     public List<HunCity> hunCities() {

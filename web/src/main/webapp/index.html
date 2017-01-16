@@ -60,6 +60,9 @@
                     <li ng-class="{'active' : isActive('/administration/nova-materials')}"
                     ><a ng-href="#/administration/nova-materials">Nova anyagok</a>
                     </li>
+                    <li ng-class="{'active' : isActive('/administration/settings')}"
+                    ><a ng-href="#/administration/settings">Beállítások</a>
+                    </li>
                 </ul>
             </li>
             <li class="navbar-text">Bejelentkezve mint: {{loginTherapist.name}}</li>
@@ -85,7 +88,7 @@
 <!--factories-->
 <script src="app/components/MoraDataService.js"></script>
 <script src="app/components/NovaDataService.js"></script>
-<script src="app/components/HunCityService.js"></script>
+<script src="app/components/SettingsService.js"></script>
 <script src="app/components/AlertService.js"></script>
 <script src="app/components/PatientsCache.js"></script>
 
@@ -107,6 +110,7 @@
 <script src="app/administration/therapists/TherapistAdminController.js"></script>
 <script src="app/administration/nova-materials/NovaMaterialsController.js"></script>
 <script src="app/administration/nova-mora-patients/NovaMoraPatientsController.js"></script>
+<script src="app/administration/settings/SettingsController.js"></script>
 
 </body>
 </html>

@@ -16,6 +16,14 @@ public class Config {
     @Column(name = "VALUE")
     private String value;
 
+    public Config() {
+    }
+
+    public Config(String name, String value) {
+        this.name = name;
+        this.value = value;
+    }
+
     public String getName() {
         return name;
     }

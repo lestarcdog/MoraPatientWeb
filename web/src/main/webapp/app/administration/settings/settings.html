@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-md-5">
+        <h3>Beállítások</h3>
+        <form name="settingsForm" class="form">
+            <div class="form-group">
+                <label for="novaPath">Nova könyvtár</label>
+                <input id="novaPath" name="novaPath" ng-model="settings.novaPath" class="form-control">
+                <div ng-if="settingsForm.novaPath.$dirty">
+                    <button ng-click="save('NOVA_DB_HOME',settings.novaPath)" class="btn btn-primary">Mentés</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

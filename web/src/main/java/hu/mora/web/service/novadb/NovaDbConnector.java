@@ -20,7 +20,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -54,27 +53,30 @@ public class NovaDbConnector {
     // cached elements
     private List<Person> cachedPersonsSortedByName;
 
-    private JAXBContext jaxbContext;
     private Unmarshaller unmarshaller;
 
     private String novaHome;
 
     @PostConstruct
     public void setUp() {
-        novaHome = configDao.getValue(Configs.NOVA_DB_HOME);
-        beapXml = Paths.get(novaHome).resolve("BEAP.XML");
+        setUpPaths();
 
         try {
-            jaxbContext = JAXBContext.newInstance(Beap.class, Benutzer.class, Person.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(Beap.class, Benutzer.class, Person.class);
             LOG.info("Unmarshall nova db {}", beapXml.toString());
             unmarshaller = jaxbContext.createUnmarshaller();
 
             reloadBeapXml();
         } catch (JAXBException e) {
             LOG.error(e.getMessage(), e);
-            beapFailReason = "A nova db fájl nem nyitható meg: " + beapXml.toString();
+            beapFailReason = "A nova db fájl nem nyitható meg: " + beapXml.toString() + ". Valószínű rossz az elérési útvonal.";
         }
 
+    }
+
+    private void setUpPaths() {
+        novaHome = configDao.getValue(Configs.NOVA_DB_HOME).getValue();
+        beapXml = Paths.get(novaHome).resolve("BEAP.XML");
     }
 
     private void populateCachedPersons() {
@@ -98,12 +100,21 @@ public class NovaDbConnector {
         }
     }
 
+    private void checkForError() {
+        if (beapFailReason != null) {
+            setUpPaths();
+            throw new MoraException(beapFailReason);
+        }
+    }
+
     public List<Person> allPatients(boolean refresh) {
+        checkForError();
         if (cachedPersonsSortedByName == null || refresh) populateCachedPersons();
         return cachedPersonsSortedByName;
     }
 
     public List<Ergebnis> patientResults(@NotNull Integer userId) {
+        checkForError();
         Optional<Benutzer> benutzer = findBenutzer(userId);
         return benutzer.orElseThrow(() -> new MoraException("A Nova beteg nem található.")).getErgebnisse();
     }
@@ -118,6 +129,7 @@ public class NovaDbConnector {
     }
 
     public NrfResult readUserResult(@NotNull Integer userId, @NotNull Integer resultId) {
+        checkForError();
         String fileName = userId + "_" + resultId + ".NRF";
         Path nrfFile = Paths.get(novaHome).resolve(NRF_PATH).resolve(fileName);
         if (Files.exists(nrfFile)) {
@@ -180,11 +192,5 @@ public class NovaDbConnector {
         row.setVerstearkung(buffer.getInt());
 
         return row;
-    }
-
-    private void checkBufferLimit(Path nrfFile, Buffer b, int expected) {
-        if (b.limit() < expected) {
-            throw new MoraException("Érvénytelen mérési eredmény fájl. Nem olvasható " + nrfFile.toString());
-        }
     }
 }

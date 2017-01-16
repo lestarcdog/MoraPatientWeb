@@ -38,6 +38,10 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
                 controller: "NovaMaterialsController",
                 templateUrl: "app/administration/nova-materials/materials.html"
             })
+            .when("/administration/settings", {
+                controller: "SettingsController",
+                templateUrl: "app/administration/settings/settings.html"
+            })
             .otherwise("/login")
     })
     .config(function ($mdDateLocaleProvider) {

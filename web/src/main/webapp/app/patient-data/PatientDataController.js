@@ -1,5 +1,5 @@
 angular.module("MoraPatientApp")
-    .controller("PatientDataController", function ($scope, $rootScope, $location, $routeParams, $filter, MoraDataService, HunCityService,
+    .controller("PatientDataController", function ($scope, $rootScope, $location, $routeParams, $filter, MoraDataService, SettingsService,
                                                    DateFormatConst, AlertService, $mdDialog, PatientCache, MoraEvents) {
         //default patient
         $scope.patient = {
@@ -49,7 +49,7 @@ angular.module("MoraPatientApp")
         };
 
         var hunCities = [];
-        HunCityService.getHunCities().then(function (cities) {
+        SettingsService.getHunCities().then(function (cities) {
             hunCities = cities;
         });
 
