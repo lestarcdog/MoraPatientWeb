@@ -1,5 +1,5 @@
 angular.module("MoraPatientApp")
-    .controller("NovaMoraPatientsController", function ($scope, NovaDataService, PatientCache, $mdDialog) {
+    .controller("NovaMoraPatientsController", function ($scope, NovaDataService, PatientCache, $mdDialog, AlertService) {
         $scope.patients = {
             nova: null,
             mora: null
@@ -44,7 +44,8 @@ angular.module("MoraPatientApp")
                 if ($scope.selected.nova.moraPatientId && $scope.selected.mora.novaPatientId) {
                     confirm = $mdDialog.confirm()
                         .title("Nova és Mora páciens")
-                        .textContent("A Nova és Mora páciensek már össze vannak egy harmadik pácienssel kötve. Mégis folytatja?")
+                        .textContent("A Nova '" + $scope.selected.nova.name + "' és Mora '" + $scope.selected.mora.name +
+                            "' páciensek már össze vannak egy harmadik pácienssel kötve. Mégis folytatja?")
                         .ok("Igen")
                         .cancel("Mégsem");
                     $mdDialog.show(confirm).then(function (result) {
@@ -56,7 +57,7 @@ angular.module("MoraPatientApp")
                 } else if ($scope.selected.nova.moraPatientId) {
                     confirm = $mdDialog.confirm()
                         .title("Nova páciens")
-                        .textContent("A Nova páciens már össze van egy másik pácienssel kötve. Mégis folytatja?")
+                        .textContent("A Nova '" + $scope.selected.nova.name + "' páciens már össze van egy másik pácienssel kötve. Mégis folytatja?")
                         .ok("Igen")
                         .cancel("Mégsem");
                     $mdDialog.show(confirm).then(function (result) {
@@ -68,7 +69,7 @@ angular.module("MoraPatientApp")
                 } else if ($scope.selected.mora.novaPatientId) {
                     confirm = $mdDialog.confirm()
                         .title("Mora páciens")
-                        .textContent("A Mora páciens már össze van egy másik pácienssel kötve. Mégis folytatja?")
+                        .textContent("A Mora '" + $scope.selected.mora.name + "' páciens már össze van egy másik pácienssel kötve. Mégis folytatja?")
                         .ok("Igen")
                         .cancel("Mégsem");
                     $mdDialog.show(confirm).then(function (result) {
@@ -101,6 +102,8 @@ angular.module("MoraPatientApp")
                 // update the tables with new connections
                 $scope.selected.nova.moraPatientId = $scope.selected.mora.id;
                 $scope.selected.mora.novaPatientId = $scope.selected.nova.id;
+
+                AlertService.showSuccess("Sikeres összeköttetés NOVA '" + $scope.selected.nova.name + "' és ' MORA" + $scope.selected.mora.name + "' között.");
 
                 $scope.selected = {};
             });

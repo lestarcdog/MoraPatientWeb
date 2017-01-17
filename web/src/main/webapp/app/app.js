@@ -18,7 +18,7 @@ angular.module("MoraPatientApp", ["ngAnimate", "ngAria", "ngRoute", "ngMessages"
                 controller: "MoraResultsController",
                 templateUrl: "app/treatment/mora-result/mora-results.html"
             })
-            .when("/treatment/nova-result/:id", {
+            .when("/treatment/nova-result/:id?", {
                 controller: "NovaResultsController",
                 templateUrl: "app/treatment/nova-result/nova-results.html"
             })

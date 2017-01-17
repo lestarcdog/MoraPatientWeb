@@ -1,4 +1,12 @@
-<div class="row">
+<div class="row" ng-if="!hasNovaPatient">
+    <div class="col-md-6 col-md-offset-3">
+        <h3 class="text-center">Nincs NOVA beteg kapcsolat</h3>
+        <p class="text-center">A páciens még nincs NOVA beteggel összekötve. Lépjen be admin felhasználóként és
+            kapcsolja össze a MORA beteget a
+            NOVA beteggel.</p>
+    </div>
+</div>
+<div class="row" ng-if="hasNovaPatient">
     <div class="col-md-3">
         <h4>Tesztek időpontja</h4>
         <ul id="nova-results-list">

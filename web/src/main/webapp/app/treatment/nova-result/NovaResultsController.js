@@ -3,6 +3,13 @@ angular.module("MoraPatientApp").controller("NovaResultsController",
 
         var patientId = $routeParams.id;
 
+        $scope.hasNovaPatient = patientId != null;
+
+        // no nova connection to this patient.
+        if (!$scope.hasNovaPatient) {
+            return;
+        }
+
         $scope.novaResult = null;
         // https://github.com/wix/angular-tree-control
         $scope.treeControlOptions = {

@@ -3,7 +3,8 @@
         <h3 class="text-center">Nova betegek</h3>
         <div class="form-inline form-group text-center">
             <label for="novaSearch">Keresés</label>
-            <input id="novaSearch" type="text" class="form-control" ng-model="novaSearch"/>
+            <input id="novaSearch" type="text" class="form-control" ng-model="novaSearch"
+                   placeholder="minden mezőben keres"/>
         </div>
         <table class="table table-condensed">
             <thead>
@@ -18,7 +19,10 @@
                 ng-click="selectNova(p)"
                 ng-class="{success: p.moraPatientId != null, info : p.id === selected.nova.id}">
                 <td class="text-center">{{p.id}}</td>
-                <td class="text-center">{{p.name}}</td>
+                <td class="text-center">{{p.name}}
+                    <md-tooltip ng-if="p.moraPatientId">Összekötve a '{{p.moraPatientId}}' azonosítójú MORA beteggel.
+                    </md-tooltip>
+                </td>
                 <td class="text-center">{{p.birthDate}}</td>
             </tr>
             </tbody>
@@ -34,7 +38,8 @@
         <h3 class="text-center">Mora betegek</h3>
         <div class="form-inline form-group text-center">
             <label for="moraSearch">Keresés</label>
-            <input id="moraSearch" type="text" class="form-control" ng-model="moraSearch"/>
+            <input id="moraSearch" type="text" class="form-control" ng-model="moraSearch"
+                   placeholder="minden mezőben keres"/>
         </div>
         <table class="table table-condensed">
             <thead>
@@ -49,7 +54,10 @@
                 ng-click="selectMora(p)"
                 ng-class="{success: p.novaPatientId != null, info : p.id === selected.mora.id}">
                 <td class="text-center">{{p.id}}</td>
-                <td class="text-center">{{p.name}}</td>
+                <td class="text-center">{{p.name}}
+                    <md-tooltip ng-if="p.novaPatientId">Összekötve a '{{p.novaPatientId}}' azonosítójú NOVA beteggel.
+                    </md-tooltip>
+                </td>
                 <td class="text-center">{{p.birthDate}}</td>
             </tr>
             </tbody>
