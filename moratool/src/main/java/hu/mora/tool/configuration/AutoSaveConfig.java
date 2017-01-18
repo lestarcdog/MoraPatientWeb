@@ -1,6 +1,7 @@
 package hu.mora.tool.configuration;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -108,11 +109,21 @@ public class AutoSaveConfig implements Config {
         saveConfig.run();
     }
 
+    public String getMoraPatientHomeDir() {
+        return moraPatientHomeDir;
+    }
+
+    public String getNovaDbHomeDir() {
+        return novaDbHomeDir;
+    }
+
+    @JsonIgnore
     @Override
     public Path getMoraPatientHomeDirPath() {
         return Paths.get(this.moraPatientHomeDir);
     }
 
+    @JsonIgnore
     @Override
     public Path getNovaDbHomeDirPath() {
         return Paths.get(this.novaDbHomeDir);
